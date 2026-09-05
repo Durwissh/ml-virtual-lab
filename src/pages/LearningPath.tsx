@@ -35,33 +35,31 @@ export default function LearningPath() {
   return (
     <div className="lp-container animate-fade-in">
       {/* ─── Hero Header ─── */}
-      <div className="lp-hero">
-        <div className="lp-hero-content">
-          <div className="lp-badge">SRM Machine Learning Curriculum</div>
-          <h1 className="lp-title">Curriculum Roadmap & Learning Path</h1>
-          <p className="lp-subtitle">
-            A structured pedagogical journey across 6 progressive milestones and 10 interactive laboratory experiments.
-          </p>
+      <header className="lp-hero">
+        <div className="lp-badge">SRM Machine Learning Curriculum</div>
+        <h1 className="lp-title">Curriculum Roadmap & Learning Path</h1>
+        <p className="lp-subtitle">
+          A structured pedagogical journey across 6 progressive milestones and 10 interactive laboratory experiments.
+        </p>
 
-          <div className="lp-progress-card">
-            <div className="lp-progress-info">
-              <div>
-                <span className="lp-progress-label">Overall Progress</span>
-                <span className="lp-progress-stat">
-                  <strong>{totalCompleted}</strong> of 10 Experiments Mastered
-                </span>
-              </div>
-              <div className="lp-progress-percent">{overallPercent}%</div>
+        <div className="lp-progress-card">
+          <div className="lp-progress-info">
+            <div>
+              <span className="lp-progress-label">Overall Completion</span>
+              <span className="lp-progress-stat">
+                <strong>{totalCompleted}</strong> of 10 Experiments Mastered
+              </span>
             </div>
-            <div className="lp-progress-track">
-              <div className="lp-progress-fill" style={{ width: `${overallPercent}%` }} />
-            </div>
+            <div className="lp-progress-percent">{overallPercent}%</div>
+          </div>
+          <div className="lp-progress-track">
+            <div className="lp-progress-fill" style={{ width: `${overallPercent}%` }} />
           </div>
         </div>
-      </div>
+      </header>
 
       {/* ─── Level Roadmap Stepper Bar ─── */}
-      <div className="lp-stepper-container" role="navigation" aria-label="Curriculum Milestones">
+      <nav className="lp-stepper-container" aria-label="Curriculum Milestones">
         <div className="lp-stepper-track">
           <button
             className={`lp-step-pill${selectedLevel === 'all' ? ' lp-step-pill--active' : ''}`}
@@ -87,7 +85,7 @@ export default function LearningPath() {
             );
           })}
         </div>
-      </div>
+      </nav>
 
       {/* ─── Level Progression ─── */}
       <div className="lp-levels-wrapper">
@@ -138,14 +136,15 @@ export default function LearningPath() {
                       className="lp-exp-card"
                       style={{ '--exp-color': exp.accentColor } as React.CSSProperties}
                     >
-                      {/* Top Meta Row */}
+                      {/* Top Meta Header */}
                       <div className="lp-exp-top-row">
                         <div className="lp-exp-ident">
                           <span className="lp-exp-num">
-                            EXP {String(exp.number).padStart(2, '0')}
+                            Experiment {String(exp.number).padStart(2, '0')}
                           </span>
                           <span className="badge badge-navy">{exp.category}</span>
                           <span className="badge badge-navy">{exp.difficulty}</span>
+                          <span className="lp-exp-time">⏱ {exp.estimatedTime}</span>
                         </div>
                         <span className={`lp-status-badge ${statusClass}`}>
                           {percent === 100 ? '✓ Completed' : statusLabel}
@@ -156,7 +155,7 @@ export default function LearningPath() {
                       <h3 className="lp-exp-title">{exp.title}</h3>
                       <p className="lp-exp-short-desc">{exp.shortDescription}</p>
 
-                      {/* Key Takeaway Highlight */}
+                      {/* Core Insight Callout */}
                       <div className="lp-takeaway-bar">
                         <span className="lp-takeaway-icon">💡</span>
                         <div className="lp-takeaway-content">
@@ -164,17 +163,17 @@ export default function LearningPath() {
                         </div>
                       </div>
 
-                      {/* Core Topics / Concepts (Clean chips with expandable toggle) */}
+                      {/* Core Topics / Concepts Section */}
                       <div className="lp-topics-block">
                         <div className="lp-topics-header-row">
-                          <span className="lp-topics-label">Key Topics Covered ({exp.topics.length}):</span>
+                          <span className="lp-topics-label">Key Topics ({exp.topics.length}):</span>
                           <button
                             type="button"
                             className="lp-topics-toggle-btn"
                             onClick={() => toggleTopics(exp.id)}
                             aria-expanded={isExpanded}
                           >
-                            {isExpanded ? '▲ Show Less' : `▼ View All ${exp.topics.length} Concepts`}
+                            {isExpanded ? '▲ Hide Full Syllabus' : `▼ View Full Syllabus (${exp.topics.length} Concepts)`}
                           </button>
                         </div>
 
@@ -190,7 +189,7 @@ export default function LearningPath() {
                               className="lp-topic-more-pill"
                               onClick={() => toggleTopics(exp.id)}
                             >
-                              +{remainingTopicsCount} more
+                              +{remainingTopicsCount} more concepts
                             </button>
                           )}
                         </div>
@@ -204,13 +203,15 @@ export default function LearningPath() {
                         </div>
                       )}
 
-                      {/* Footer Row */}
+                      {/* Footer Actions */}
                       <div className="lp-exp-footer">
                         <div className="lp-exp-footer-meta">
-                          <span className="lp-exp-time">⏱ {exp.estimatedTime}</span>
                           {percent > 0 && (
-                            <div className="lp-mini-progress">
-                              <div className="lp-mini-progress-fill" style={{ width: `${percent}%` }} />
+                            <div className="lp-progress-wrapper">
+                              <span className="lp-progress-num">{percent}% Complete</span>
+                              <div className="lp-mini-progress">
+                                <div className="lp-mini-progress-fill" style={{ width: `${percent}%` }} />
+                              </div>
                             </div>
                           )}
                         </div>
