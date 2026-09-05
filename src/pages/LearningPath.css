@@ -316,7 +316,7 @@
   100% { transform: scale(1.6); opacity: 0; }
 }
 
-/* Tree Canopy Motif */
+/* Tree Canopy & Botanical Growth Node */
 .forest-tree-canopy {
   position: relative;
   width: 64px;
@@ -329,6 +329,37 @@
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+}
+
+.canopy-seed {
+  border-color: #d97706;
+  background: rgba(69, 26, 3, 0.92);
+}
+
+.canopy-sprout {
+  border-color: #84cc16;
+  background: rgba(26, 46, 15, 0.92);
+}
+
+.canopy-sapling {
+  border-color: #10b981;
+  background: rgba(6, 46, 26, 0.92);
+}
+
+.canopy-branching {
+  border-color: #06b6d4;
+  background: rgba(8, 47, 73, 0.92);
+}
+
+.canopy-mature-tree {
+  border-color: #22c55e;
+  background: rgba(5, 46, 22, 0.92);
+}
+
+.canopy-ancient-tree {
+  border-color: #eab308;
+  background: rgba(66, 32, 6, 0.92);
+  box-shadow: 0 0 25px rgba(234, 179, 8, 0.5), 0 8px 24px rgba(0, 0, 0, 0.7);
 }
 
 .forest-node-wrapper.is-selected .forest-tree-canopy {
@@ -416,6 +447,25 @@
   font-weight: 800;
   letter-spacing: 0.06em;
   color: #38bdf8;
+}
+
+.forest-growth-badge {
+  font-size: 8.5px;
+  font-weight: 800;
+  color: #facc15;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 1px;
+}
+
+.forest-growth-badge-detail {
+  font-size: 10px;
+  font-weight: 800;
+  color: #fde047;
+  background: rgba(250, 204, 21, 0.16);
+  border: 1px solid rgba(250, 204, 21, 0.35);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
 }
 
 .forest-current-pill {

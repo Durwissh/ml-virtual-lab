@@ -23,7 +23,7 @@ export default function CheckpointNode({
 
   return (
     <div
-      className={`forest-node-wrapper pos-${checkpoint.id}${isSelected ? ' is-selected' : ''} status-${status}`}
+      className={`forest-node-wrapper pos-${checkpoint.id}${isSelected ? ' is-selected' : ''} status-${status} growth-${checkpoint.treeType}`}
       style={{
         left: `${checkpoint.mapX}%`,
         top: `${checkpoint.mapY}%`,
@@ -34,21 +34,21 @@ export default function CheckpointNode({
         type="button"
         className="forest-node-btn"
         onClick={() => onSelect(checkpoint)}
-        aria-label={`${checkpoint.name} - ${status}`}
+        aria-label={`Step ${checkpoint.number}: ${checkpoint.stageName} - ${checkpoint.name} (${status})`}
         aria-current={isSelected ? 'true' : undefined}
       >
         {/* Glow Ring for Current / Selected Node */}
         {(isCurrent || isSelected) && <div className="forest-node-glow-ring" />}
 
-        {/* Tree Canopy Art & Visual Motif */}
+        {/* Tree Canopy & Botanical Growth Motif */}
         <div className={`forest-tree-canopy canopy-${checkpoint.treeType}`}>
           <div className="forest-tree-leaves">
-            {checkpoint.treeType === 'sprout' && <span className="tree-art">🌱</span>}
-            {checkpoint.treeType === 'grove' && <span className="tree-art">🌳</span>}
-            {checkpoint.treeType === 'clearing' && <span className="tree-art">🔬</span>}
-            {checkpoint.treeType === 'observatory' && <span className="tree-art">📊</span>}
-            {checkpoint.treeType === 'twin-trees' && <span className="tree-art">🌲🌲</span>}
-            {checkpoint.treeType === 'summit' && <span className="tree-art">🏆</span>}
+            {checkpoint.treeType === 'seed' && <span className="tree-art" title="The Seed">🌰</span>}
+            {checkpoint.treeType === 'sprout' && <span className="tree-art" title="The Sprout">🌱</span>}
+            {checkpoint.treeType === 'sapling' && <span className="tree-art" title="The Sapling">🌿</span>}
+            {checkpoint.treeType === 'branching' && <span className="tree-art" title="Branching Tree">🪴</span>}
+            {checkpoint.treeType === 'mature-tree' && <span className="tree-art" title="Full Canopy Tree">🌳</span>}
+            {checkpoint.treeType === 'ancient-tree' && <span className="tree-art" title="Ancient Tree of Mastery">🌲✨</span>}
           </div>
 
           {/* Status Pin Badge on Tree */}
@@ -65,7 +65,7 @@ export default function CheckpointNode({
           </div>
         </div>
 
-        {/* Floating Label Banner */}
+        {/* Floating Label Banner with Stage Name & Growth Progression */}
         <div className="forest-node-label-plate">
           <div className="forest-label-top">
             <span className="forest-step-tag">STEP {checkpoint.number}</span>
@@ -73,8 +73,8 @@ export default function CheckpointNode({
             {isCompleted && <span className="forest-done-pill">Done</span>}
             {isLocked && <span className="forest-locked-pill">Locked</span>}
           </div>
+          <div className="forest-growth-badge">{checkpoint.stageName}</div>
           <div className="forest-label-name">{checkpoint.name}</div>
-          <div className="forest-label-sub">{checkpoint.subtitle}</div>
         </div>
       </button>
     </div>

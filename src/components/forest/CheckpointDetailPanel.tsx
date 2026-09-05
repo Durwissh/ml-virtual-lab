@@ -35,7 +35,8 @@ export default function CheckpointDetailPanel({
       {/* Top Bar with Badges and Close Button */}
       <div className="forest-detail-top">
         <div className="forest-detail-badges">
-          <span className="forest-detail-num">CHECKPOINT {checkpoint.number} OF 06</span>
+          <span className="forest-detail-num">STEP {checkpoint.number} OF 06</span>
+          <span className="forest-growth-badge-detail">🌱 {checkpoint.growthStage}</span>
           <span className="forest-detail-cat">{checkpoint.category}</span>
           {isCompleted && <span className="forest-status-badge completed">✓ Completed</span>}
           {isCurrent && <span className="forest-status-badge current">● Current Stage</span>}
@@ -62,7 +63,7 @@ export default function CheckpointDetailPanel({
           <span className="forest-detail-emoji">{checkpoint.icon}</span>
         </div>
         <div className="forest-detail-title-wrap">
-          <div className="forest-detail-location-tag">📍 {checkpoint.locationName}</div>
+          <div className="forest-detail-location-tag">📍 {checkpoint.locationName} · {checkpoint.stageName}</div>
           <h2 className="forest-detail-title">{checkpoint.name}</h2>
           <p className="forest-detail-subtitle">{checkpoint.subtitle}</p>
         </div>
