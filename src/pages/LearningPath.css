@@ -1,71 +1,45 @@
-/* src/pages/LearningPath.css - Interactive Learning Forest */
+/* src/pages/LearningPath.css - Top-Down RPG Learning Forest */
 
 .forest-page-wrapper {
   position: relative;
   min-height: calc(100vh - var(--header-height));
-  background: var(--bg-primary);
-  padding: calc(var(--header-height) + 16px) var(--space-4) 80px;
-}
-
-.forest-container {
-  max-width: 1200px;
-  margin: 0 auto;
+  background: #0d1610;
+  padding: calc(var(--header-height) + 16px) var(--space-4) 40px;
   display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
+  justify-content: center;
+  align-items: flex-start;
 }
 
-/* ─── The Interactive Forest Map Section ─── */
-.forest-map-section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  width: 100%;
-}
-
-/* Forest Map Canvas Container */
-.forest-map-container {
+/* ─── Main RPG Viewport Container ─── */
+.forest-rpg-viewport {
   position: relative;
   width: 100%;
-  height: 920px;
-  background: linear-gradient(180deg, #ecfdf5 0%, #f0fdf4 30%, #e0f2fe 75%, #f1f5f9 100%);
-  border: 2px solid var(--border-secondary);
+  max-width: 960px;
+  background: #111f16;
+  border: 2px solid rgba(52, 211, 153, 0.25);
   border-radius: var(--radius-3xl);
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 30px rgba(16, 185, 129, 0.15);
   overflow: hidden;
-  box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.12);
   user-select: none;
 }
 
-[data-theme="dark"] .forest-map-container {
-  background: linear-gradient(180deg, #022c22 0%, #064e3b 30%, #0c4a6e 75%, #0f172a 100%);
-  border-color: #1e293b;
-  box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.4);
-}
-
-/* ─── Floating Top HUD Overlay inside the Map ─── */
+/* ─── Floating Top Game HUD ─── */
 .forest-floating-hud {
   position: absolute;
-  top: 18px;
-  left: 20px;
-  right: 20px;
-  z-index: 20;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  z-index: 30;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-4);
-  background: rgba(255, 255, 255, 0.88);
+  gap: var(--space-3);
+  background: rgba(15, 28, 20, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(52, 211, 153, 0.35);
   border-radius: var(--radius-2xl);
-  padding: 10px 20px;
-  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
-  pointer-events: auto;
-}
-
-[data-theme="dark"] .forest-floating-hud {
-  background: rgba(15, 23, 42, 0.88);
-  border-color: rgba(255, 255, 255, 0.1);
+  padding: 10px 18px;
   box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
 }
 
@@ -77,22 +51,17 @@
 }
 
 .forest-hud-badge {
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  color: #059669;
-  background: rgba(16, 185, 129, 0.14);
-  padding: 5px 14px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  color: #6ee7b7;
+  background: rgba(16, 185, 129, 0.22);
+  padding: 4px 12px;
   border-radius: var(--radius-full);
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  border: 1px solid rgba(52, 211, 153, 0.4);
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-}
-
-[data-theme="dark"] .forest-hud-badge {
-  color: #6ee7b7;
-  background: rgba(16, 185, 129, 0.2);
+  gap: 5px;
 }
 
 .forest-hud-progress-wrap {
@@ -103,29 +72,26 @@
 
 .forest-hud-step-text {
   font-size: var(--text-xs);
-  color: var(--text-secondary);
+  color: #94a3b8;
 }
 
 .forest-hud-step-text strong {
-  color: var(--accent-text);
+  color: #4ade80;
   font-size: var(--text-sm);
 }
 
 .forest-hud-bar {
-  width: 140px;
+  width: 120px;
   height: 8px;
-  background: rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-full);
   overflow: hidden;
 }
 
-[data-theme="dark"] .forest-hud-bar {
-  background: rgba(255, 255, 255, 0.12);
-}
-
 .forest-hud-fill {
   height: 100%;
-  background: linear-gradient(90deg, #10b981, #38bdf8, #818cf8);
+  background: linear-gradient(90deg, #10b981, #38bdf8, #fbbf24);
   border-radius: var(--radius-full);
   transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -133,14 +99,10 @@
 .forest-hud-pct {
   font-size: 11px;
   font-weight: 800;
-  color: #059669;
-  background: rgba(16, 185, 129, 0.12);
-  padding: 2px 8px;
-  border-radius: var(--radius-full);
-}
-
-[data-theme="dark"] .forest-hud-pct {
   color: #6ee7b7;
+  background: rgba(16, 185, 129, 0.2);
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
 }
 
 .forest-hud-right {
@@ -154,24 +116,25 @@
   gap: 8px;
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   color: #ffffff;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: var(--radius-xl);
-  padding: 8px 18px;
+  padding: 7px 16px;
   font-size: var(--text-xs);
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
   transition: all 0.2s ease;
   white-space: nowrap;
 }
 
 .forest-hud-continue-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
+  box-shadow: 0 6px 22px rgba(16, 185, 129, 0.55);
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
 }
 
 .hud-arrow {
-  font-size: 14px;
+  font-size: 13px;
   transition: transform 0.2s ease;
 }
 
@@ -179,326 +142,125 @@
   transform: translateX(3px);
 }
 
-/* ─── Ambient Landscape Elements ─── */
-.forest-ambient-layer {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
+/* ─── 2D RPG Forest Canvas ─── */
+.forest-rpg-canvas {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  max-height: 1400px;
+  overflow: hidden;
 }
 
-.forest-hill {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(45px);
-  opacity: 0.4;
-}
-
-.hill-back {
-  width: 800px;
-  height: 450px;
-  top: 80px;
-  left: 15%;
-  background: #a7f3d0;
-}
-
-.hill-mid {
-  width: 700px;
-  height: 400px;
-  bottom: 140px;
-  right: 5%;
-  background: #bae6fd;
-}
-
-.hill-front {
-  width: 500px;
-  height: 300px;
-  top: 50%;
-  left: 5%;
-  background: #dcfce7;
-  opacity: 0.3;
-}
-
-[data-theme="dark"] .hill-back {
-  background: #047857;
-  opacity: 0.25;
-}
-
-[data-theme="dark"] .hill-mid {
-  background: #0369a1;
-  opacity: 0.22;
-}
-
-[data-theme="dark"] .hill-front {
-  background: #065f46;
-  opacity: 0.2;
-}
-
-/* Fireflies / Glowing Sparkles */
-.forest-firefly {
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #fbbf24;
-  box-shadow: 0 0 12px 3px #fbbf24;
-  animation: ffFloat 5s ease-in-out infinite alternate;
-}
-
-.ff-1 { top: 12%; left: 42%; animation-duration: 6s; }
-.ff-2 { top: 26%; left: 16%; animation-duration: 4.5s; animation-delay: -2s; }
-.ff-3 { top: 40%; left: 68%; animation-duration: 7s; animation-delay: -3s; }
-.ff-4 { top: 55%; left: 32%; animation-duration: 5.5s; animation-delay: -1s; }
-.ff-5 { top: 68%; left: 82%; animation-duration: 6.5s; animation-delay: -4s; }
-.ff-6 { top: 82%; left: 38%; animation-duration: 5s; }
-.ff-7 { top: 88%; left: 74%; animation-duration: 6.2s; animation-delay: -2.5s; }
-.ff-8 { top: 18%; right: 20%; animation-duration: 5.8s; animation-delay: -1.5s; }
-
-@keyframes ffFloat {
-  0% { transform: translate(0, 0) scale(0.8); opacity: 0.35; }
-  50% { transform: translate(15px, -20px) scale(1.25); opacity: 0.95; }
-  100% { transform: translate(-10px, -40px) scale(0.8); opacity: 0.4; }
-}
-
-/* Fluttering Butterflies */
-.forest-nature-item {
-  position: absolute;
-  user-select: none;
-  pointer-events: none;
-  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.12));
-}
-
-.butterfly-1 {
-  top: 18%;
-  left: 32%;
-  font-size: 1.4rem;
-  animation: butterflyFlutter1 8s ease-in-out infinite;
-}
-
-.butterfly-2 {
-  top: 45%;
-  left: 62%;
-  font-size: 1.5rem;
-  animation: butterflyFlutter2 9s ease-in-out infinite;
-}
-
-.butterfly-3 {
-  top: 76%;
-  right: 25%;
-  font-size: 1.3rem;
-  animation: butterflyFlutter1 7.5s ease-in-out infinite reverse;
-}
-
-@keyframes butterflyFlutter1 {
-  0% { transform: translate(0, 0) rotate(0deg) scale(1); }
-  25% { transform: translate(25px, -18px) rotate(15deg) scale(1.08); }
-  50% { transform: translate(10px, -35px) rotate(-10deg) scale(0.95); }
-  75% { transform: translate(-15px, -18px) rotate(12deg) scale(1.05); }
-  100% { transform: translate(0, 0) rotate(0deg) scale(1); }
-}
-
-@keyframes butterflyFlutter2 {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  33% { transform: translate(-20px, -25px) rotate(-12deg); }
-  66% { transform: translate(20px, -15px) rotate(10deg); }
-  100% { transform: translate(0, 0) rotate(0deg); }
-}
-
-/* Cute Forest Wildlife */
-.animal-deer {
-  top: 22%;
-  right: 12%;
-  font-size: 2.2rem;
-  animation: animalGentleBob 6s ease-in-out infinite;
-}
-
-.animal-rabbit-1 {
-  top: 28%;
-  left: 14%;
-  font-size: 1.8rem;
-  animation: rabbitHop 5s ease-in-out infinite;
-}
-
-.animal-rabbit-2 {
-  top: 72%;
-  left: 68%;
-  font-size: 1.7rem;
-  animation: rabbitHop 6s ease-in-out infinite 1.5s;
-}
-
-.animal-fox {
-  top: 48%;
-  right: 14%;
-  font-size: 2rem;
-  animation: animalGentleBob 7s ease-in-out infinite;
-}
-
-.animal-hedgehog {
-  top: 68%;
-  left: 14%;
-  font-size: 1.6rem;
-  animation: animalGentleBob 4.5s ease-in-out infinite;
-}
-
-.animal-owl {
-  top: 9%;
-  left: 48%;
-  font-size: 1.8rem;
-}
-
-.animal-bird {
-  top: 62%;
-  left: 36%;
-  font-size: 1.5rem;
-  animation: animalGentleBob 4s ease-in-out infinite;
-}
-
-@keyframes animalGentleBob {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-}
-
-@keyframes rabbitHop {
-  0%, 80%, 100% { transform: translateY(0) scale(1); }
-  88% { transform: translateY(-8px) scale(1.05); }
-  94% { transform: translateY(0) scale(0.95); }
-}
-
-/* Decorative Trees Around the Trail */
-.forest-deco-tree {
-  position: absolute;
-  font-size: 2.4rem;
-  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.1));
-  opacity: 0.85;
-  transition: transform 0.3s ease;
-  pointer-events: none;
-}
-
-.tree-1 { top: 5%; left: 7%; font-size: 3rem; }
-.tree-2 { top: 6%; right: 8%; font-size: 2.8rem; }
-.tree-3 { top: 18%; left: 4%; font-size: 2.6rem; }
-.tree-4 { top: 16%; right: 5%; font-size: 3.2rem; }
-.tree-5 { top: 36%; left: 48%; font-size: 2.5rem; }
-.tree-6 { top: 40%; right: 6%; font-size: 3rem; }
-.tree-7 { top: 52%; left: 8%; font-size: 2.7rem; }
-.tree-8 { top: 55%; left: 54%; font-size: 2.6rem; }
-.tree-9 { top: 60%; right: 7%; font-size: 2.9rem; }
-.tree-10 { top: 72%; right: 12%; font-size: 3.1rem; }
-.tree-11 { top: 75%; left: 6%; font-size: 3rem; }
-.tree-12 { top: 86%; left: 10%; font-size: 3.3rem; }
-.tree-13 { top: 88%; left: 46%; font-size: 2.7rem; }
-.tree-14 { top: 92%; right: 18%; font-size: 2.8rem; }
-
-/* ─── Rich Meadow Grass & Wildflowers ─── */
-.forest-grass {
-  position: absolute;
-  font-size: 1.15rem;
-  letter-spacing: 2px;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
-  opacity: 0.88;
-  pointer-events: none;
-  animation: grassSway 4s ease-in-out infinite alternate;
-}
-
-@keyframes grassSway {
-  0% { transform: rotate(0deg); }
-  50% { transform: rotate(2.5deg); }
-  100% { transform: rotate(-2deg); }
-}
-
-.grass-1 { top: 13%; left: 10%; animation-delay: 0s; }
-.grass-2 { top: 15%; left: 34%; animation-delay: -1s; }
-.grass-3 { top: 22%; left: 62%; animation-delay: -2s; }
-.grass-4 { top: 31%; right: 10%; animation-delay: -0.5s; }
-.grass-5 { top: 34%; left: 44%; animation-delay: -1.5s; }
-.grass-6 { top: 44%; left: 14%; animation-delay: -2.5s; }
-.grass-7 { top: 51%; left: 38%; animation-delay: -1.2s; }
-.grass-8 { top: 57%; left: 64%; animation-delay: -0.8s; }
-.grass-9 { top: 62%; right: 10%; animation-delay: -2.2s; }
-.grass-10 { top: 69%; left: 40%; animation-delay: -1.8s; }
-.grass-11 { top: 79%; left: 14%; animation-delay: -0.4s; }
-.grass-12 { top: 83%; left: 72%; animation-delay: -2.7s; }
-.grass-13 { top: 91%; left: 30%; animation-delay: -1.4s; }
-.grass-14 { top: 94%; right: 24%; animation-delay: -2.1s; }
-
-/* Mushrooms & Rocks */
-.shroom-1 { top: 14%; left: 26%; font-size: 1.4rem; }
-.shroom-2 { top: 34%; left: 66%; font-size: 1.3rem; }
-.shroom-3 { top: 54%; left: 32%; font-size: 1.4rem; }
-.shroom-4 { top: 73%; right: 18%; font-size: 1.35rem; }
-.shroom-5 { top: 87%; left: 16%; font-size: 1.45rem; }
-
-.rock-1 { top: 14%; right: 22%; font-size: 1.3rem; }
-.rock-2 { top: 34%; left: 10%; font-size: 1.4rem; }
-.rock-3 { top: 67%; left: 56%; font-size: 1.3rem; }
-.rock-4 { top: 89%; right: 26%; font-size: 1.4rem; }
-.campfire { top: 92%; left: 47%; font-size: 1.6rem; }
-
-.forest-summit-peaks {
-  position: absolute;
-  bottom: 24px;
-  right: 14%;
-  font-size: 2.5rem;
-  opacity: 0.85;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));
-}
-
-/* ─── SVG Winding Path ─── */
-.forest-path-svg {
-  position: absolute;
-  inset: 0;
+.forest-rpg-bg-image {
   width: 100%;
   height: 100%;
-  z-index: 2;
+  object-fit: cover;
+  display: block;
   pointer-events: none;
 }
 
-.forest-path-bed {
-  stroke: rgba(0, 0, 0, 0.18);
-  stroke-width: 46px;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-[data-theme="dark"] .forest-path-bed {
-  stroke: rgba(0, 0, 0, 0.7);
-  stroke-width: 50px;
-}
-
-.forest-path-surface {
-  stroke: #18181b;
-  stroke-width: 34px;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-[data-theme="dark"] .forest-path-surface {
-  stroke: #090d16;
-}
-
-.forest-path-active-glow {
-  stroke: url(#forestPathActiveGlow);
-  stroke-width: 4.5px;
-  stroke-linecap: round;
-  stroke-dasharray: 10 12;
-  animation: pathDashFlow 25s linear infinite;
-  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.8));
-}
-
-@keyframes pathDashFlow {
-  to {
-    stroke-dashoffset: -1000;
-  }
-}
-
-/* ─── Forest Nodes Layer ─── */
-.forest-nodes-layer {
+/* ─── Sunlight & Magic Particles ─── */
+.forest-ambient-effects {
   position: absolute;
   inset: 0;
+  pointer-events: none;
   z-index: 5;
 }
 
-/* Node Wrapper Anchor */
+.forest-sun-shafts {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 75% 15%, rgba(254, 240, 138, 0.15) 0%, transparent 60%);
+  mix-blend-mode: screen;
+}
+
+.forest-firefly {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fef08a;
+  box-shadow: 0 0 12px 3px rgba(250, 204, 21, 0.9);
+  animation: ffFloat 5s ease-in-out infinite alternate;
+}
+
+.ff-1 { top: 14%; left: 68%; animation-duration: 6s; }
+.ff-2 { top: 25%; left: 45%; animation-duration: 4.5s; animation-delay: -2s; }
+.ff-3 { top: 38%; left: 28%; animation-duration: 7s; animation-delay: -3s; }
+.ff-4 { top: 52%; left: 62%; animation-duration: 5.5s; animation-delay: -1s; }
+.ff-5 { top: 70%; left: 42%; animation-duration: 6.5s; animation-delay: -4s; }
+.ff-6 { top: 86%; left: 24%; animation-duration: 5s; }
+.ff-7 { top: 62%; right: 18%; animation-duration: 6.2s; animation-delay: -2.5s; }
+.ff-8 { top: 82%; right: 28%; animation-duration: 5.8s; animation-delay: -1.5s; }
+
+@keyframes ffFloat {
+  0% { transform: translate(0, 0) scale(0.8); opacity: 0.35; }
+  50% { transform: translate(12px, -15px) scale(1.3); opacity: 0.95; }
+  100% { transform: translate(-8px, -30px) scale(0.8); opacity: 0.4; }
+}
+
+/* ─── Player Avatar Indicator ─── */
+.forest-player-avatar {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  z-index: 25;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: avatarFloat 3s ease-in-out infinite;
+}
+
+@keyframes avatarFloat {
+  0%, 100% { transform: translate(-50%, -100%) translateY(0); }
+  50% { transform: translate(-50%, -100%) translateY(-6px); }
+}
+
+.player-pulse-ring {
+  position: absolute;
+  bottom: -4px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(56, 189, 248, 0.4);
+  animation: playerRingPulse 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes playerRingPulse {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.player-badge {
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  border: 2px solid #ffffff;
+  border-radius: var(--radius-full);
+  padding: 3px 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.player-icon {
+  font-size: 13px;
+}
+
+.player-tooltip {
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+/* ─── Checkpoint Nodes Layer ─── */
+.forest-nodes-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+}
+
 .forest-node-wrapper {
   position: absolute;
   transform: translate(-50%, -50%);
@@ -508,17 +270,16 @@
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.forest-node-wrapper.is-selected {
-  transform: translate(-50%, -50%) scale(1.12);
-  z-index: 10;
-}
-
 .forest-node-wrapper:hover {
-  transform: translate(-50%, -50%) scale(1.08);
-  z-index: 9;
+  transform: translate(-50%, -50%) scale(1.1);
+  z-index: 22;
 }
 
-/* Node Button */
+.forest-node-wrapper.is-selected {
+  transform: translate(-50%, -50%) scale(1.15);
+  z-index: 23;
+}
+
 .forest-node-btn {
   background: transparent;
   border: none;
@@ -534,29 +295,29 @@
 /* Pulsing Glow Ring */
 .forest-node-glow-ring {
   position: absolute;
-  top: 15px;
-  width: 76px;
-  height: 76px;
+  top: 8px;
+  width: 68px;
+  height: 68px;
   border-radius: 50%;
-  background: rgba(16, 185, 129, 0.35);
+  background: rgba(74, 222, 128, 0.4);
   animation: nodeGlowPulse 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
   pointer-events: none;
 }
 
 @keyframes nodeGlowPulse {
-  0% { transform: scale(0.9); opacity: 0.9; }
-  100% { transform: scale(1.65); opacity: 0; }
+  0% { transform: scale(0.85); opacity: 0.9; }
+  100% { transform: scale(1.6); opacity: 0; }
 }
 
 /* Tree Canopy Motif */
 .forest-tree-canopy {
   position: relative;
-  width: 70px;
-  height: 70px;
+  width: 62px;
+  height: 62px;
   border-radius: 50%;
-  background: var(--card-bg);
+  background: rgba(15, 23, 42, 0.92);
   border: 3.5px solid #10b981;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -565,17 +326,22 @@
 
 .forest-node-wrapper.is-selected .forest-tree-canopy {
   border-color: #38bdf8;
-  box-shadow: 0 0 0 5px rgba(56, 189, 248, 0.45), 0 14px 32px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 0 0 5px rgba(56, 189, 248, 0.45), 0 12px 30px rgba(0, 0, 0, 0.7);
+}
+
+.forest-node-wrapper.status-completed .forest-tree-canopy {
+  border-color: #4ade80;
+  background: rgba(6, 78, 59, 0.95);
 }
 
 .forest-node-wrapper.status-locked .forest-tree-canopy {
-  border-color: var(--border-secondary);
-  opacity: 0.65;
-  filter: grayscale(40%);
+  border-color: #475569;
+  background: rgba(30, 41, 59, 0.85);
+  opacity: 0.75;
 }
 
 .forest-tree-leaves .tree-art {
-  font-size: 2.3rem;
+  font-size: 2rem;
   line-height: 1;
 }
 
@@ -584,15 +350,15 @@
   position: absolute;
   top: -4px;
   right: -4px;
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  background: #18181b;
+  background: #0f172a;
   border: 2px solid white;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .pin-icon.check {
@@ -602,7 +368,7 @@
 }
 
 .pin-icon.lock {
-  font-size: 11px;
+  font-size: 10px;
 }
 
 .pin-icon.pulse {
@@ -612,21 +378,21 @@
 
 .pin-icon.num {
   color: #f1f5f9;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 800;
 }
 
-/* Label Plate Attached Under Tree */
+/* Label Banner */
 .forest-node-label-plate {
-  margin-top: 6px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-lg);
-  padding: 5px 12px;
+  margin-top: 5px;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  padding: 4px 10px;
   text-align: center;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
-  backdrop-filter: blur(12px);
-  max-width: 155px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  max-width: 140px;
   pointer-events: none;
 }
 
@@ -642,66 +408,86 @@
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 0.06em;
-  color: var(--accent-text);
+  color: #38bdf8;
 }
 
 .forest-current-pill {
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 800;
-  color: #0284c7;
-  background: rgba(14, 165, 233, 0.15);
-  padding: 1px 5px;
+  color: #38bdf8;
+  background: rgba(14, 165, 233, 0.2);
+  padding: 1px 4px;
   border-radius: var(--radius-full);
 }
 
 .forest-done-pill {
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 800;
-  color: #16a34a;
-  background: rgba(22, 163, 74, 0.15);
-  padding: 1px 5px;
+  color: #4ade80;
+  background: rgba(34, 197, 94, 0.2);
+  padding: 1px 4px;
   border-radius: var(--radius-full);
 }
 
 .forest-locked-pill {
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 700;
-  color: var(--text-muted);
+  color: #64748b;
 }
 
 .forest-label-name {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
-  color: var(--text-primary);
+  color: #f8fafc;
   white-space: nowrap;
   line-height: 1.2;
 }
 
 .forest-label-sub {
-  font-size: 9px;
-  color: var(--text-secondary);
+  font-size: 8.5px;
+  color: #94a3b8;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 135px;
+  max-width: 120px;
 }
 
-/* ─── Selected Checkpoint Detail Panel ─── */
-.forest-detail-section {
+/* ─── Sleek Game Quest Modal Overlay ─── */
+.forest-quest-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 10, 8, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.forest-quest-modal-card {
   width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: var(--radius-2xl);
+  box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.8), 0 0 40px rgba(16, 185, 129, 0.2);
 }
 
+/* Detail Panel Styling inside modal */
 .forest-detail-panel {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
+  background: #0f1c14;
+  border: 1.5px solid rgba(52, 211, 153, 0.3);
   border-radius: var(--radius-2xl);
-  padding: var(--space-8) var(--space-10);
-  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.1);
+  padding: var(--space-6) var(--space-8);
   display: flex;
   flex-direction: column;
-  gap: var(--space-5);
+  gap: var(--space-4);
   position: relative;
   overflow: hidden;
+  color: #e2e8f0;
 }
 
 .forest-detail-panel::before {
@@ -718,7 +504,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--border-secondary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: var(--space-3);
 }
 
@@ -730,58 +516,69 @@
 }
 
 .forest-detail-num {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.1em;
-  color: var(--accent-text);
-  background: var(--accent-subtle);
-  padding: 3px 10px;
+  color: #6ee7b7;
+  background: rgba(16, 185, 129, 0.18);
+  padding: 3px 9px;
   border-radius: var(--radius-sm);
 }
 
 .forest-detail-cat {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.06em;
-  color: var(--text-tertiary);
+  color: #94a3b8;
   text-transform: uppercase;
 }
 
 .forest-status-badge {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
-  padding: 3px 10px;
+  padding: 3px 9px;
   border-radius: var(--radius-full);
 }
 
 .forest-status-badge.completed {
-  background: rgba(56, 161, 105, 0.12);
-  color: #2f855a;
+  background: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
 }
 
 .forest-status-badge.current {
-  background: rgba(14, 165, 233, 0.15);
-  color: #0284c7;
+  background: rgba(14, 165, 233, 0.2);
+  color: #38bdf8;
 }
 
 .forest-status-badge.available {
-  background: var(--bg-secondary);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-secondary);
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
 }
 
 .forest-status-badge.locked {
-  background: var(--bg-secondary);
-  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  color: #64748b;
 }
 
 .forest-detail-close-btn {
-  background: transparent;
-  border: none;
-  font-size: var(--text-md);
-  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-full);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #cbd5e1;
   cursor: pointer;
-  padding: 4px;
+  transition: all 0.2s ease;
+}
+
+.forest-detail-close-btn:hover {
+  background: rgba(239, 68, 68, 0.25);
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.4);
 }
 
 /* Header */
@@ -792,11 +589,11 @@
 }
 
 .forest-detail-icon-circle {
-  width: 60px;
-  height: 60px;
+  width: 56px;
+  height: 56px;
   border-radius: var(--radius-xl);
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-secondary);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(52, 211, 153, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -810,48 +607,44 @@
 .forest-detail-location-tag {
   font-size: 11px;
   font-weight: 700;
-  color: #059669;
+  color: #6ee7b7;
   letter-spacing: 0.05em;
   margin-bottom: 2px;
 }
 
-[data-theme="dark"] .forest-detail-location-tag {
-  color: #6ee7b7;
-}
-
 .forest-detail-title {
-  font-size: clamp(1.4rem, 2.5vw, var(--text-2xl));
+  font-size: clamp(1.3rem, 2.2vw, var(--text-2xl));
   font-weight: 800;
-  color: var(--text-primary);
+  color: #f8fafc;
   line-height: 1.25;
   letter-spacing: -0.015em;
 }
 
 .forest-detail-subtitle {
   font-size: var(--text-xs);
-  color: var(--text-secondary);
+  color: #94a3b8;
   margin-top: 2px;
 }
 
 .forest-detail-desc {
   font-size: var(--text-sm);
-  color: var(--text-secondary);
-  line-height: 1.75;
+  color: #cbd5e1;
+  line-height: 1.7;
 }
 
 /* Objectives */
 .forest-detail-objectives {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-secondary);
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-xl);
-  padding: var(--space-5) var(--space-6);
+  padding: var(--space-4) var(--space-5);
 }
 
 .forest-objectives-header {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-2);
 }
 
 .forest-objectives-icon {
@@ -859,11 +652,11 @@
 }
 
 .forest-objectives-title {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--text-muted);
+  color: #6ee7b7;
 }
 
 .forest-objectives-list {
@@ -871,24 +664,24 @@
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 6px;
 }
 
 .forest-objective-item {
   font-size: var(--text-xs);
-  color: var(--text-primary);
+  color: #e2e8f0;
   display: flex;
   align-items: flex-start;
-  gap: 8px;
-  line-height: 1.5;
+  gap: 7px;
+  line-height: 1.45;
 }
 
 .forest-objective-check {
   color: #10b981;
   font-weight: 900;
   font-size: var(--text-xs);
-  margin-top: 2px;
+  margin-top: 1px;
   flex-shrink: 0;
 }
 
@@ -903,7 +696,7 @@
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.08em;
-  color: var(--text-muted);
+  color: #94a3b8;
 }
 
 .forest-exp-chips {
@@ -916,41 +709,41 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-secondary);
-  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 5px 12px;
   border-radius: var(--radius-md);
   text-decoration: none;
-  transition: all var(--duration-fast) var(--ease-out);
+  transition: all 0.2s ease;
 }
 
 .forest-exp-chip:hover {
-  border-color: var(--accent-primary);
-  background: var(--accent-subtle);
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.15);
   transform: translateY(-1px);
 }
 
 .forest-chip-num {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
-  color: var(--accent-text);
+  color: #38bdf8;
 }
 
 .forest-chip-name {
   font-size: var(--text-xs);
   font-weight: 600;
-  color: var(--text-primary);
+  color: #f1f5f9;
 }
 
 .forest-chip-arrow {
-  font-size: 12px;
-  color: var(--text-muted);
+  font-size: 11px;
+  color: #94a3b8;
 }
 
 /* Footer & Actions */
 .forest-detail-footer {
   padding-top: var(--space-3);
-  border-top: 1px solid var(--border-secondary);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .forest-action-row {
@@ -961,17 +754,26 @@
 }
 
 .forest-main-cta {
-  padding: 12px 28px;
+  padding: 10px 24px;
   font-size: var(--text-sm);
-  font-weight: 700;
+  font-weight: 800;
   border-radius: var(--radius-lg);
   cursor: pointer;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border: none;
+  color: white;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+}
+
+.forest-main-cta:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  transform: translateY(-1px);
 }
 
 .forest-action-hint {
   font-size: var(--text-xs);
-  color: var(--text-tertiary);
-  line-height: 1.5;
+  color: #94a3b8;
+  line-height: 1.4;
   flex: 1;
 }
 
@@ -979,43 +781,39 @@
   display: flex;
   align-items: flex-start;
   gap: var(--space-3);
-  background: rgba(221, 107, 32, 0.08);
-  border: 1px solid rgba(221, 107, 32, 0.25);
+  background: rgba(221, 107, 32, 0.12);
+  border: 1px solid rgba(221, 107, 32, 0.35);
   border-radius: var(--radius-xl);
-  padding: var(--space-4) var(--space-6);
+  padding: var(--space-3) var(--space-5);
 }
 
 .forest-locked-icon {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .forest-locked-title {
   font-size: var(--text-sm);
   font-weight: 700;
-  color: var(--text-primary);
+  color: #fdba74;
   margin-bottom: 2px;
 }
 
 .forest-locked-desc {
   font-size: var(--text-xs);
-  color: var(--text-secondary);
+  color: #fed7aa;
 }
 
 /* ─── Responsive Media Queries ─── */
-@media (max-width: 900px) {
-  .forest-map-container {
-    height: 780px;
-  }
-
+@media (max-width: 768px) {
   .forest-floating-hud {
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--space-2);
-    padding: 10px 14px;
+    gap: 8px;
+    padding: 8px 12px;
   }
 
   .forest-hud-bar {
-    width: 100px;
+    width: 90px;
   }
 
   .forest-hud-continue-btn {
@@ -1023,46 +821,22 @@
     justify-content: center;
   }
 
-  .forest-detail-panel {
-    padding: var(--space-6);
-  }
-
-  .forest-action-row {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .forest-main-cta {
-    width: 100%;
-    text-align: center;
-  }
-}
-
-@media (max-width: 640px) {
-  .forest-page-wrapper {
-    padding: calc(var(--header-height) + 12px) var(--space-3) 60px;
-  }
-
-  .forest-map-container {
-    height: 700px;
-  }
-
   .forest-tree-canopy {
-    width: 56px;
-    height: 56px;
+    width: 52px;
+    height: 52px;
   }
 
   .forest-tree-leaves .tree-art {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
 
   .forest-node-label-plate {
-    max-width: 110px;
-    padding: 3px 6px;
+    max-width: 100px;
+    padding: 2px 5px;
   }
 
   .forest-label-name {
-    font-size: 10px;
+    font-size: 9.5px;
   }
 
   .forest-label-sub {

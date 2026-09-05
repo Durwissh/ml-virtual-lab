@@ -1,10 +1,9 @@
 // src/pages/LearningPath.tsx
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useProgress } from '../context/ProgressContext';
 import { FOREST_CHECKPOINTS, ForestCheckpoint } from '../components/forest/forestData';
 import ForestMap from '../components/forest/ForestMap';
-import CheckpointDetailPanel from '../components/forest/CheckpointDetailPanel';
 import { CheckpointStatus } from '../components/forest/CheckpointNode';
 import './LearningPath.css';
 
@@ -12,7 +11,6 @@ export default function LearningPath() {
   const navigate = useNavigate();
   const { progress, getCompletionPercent, getOverallPercent } = useProgress();
   const overallPercent = getOverallPercent();
-  const detailPanelRef = useRef<HTMLDivElement | null>(null);
 
   // Experiment completion metrics
   const exp1Percent = getCompletionPercent('1');
@@ -91,14 +89,11 @@ export default function LearningPath() {
     return FOREST_CHECKPOINTS[0];
   }, [checkpointStates]);
 
-  // Selected checkpoint for the detail panel (defaults to current/next checkpoint)
+  // Selected checkpoint for the detail panel
   const [selectedCheckpoint, setSelectedCheckpoint] = useState<ForestCheckpoint>(nextCheckpoint);
 
   const handleSelectCheckpoint = (checkpoint: ForestCheckpoint) => {
     setSelectedCheckpoint(checkpoint);
-    if (detailPanelRef.current) {
-      detailPanelRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
   };
 
   const handleContinueLearning = () => {
@@ -106,29 +101,16 @@ export default function LearningPath() {
   };
 
   return (
-    <div className="forest-page-wrapper animate-fade-in">
-      <div className="forest-container">
-        {/* ─── The Interactive Digital Forest Map ─── */}
-        <section className="forest-map-section" aria-label="Interactive Forest Map">
-          <ForestMap
-            checkpointStates={checkpointStates}
-            selectedCheckpoint={selectedCheckpoint}
-            onSelectCheckpoint={handleSelectCheckpoint}
-            completedCount={completedCount}
-            journeyProgressPct={journeyProgressPct}
-            nextCheckpoint={nextCheckpoint}
-            onContinue={handleContinueLearning}
-          />
-        </section>
-
-        {/* ─── Selected Checkpoint Detail Panel ─── */}
-        <section ref={detailPanelRef} className="forest-detail-section" aria-label="Checkpoint Details">
-          <CheckpointDetailPanel
-            checkpoint={selectedCheckpoint}
-            status={checkpointStates[selectedCheckpoint.id]?.status || 'available'}
-          />
-        </section>
-      </div>
-    </div>
+    <main className="forest-page-wrapper animate-fade-in" aria-label="Learning Path RPG Forest">
+      <ForestMap
+        checkpointStates={checkpointStates}
+        selectedCheckpoint={selectedCheckpoint}
+        onSelectCheckpoint={handleSelectCheckpoint}
+        completedCount={completedCount}
+        journeyProgressPct={journeyProgressPct}
+        nextCheckpoint={nextCheckpoint}
+        onContinue={handleContinueLearning}
+      />
+    </main>
   );
 }
