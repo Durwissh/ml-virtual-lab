@@ -3,7 +3,6 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import { useProgress } from '../context/ProgressContext';
-import { useAuth } from '../context/AuthContext';
 import srmLogo from '../assets/srm-logo.png';
 import './Header.css';
 
@@ -13,7 +12,6 @@ const navItems = [
   { to: '/learning-path', label: 'Learning Path' },
   { to: '/visual-lab', label: 'Visual Lab' },
   { to: '/glossary', label: 'Glossary' },
-  { to: '/student/dashboard', label: 'My Dashboard' },
 ];
 
 function SunIcon() {
@@ -43,13 +41,10 @@ function MoonIcon() {
 export default function Header() {
   const { theme, toggleTheme } = useTheme();
   const { getOverallPercent } = useProgress();
-  const { user, isTeacher } = useAuth();
   const overallPercent = getOverallPercent();
 
   const circumference = 2 * Math.PI * 7;
   const offset = circumference - (overallPercent / 100) * circumference;
-
-  const dashboardPath = isTeacher ? '/teacher/dashboard' : '/student/dashboard';
 
   return (
     <header className="header" role="banner">
@@ -76,7 +71,7 @@ export default function Header() {
 
         <div className="header-actions">
           {overallPercent > 0 && (
-            <Link to={dashboardPath} className="header-progress-badge" aria-label={`Overall progress: ${overallPercent}%`}>
+            <div className="header-progress-badge" aria-label={`Overall progress: ${overallPercent}%`}>
               <svg className="header-progress-ring" viewBox="0 0 20 20">
                 <circle cx="10" cy="10" r="7" fill="none" stroke="var(--border-secondary)" strokeWidth="2" />
                 <circle
@@ -91,7 +86,7 @@ export default function Header() {
                 />
               </svg>
               <span>{overallPercent}%</span>
-            </Link>
+            </div>
           )}
 
           <button
@@ -102,13 +97,6 @@ export default function Header() {
           >
             {theme === 'light' ? <MoonIcon /> : <SunIcon />}
           </button>
-
-          <Link to="/student/profile" className="header-user-btn" title="View Profile">
-            <span className="header-user-avatar">
-              {(user?.name || 'S').charAt(0).toUpperCase()}
-            </span>
-            <span className="name">{user?.name ? user.name.split(' ')[0] : 'Student'}</span>
-          </Link>
         </div>
       </div>
     </header>

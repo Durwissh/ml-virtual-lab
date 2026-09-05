@@ -146,7 +146,7 @@ const JOURNEY_STEPS: JourneyStep[] = [
     actionLabel: 'Take Assessment →',
     route: '/experiment/1#posttest',
     lockRequirement: 'Complete the foundational experiments and results analysis',
-    quickLink: { label: 'View Student Dashboard & Scores', route: '/student/dashboard' }
+    quickLink: { label: 'Direct Link: Experiment 01 Posttest', route: '/experiment/1#posttest' }
   }
 ];
 

@@ -184,7 +184,7 @@ export async function initDatabase(): Promise<void> {
     db.prepare(`
       INSERT INTO users (student_id, name, email, password_hash, role, created_at, last_login)
       VALUES (?, ?, ?, ?, ?, ?, ?)
-    `).run('RA2111003010001', 'Aditya Kumar', studentEmail, passwordHash, 'student', now, now);
+    `).run('RA2411027010104', 'Akshayanivashini', studentEmail, passwordHash, 'student', now, now);
     console.log('Default Student account initialized (student@srm.edu / Student@123)');
   }
 
