@@ -15,6 +15,11 @@ export interface MilestoneStage {
   relatedExpIds: string[];
   ctaLabel: string;
   route: string;
+  animal?: {
+    emoji: string;
+    name: string;
+    tip: string;
+  };
 }
 
 const MILESTONES: MilestoneStage[] = [
@@ -31,7 +36,12 @@ const MILESTONES: MilestoneStage[] = [
     ],
     relatedExpIds: ['1'],
     ctaLabel: 'Start Foundations →',
-    route: '/experiment/1#aim'
+    route: '/experiment/1#aim',
+    animal: {
+      emoji: '🦌',
+      name: 'Forest Deer',
+      tip: '“Every model starts with clean assumptions. Begin your journey here!”'
+    }
   },
   {
     id: 2,
@@ -47,7 +57,12 @@ const MILESTONES: MilestoneStage[] = [
     ],
     relatedExpIds: ['1'],
     ctaLabel: 'Explore Data & Pre-processing →',
-    route: '/experiment/1'
+    route: '/experiment/1',
+    animal: {
+      emoji: '🐇',
+      name: 'Meadow Rabbit',
+      tip: '“Tip: Always fit scalers on training data only to prevent data leakage!”'
+    }
   },
   {
     id: 3,
@@ -62,7 +77,12 @@ const MILESTONES: MilestoneStage[] = [
     ],
     relatedExpIds: ['2', '4', '6', '8', '9'],
     ctaLabel: 'Explore Supervised Models →',
-    route: '/experiment/2'
+    route: '/experiment/2',
+    animal: {
+      emoji: '🦊',
+      name: 'Curious Fox',
+      tip: '“Supervised models learn direct mappings from inputs (X) to targets (y)!”'
+    }
   },
   {
     id: 4,
@@ -77,7 +97,12 @@ const MILESTONES: MilestoneStage[] = [
     ],
     relatedExpIds: ['5', '7'],
     ctaLabel: 'Explore Unsupervised Learning →',
-    route: '/experiment/7'
+    route: '/experiment/7',
+    animal: {
+      emoji: '🦔',
+      name: 'Pattern Hedgehog',
+      tip: '“Unsupervised algorithms find natural clusters and compress feature space without labels!”'
+    }
   },
   {
     id: 5,
@@ -92,7 +117,12 @@ const MILESTONES: MilestoneStage[] = [
     ],
     relatedExpIds: ['3'],
     ctaLabel: 'Evaluate Models →',
-    route: '/experiment/3'
+    route: '/experiment/3',
+    animal: {
+      emoji: '🦉',
+      name: 'Wise Owl',
+      tip: '“Cross-validation ensures your model generalises well to unseen real-world data!”'
+    }
   },
   {
     id: 6,
@@ -107,7 +137,12 @@ const MILESTONES: MilestoneStage[] = [
     ],
     relatedExpIds: ['10'],
     ctaLabel: 'Master Laboratory →',
-    route: '/experiment/10'
+    route: '/experiment/10',
+    animal: {
+      emoji: '🦅',
+      name: 'Summit Eagle',
+      tip: '“You’ve reached the summit! Ready to conquer all 10 virtual experiments?”'
+    }
   }
 ];
 
@@ -115,6 +150,7 @@ export default function LearningPath() {
   const navigate = useNavigate();
   const { progress, getCompletionPercent } = useProgress();
   const [activeMilestoneId, setActiveMilestoneId] = useState<number>(1);
+  const [activeTip, setActiveTip] = useState<{ id: number; text: string; name: string } | null>(null);
   const milestoneRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   // Calculate live completion state for each milestone
@@ -177,8 +213,45 @@ export default function LearningPath() {
     navigate(route);
   };
 
+  const handleAnimalClick = (id: number, name: string, tip: string) => {
+    if (activeTip?.id === id) {
+      setActiveTip(null);
+    } else {
+      setActiveTip({ id, name, text: tip });
+    }
+  };
+
   return (
     <div className="lp-journey-page">
+      {/* ─── Ambient Landscape Layer (Grass, Trees, Sun, Clouds) ─── */}
+      <div className="lp-landscape-bg" aria-hidden="true">
+        {/* Floating Clouds */}
+        <div className="lp-cloud lp-cloud-1">☁️</div>
+        <div className="lp-cloud lp-cloud-2">☁️</div>
+        <div className="lp-cloud lp-cloud-3">☁️</div>
+
+        {/* Scattered Wild Trees along the Landscape */}
+        <div className="lp-tree lp-tree-top-left" title="Pine Tree">🌲</div>
+        <div className="lp-tree lp-tree-top-right" title="Oak Tree">🌳</div>
+        <div className="lp-tree lp-tree-mid-1" title="Evergreen">🌲</div>
+        <div className="lp-tree lp-tree-mid-2" title="Apple Tree">🌳</div>
+        <div className="lp-tree lp-tree-mid-3" title="Spruce">🌲</div>
+        <div className="lp-tree lp-tree-mid-4" title="Oak">🌳</div>
+        <div className="lp-tree lp-tree-bottom-left" title="Cedar">🌲</div>
+        <div className="lp-tree lp-tree-bottom-right" title="Forest">🌳</div>
+
+        {/* Fluttering Butterflies */}
+        <div className="lp-butterfly lp-butterfly-1">🦋</div>
+        <div className="lp-butterfly lp-butterfly-2">🦋</div>
+        <div className="lp-butterfly lp-butterfly-3">🦋</div>
+
+        {/* Wildflower & Grass Clumps */}
+        <div className="lp-grass lp-grass-1">🌿 🌸</div>
+        <div className="lp-grass lp-grass-2">🌼 🌿</div>
+        <div className="lp-grass lp-grass-3">🌻 🌿</div>
+        <div className="lp-grass lp-grass-4">🌸 🌿</div>
+      </div>
+
       {/* ─── Compact Sticky Stage Indicator ─── */}
       <aside className="lp-sticky-tracker" aria-label="Journey Progress">
         <div className="lp-tracker-inner">
@@ -198,10 +271,11 @@ export default function LearningPath() {
       <div className="lp-journey-container">
         {/* ─── Compact Hero (No bulky stats) ─── */}
         <header className="lp-journey-hero">
-          <span className="lp-hero-tag">SRM VIRTUAL LAB · CURRICULUM ROADMAP</span>
-          <h1 className="lp-hero-headline">Machine Learning Journey</h1>
+          <span className="lp-hero-tag">🌲 SRM ML VIRTUAL LAB · INTERACTIVE TRAIL 🌲</span>
+          <h1 className="lp-hero-headline">Machine Learning Trail</h1>
           <p className="lp-hero-subline">
-            From data foundations to intelligent neural models. Follow the road through each milestone.
+            Travel down the road from foundational data prep to deep neural models.
+            Interact with the stops, discover helpful tips, and launch into the experiments.
           </p>
           <button
             type="button"
@@ -223,7 +297,7 @@ export default function LearningPath() {
               preserveAspectRatio="none"
               fill="none"
             >
-              {/* Outer Roadbed Glow */}
+              {/* Outer Roadbed Glow / Curb */}
               <path
                 d="M 500 40 
                    C 500 160, 260 220, 260 360
@@ -234,7 +308,7 @@ export default function LearningPath() {
                    C 260 2120, 500 2200, 500 2340"
                 className="lp-road-bed"
               />
-              {/* Active Road Surface */}
+              {/* Active Deep Black Asphalt Road Surface */}
               <path
                 d="M 500 40 
                    C 500 160, 260 220, 260 360
@@ -245,7 +319,7 @@ export default function LearningPath() {
                    C 260 2120, 500 2200, 500 2340"
                 className="lp-road-surface"
               />
-              {/* Center Line Markings */}
+              {/* Yellow/Amber Center Line Markings */}
               <path
                 d="M 500 40 
                    C 500 160, 260 220, 260 360
@@ -261,7 +335,7 @@ export default function LearningPath() {
 
           {/* Road Start Marker */}
           <div className="lp-road-start-marker">
-            <span className="lp-start-badge">START JOURNEY</span>
+            <span className="lp-start-badge">🏁 TRAILHEAD · START HERE</span>
             <div className="lp-start-node" />
           </div>
 
@@ -272,6 +346,7 @@ export default function LearningPath() {
               const isActive = m.id === activeMilestoneId;
               const state = milestoneStates[m.id as keyof typeof milestoneStates];
               const isCompleted = state?.isCompleted;
+              const isTipOpen = activeTip?.id === m.id;
 
               return (
                 <div
@@ -304,7 +379,7 @@ export default function LearningPath() {
                       <span className="lp-step-label">STEP {m.stepNumber}</span>
                       <span className="lp-category-label">{m.category}</span>
                       {isCompleted && (
-                        <span className="lp-completed-pill">✓ Done</span>
+                        <span className="lp-completed-pill">✓ Completed</span>
                       )}
                     </div>
 
@@ -360,23 +435,58 @@ export default function LearningPath() {
                       </button>
                     </div>
                   </article>
+
+                  {/* ─── Interactive Roadside Animal Companion ─── */}
+                  {m.animal && (
+                    <div
+                      className={`lp-road-animal-wrapper ${isLeft ? 'lp-animal-right' : 'lp-animal-left'}`}
+                    >
+                      <button
+                        type="button"
+                        className="lp-road-animal-btn"
+                        onClick={() => handleAnimalClick(m.id, m.animal!.name, m.animal!.tip)}
+                        title={`Click ${m.animal.name} for an ML tip!`}
+                        aria-label={`${m.animal.name} tip`}
+                      >
+                        <span className="lp-animal-sprite">{m.animal.emoji}</span>
+                        <span className="lp-animal-tag">{m.animal.name}</span>
+                      </button>
+
+                      {/* Interactive Speech Bubble Tooltip */}
+                      {isTipOpen && (
+                        <div className="lp-speech-bubble animate-fade-in">
+                          <div className="lp-bubble-title">💡 {m.animal.name} says:</div>
+                          <p className="lp-bubble-text">{m.animal.tip}</p>
+                          <button
+                            type="button"
+                            className="lp-bubble-close"
+                            onClick={() => setActiveTip(null)}
+                          >
+                            ✕
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               );
             })}
           </div>
 
-          {/* ─── Terminus / Finish Line ─── */}
+          {/* ─── Terminus / Finish Line Campsite ─── */}
           <footer className="lp-road-terminus">
             <div className="lp-finish-node" />
             <div className="lp-finish-card">
-              <span className="lp-finish-tag">JOURNEY COMPLETE</span>
-              <h2 className="lp-finish-title">Ready for Hands-On Laboratory Practice</h2>
+              <span className="lp-finish-camp-icon">🏕️ 🌲 🔥</span>
+              <span className="lp-finish-tag">TRAIL END · LABORATORY BASECAMP</span>
+              <h2 className="lp-finish-title">Ready for Hands-On Practice</h2>
               <p className="lp-finish-desc">
-                Step into all 10 virtual experiments with interactive datasets, parameter tuning, and evaluation quizzes.
+                Step into all 10 virtual laboratory experiments with real-time parameter tuning,
+                interactive visualization sandboxes, and mastery quizzes.
               </p>
               <div className="lp-finish-actions">
                 <Link to="/experiments" className="btn btn-primary btn-lg">
-                  Explore 10 Experiments →
+                  Explore All 10 Experiments →
                 </Link>
                 <Link to="/glossary" className="btn btn-secondary btn-lg">
                   Review Master Glossary (102 Terms)
