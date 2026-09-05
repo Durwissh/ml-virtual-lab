@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 export default function NotFound() {
   return (
     <div style={{
-      minHeight: '70vh',
+      minHeight: '100vh',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: 'var(--space-6)',
+      padding: 'calc(var(--header-height) + var(--space-8)) var(--space-6) var(--space-8)',
       textAlign: 'center',
     }}>
       <div style={{
