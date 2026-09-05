@@ -23,6 +23,10 @@ export const experimentDataMap: Record<string, any> = {
   '10': exp10,
 };
 
-export function getExperimentContent(id: string) {
-  return experimentDataMap[id] || null;
+import { normalizeExpId } from './experiments';
+
+export function getExperimentContent(id: string | number) {
+  const normalized = normalizeExpId(id);
+  return experimentDataMap[normalized] || null;
 }
+

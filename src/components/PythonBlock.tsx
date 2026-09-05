@@ -1,9 +1,8 @@
 // src/components/PythonBlock.tsx
 import React, { useState, useEffect, useRef } from 'react';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-python';
 import './PythonBlock.css';
-
-// We'll use Prism for syntax highlighting
-declare const Prism: any;
 
 interface PythonBlockProps {
   title?: string;
@@ -17,10 +16,19 @@ export default function PythonBlock({ title, code, explanation }: PythonBlockPro
   const codeRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (codeRef.current && typeof Prism !== 'undefined') {
-      Prism.highlightElement(codeRef.current);
+    if (codeRef.current) {
+      try {
+        if (typeof Prism !== 'undefined' && Prism.highlightElement) {
+          Prism.highlightElement(codeRef.current);
+        } else if (typeof window !== 'undefined' && (window as any).Prism?.highlightElement) {
+          (window as any).Prism.highlightElement(codeRef.current);
+        }
+      } catch (e) {
+        console.warn('Prism highlighting error:', e);
+      }
     }
   }, [code, expanded]);
+
 
   const handleCopy = async () => {
     try {

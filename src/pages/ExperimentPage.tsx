@@ -1,7 +1,7 @@
 // src/pages/ExperimentPage.tsx
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { experiments, getExperiment } from '../data/experiments';
+import { experiments, getExperiment, normalizeExpId } from '../data/experiments';
 import { getExperimentContent } from '../data';
 import { useProgress } from '../context/ProgressContext';
 import PythonBlock from '../components/PythonBlock';
@@ -34,33 +34,40 @@ const sections: { key: SectionKey; label: string; number: string }[] = [
 
 const renderVisualization = (vizId: string) => {
   switch (vizId) {
-    case 'linear-regression': return <LinearRegressionViz />;
-    case 'logistic-regression': return <LogisticRegressionViz />;
-    case 'pca': return <PCAViz />;
-    case 'svm': return <SVMViz />;
-    case 'kmeans': return <KMeansViz />;
-    case 'decision-tree': return <DecisionTreeViz />;
-    case 'random-forest': return <RandomForestViz />;
-    case 'perceptron': return <PerceptronViz />;
+    case 'linear-regression': return <LinearRegressionViz key="linear-regression" />;
+    case 'logistic-regression': return <LogisticRegressionViz key="logistic-regression" />;
+    case 'pca': return <PCAViz key="pca" />;
+    case 'svm': return <SVMViz key="svm" />;
+    case 'kmeans': return <KMeansViz key="kmeans" />;
+    case 'decision-tree': return <DecisionTreeViz key="decision-tree" />;
+    case 'random-forest': return <RandomForestViz key="random-forest" />;
+    case 'perceptron': return <PerceptronViz key="perceptron" />;
     default: return null;
   }
 };
 
 export default function ExperimentPage() {
   const { id } = useParams<{ id: string }>();
-  const expMeta = getExperiment(id || '');
-  const content = getExperimentContent(id || '');
+  const normalizedId = normalizeExpId(id || '1');
+  const expMeta = getExperiment(normalizedId);
+  const content = getExperimentContent(normalizedId);
   const { getExperimentProgress, markSectionComplete, setLastVisited, saveProcedureStep, getProcedureSteps } = useProgress();
 
   const [activeSection, setActiveSection] = useState<SectionKey>('aim');
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
-  const progress = getExperimentProgress(id || '1');
+  const progress = getExperimentProgress(normalizedId);
   const nextExp = experiments.find(e => e.number === (expMeta?.number || 0) + 1);
 
+  // Reset scroll and active section on experiment ID change
   useEffect(() => {
-    if (id) setLastVisited(id, activeSection);
-  }, [id, activeSection, setLastVisited]);
+    setActiveSection('aim');
+    window.scrollTo(0, 0);
+  }, [normalizedId]);
+
+  useEffect(() => {
+    if (normalizedId) setLastVisited(normalizedId, activeSection);
+  }, [normalizedId, activeSection, setLastVisited]);
 
   const scrollToSection = useCallback((key: SectionKey) => {
     setActiveSection(key);
@@ -71,8 +78,9 @@ export default function ExperimentPage() {
   }, []);
 
   const handleMarkComplete = useCallback((section: SectionKey) => {
-    markSectionComplete(id || '1', section);
-  }, [id, markSectionComplete]);
+    markSectionComplete(normalizedId, section);
+  }, [normalizedId, markSectionComplete]);
+
 
   if (!expMeta) {
     return (
@@ -131,10 +139,10 @@ export default function ExperimentPage() {
     );
   }
 
-  const procedureSteps = getProcedureSteps(id || '1', content.procedure.steps.length);
+  const procedureSteps = getProcedureSteps(normalizedId, content.procedure.steps.length);
 
   return (
-    <div className="exp-layout">
+    <div className="exp-layout" key={`exp-page-${normalizedId}`}>
       {/* ─── Sidebar ─── */}
       <aside className="exp-sidebar" aria-label="Experiment sections">
         <div className="exp-sidebar-header">
@@ -176,7 +184,8 @@ export default function ExperimentPage() {
               <span>Experiment {String(expMeta.number).padStart(2, '0')}</span>
             </nav>
             <ExperimentUtilities 
-              experimentId={id || '1'} 
+              key={`util-${normalizedId}`}
+              experimentId={normalizedId} 
               experimentTitle={expMeta.title} 
             />
           </div>
@@ -346,7 +355,8 @@ export default function ExperimentPage() {
               </div>
             </div>
             <Quiz
-              quizId={`exp-${id}-pretest`}
+              key={`quiz-${normalizedId}-pretest`}
+              quizId={`exp-${normalizedId}-pretest`}
               title={content.pretest.title}
               description={content.pretest.description}
               questions={content.pretest.questions}
@@ -394,7 +404,7 @@ export default function ExperimentPage() {
                     <button
                       className={`exp-procedure-check${isComplete ? ' exp-procedure-check--done' : ''}`}
                       onClick={() => {
-                        saveProcedureStep(id || '1', i, !isComplete);
+                        saveProcedureStep(normalizedId, i, !isComplete);
                         if (!isComplete && procedureSteps.filter(Boolean).length + 1 === content.procedure.steps.length) {
                           handleMarkComplete('procedure');
                         }
@@ -472,7 +482,8 @@ export default function ExperimentPage() {
               </div>
             </div>
             <Quiz
-              quizId={`exp-${id}-posttest`}
+              key={`quiz-${normalizedId}-posttest`}
+              quizId={`exp-${normalizedId}-posttest`}
               title={content.posttest.title}
               description={content.posttest.description}
               questions={content.posttest.questions}
@@ -485,6 +496,7 @@ export default function ExperimentPage() {
           {nextExp && (
             <Link to={`/experiment/${nextExp.id}`} className="exp-next">
               <div>
+
                 <div className="exp-next-label">Next Experiment</div>
                 <div className="exp-next-title">{String(nextExp.number).padStart(2, '0')}. {nextExp.shortTitle}</div>
               </div>

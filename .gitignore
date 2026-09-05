@@ -1,5 +1,10 @@
 node_modules/
 dist/
+server/dist/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
 .env
 .env.*
 !.env.example
@@ -7,3 +12,4 @@ dist/
 .DS_Store
 Thumbs.db
 raw_request.txt
+

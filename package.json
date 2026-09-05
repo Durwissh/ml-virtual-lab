@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "server": "npm --prefix server run dev",
+    "build:server": "npm --prefix server run build",
+    "build": "vite build && npm --prefix server run build",
     "preview": "vite preview"
   },
   "dependencies": {

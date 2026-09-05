@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useProgress } from '../context/ProgressContext';
 import './ExperimentUtilities.css';
 
@@ -14,6 +14,11 @@ export default function ExperimentUtilities({ experimentId, experimentTitle }: E
   const [isNotesOpen, setIsNotesOpen] = useState(false);
   const [noteText, setNoteText] = useState(() => getNote(experimentId));
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saved'>('idle');
+
+  useEffect(() => {
+    setNoteText(getNote(experimentId));
+  }, [experimentId, getNote]);
+
 
   const handleToggleBookmark = () => {
     toggleBookmark({

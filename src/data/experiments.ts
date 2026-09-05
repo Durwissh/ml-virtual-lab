@@ -137,6 +137,16 @@ export const experiments: ExperimentMeta[] = [
   },
 ];
 
-export function getExperiment(id: string): ExperimentMeta | undefined {
-  return experiments.find(e => e.id === id);
+export function normalizeExpId(id: string | number): string {
+  const num = typeof id === 'number' ? id : parseInt(id, 10);
+  if (!isNaN(num) && num >= 1 && num <= 10) {
+    return String(num);
+  }
+  return String(id).trim();
 }
+
+export function getExperiment(id: string | number): ExperimentMeta | undefined {
+  const normalized = normalizeExpId(id);
+  return experiments.find(e => e.id === normalized || String(e.number) === normalized);
+}
+

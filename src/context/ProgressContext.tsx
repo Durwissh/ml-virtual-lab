@@ -1,29 +1,40 @@
-// src/context/ProgressContext.tsx
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { useAuth } from './AuthContext';
 
-interface ExperimentProgress {
+export interface ExperimentProgress {
   aim: boolean;
   theory: boolean;
   pretest: boolean;
   procedure: boolean;
   results: boolean;
   posttest: boolean;
+  startedAt?: string;
+  completedAt?: string;
 }
 
-interface QuizResult {
+export interface QuizResult {
   score: number;
   total: number;
   answers: number[];
   submittedAt: string;
 }
 
-interface ProgressState {
+export interface Bookmark {
+  id: string;
+  type: string;
+  experimentId: string;
+  title: string;
+  addedAt: string;
+}
+
+export interface ProgressState {
   experiments: Record<string, ExperimentProgress>;
   quizResults: Record<string, QuizResult>;
   procedureSteps: Record<string, boolean[]>;
   lastVisited: { experimentId: string; section: string } | null;
-  bookmarks: Array<{ id: string; type: string; experimentId: string; title: string; addedAt: string }>;
+  bookmarks: Bookmark[];
   notes: Record<string, string>;
+  isLoading: boolean;
 }
 
 const defaultProgress: ExperimentProgress = {
@@ -35,49 +46,78 @@ const defaultProgress: ExperimentProgress = {
   posttest: false,
 };
 
-const STORAGE_KEY = 'ml-vlab-progress';
-
-function loadProgress(): ProgressState {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) return JSON.parse(saved);
-  } catch {}
-  return {
-    experiments: {},
-    quizResults: {},
-    procedureSteps: {},
-    lastVisited: null,
-    bookmarks: [],
-    notes: {},
-  };
-}
+const initialEmptyState: ProgressState = {
+  experiments: {},
+  quizResults: {},
+  procedureSteps: {},
+  lastVisited: null,
+  bookmarks: [],
+  notes: {},
+  isLoading: false,
+};
 
 interface ProgressContextType {
   progress: ProgressState;
-  markSectionComplete: (experimentId: string, section: keyof ExperimentProgress) => void;
-  saveQuizResult: (quizId: string, result: QuizResult) => void;
+  markSectionComplete: (experimentId: string, section: keyof ExperimentProgress) => Promise<void>;
+  saveQuizResult: (quizId: string, result: QuizResult) => Promise<void>;
   getExperimentProgress: (experimentId: string) => ExperimentProgress;
   getCompletionPercent: (experimentId: string) => number;
   getOverallPercent: () => number;
   setLastVisited: (experimentId: string, section: string) => void;
-  toggleBookmark: (bookmark: { id: string; type: string; experimentId: string; title: string }) => void;
+  toggleBookmark: (bookmark: { id: string; type: string; experimentId: string; title: string }) => Promise<void>;
   isBookmarked: (id: string) => boolean;
-  saveNote: (key: string, text: string) => void;
+  saveNote: (key: string, text: string) => Promise<void>;
   getNote: (key: string) => string;
-  saveProcedureStep: (experimentId: string, stepIndex: number, complete: boolean) => void;
+  saveProcedureStep: (experimentId: string, stepIndex: number, complete: boolean) => Promise<void>;
   getProcedureSteps: (experimentId: string, totalSteps: number) => boolean[];
+  reloadProgress: () => Promise<void>;
 }
 
 const ProgressContext = createContext<ProgressContextType>({} as ProgressContextType);
 
 export function ProgressProvider({ children }: { children: React.ReactNode }) {
-  const [progress, setProgress] = useState<ProgressState>(loadProgress);
+  const { token, user } = useAuth();
+  const [progress, setProgress] = useState<ProgressState>(initialEmptyState);
+
+  // Load progress from backend whenever authenticated user changes
+  const reloadProgress = useCallback(async () => {
+    if (!token) {
+      // Clear progress when unauthenticated
+      setProgress(initialEmptyState);
+      return;
+    }
+
+    try {
+      setProgress(prev => ({ ...prev, isLoading: true }));
+      const res = await fetch('/api/progress', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setProgress({
+          experiments: data.experiments || {},
+          quizResults: data.quizResults || {},
+          procedureSteps: data.procedureSteps || {},
+          bookmarks: data.bookmarks || [],
+          notes: data.notes || {},
+          lastVisited: null,
+          isLoading: false,
+        });
+      } else {
+        setProgress(prev => ({ ...prev, isLoading: false }));
+      }
+    } catch (err) {
+      console.warn('Failed to load progress from server:', err);
+      setProgress(prev => ({ ...prev, isLoading: false }));
+    }
+  }, [token]);
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
-  }, [progress]);
+    reloadProgress();
+  }, [reloadProgress, user?.id]);
 
-  const markSectionComplete = useCallback((experimentId: string, section: keyof ExperimentProgress) => {
+  const markSectionComplete = useCallback(async (experimentId: string, section: keyof ExperimentProgress) => {
+    // 1. Optimistic UI update
     setProgress(prev => ({
       ...prev,
       experiments: {
@@ -88,14 +128,65 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
         },
       },
     }));
-  }, []);
 
-  const saveQuizResult = useCallback((quizId: string, result: QuizResult) => {
+    // 2. Persist to database if authenticated
+    if (token) {
+      try {
+        await fetch('/api/progress/section', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ experimentId, section }),
+        });
+      } catch (err) {
+        console.error('Error persisting section progress:', err);
+      }
+    }
+  }, [token]);
+
+  const saveQuizResult = useCallback(async (quizId: string, result: QuizResult) => {
+    // quizId format: exp-1-pretest or exp-1-posttest
+    const parts = quizId.split('-');
+    const experimentId = parts[1] || '1';
+    const quizType = parts[2] || 'pretest';
+
+    // 1. Optimistic UI update
     setProgress(prev => ({
       ...prev,
       quizResults: { ...prev.quizResults, [quizId]: result },
+      experiments: {
+        ...prev.experiments,
+        [experimentId]: {
+          ...(prev.experiments[experimentId] || defaultProgress),
+          [quizType as 'pretest' | 'posttest']: true,
+        },
+      },
     }));
-  }, []);
+
+    // 2. Persist to database if authenticated
+    if (token) {
+      try {
+        await fetch('/api/quizzes/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            experimentId,
+            quizType,
+            score: result.score,
+            totalQuestions: result.total,
+            answers: result.answers,
+          }),
+        });
+      } catch (err) {
+        console.error('Error persisting quiz attempt:', err);
+      }
+    }
+  }, [token]);
 
   const getExperimentProgress = useCallback((experimentId: string): ExperimentProgress => {
     return progress.experiments[experimentId] || defaultProgress;
@@ -103,7 +194,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
 
   const getCompletionPercent = useCallback((experimentId: string): number => {
     const p = progress.experiments[experimentId] || defaultProgress;
-    const sections = Object.values(p);
+    const sections = [p.aim, p.theory, p.pretest, p.procedure, p.results, p.posttest];
     const completed = sections.filter(Boolean).length;
     return Math.round((completed / sections.length) * 100);
   }, [progress.experiments]);
@@ -114,7 +205,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
     for (let i = 1; i <= 10; i++) {
       const id = String(i);
       const p = progress.experiments[id] || defaultProgress;
-      const sections = Object.values(p);
+      const sections = [p.aim, p.theory, p.pretest, p.procedure, p.results, p.posttest];
       total += sections.length;
       completed += sections.filter(Boolean).length;
     }
@@ -128,34 +219,75 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
     }));
   }, []);
 
-  const toggleBookmark = useCallback((bookmark: { id: string; type: string; experimentId: string; title: string }) => {
-    setProgress(prev => {
-      const exists = prev.bookmarks.find(b => b.id === bookmark.id);
-      return {
-        ...prev,
-        bookmarks: exists
-          ? prev.bookmarks.filter(b => b.id !== bookmark.id)
-          : [...prev.bookmarks, { ...bookmark, addedAt: new Date().toISOString() }],
-      };
-    });
-  }, []);
+  const toggleBookmark = useCallback(async (bookmark: { id: string; type: string; experimentId: string; title: string }) => {
+    const exists = progress.bookmarks.find(b => b.experimentId === bookmark.experimentId);
 
-  const isBookmarked = useCallback((id: string): boolean => {
-    return progress.bookmarks.some(b => b.id === id);
-  }, [progress.bookmarks]);
-
-  const saveNote = useCallback((key: string, text: string) => {
+    // 1. Optimistic UI update
     setProgress(prev => ({
       ...prev,
-      notes: { ...prev.notes, [key]: text },
+      bookmarks: exists
+        ? prev.bookmarks.filter(b => b.experimentId !== bookmark.experimentId)
+        : [...prev.bookmarks, { ...bookmark, addedAt: new Date().toISOString() }],
     }));
-  }, []);
 
-  const getNote = useCallback((key: string): string => {
-    return progress.notes[key] || '';
+    // 2. Persist to database if authenticated
+    if (token) {
+      try {
+        await fetch('/api/bookmarks/toggle', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            experimentId: bookmark.experimentId,
+            title: bookmark.title,
+            type: bookmark.type,
+          }),
+        });
+      } catch (err) {
+        console.error('Error toggling bookmark:', err);
+      }
+    }
+  }, [token, progress.bookmarks]);
+
+  const isBookmarked = useCallback((id: string): boolean => {
+    return progress.bookmarks.some(b => b.experimentId === id || b.id === id);
+  }, [progress.bookmarks]);
+
+  const saveNote = useCallback(async (experimentId: string, text: string) => {
+    // 1. Optimistic UI update
+    setProgress(prev => ({
+      ...prev,
+      notes: { ...prev.notes, [experimentId]: text },
+    }));
+
+    // 2. Persist to database if authenticated
+    if (token) {
+      try {
+        await fetch('/api/notes', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            experimentId,
+            content: text,
+          }),
+        });
+      } catch (err) {
+        console.error('Error saving note:', err);
+      }
+    }
+  }, [token]);
+
+  const getNote = useCallback((experimentId: string): string => {
+    return progress.notes[experimentId] || '';
   }, [progress.notes]);
 
-  const saveProcedureStep = useCallback((experimentId: string, stepIndex: number, complete: boolean) => {
+  const saveProcedureStep = useCallback(async (experimentId: string, stepIndex: number, complete: boolean) => {
+    // 1. Optimistic UI update
     setProgress(prev => {
       const existing = prev.procedureSteps[experimentId] || [];
       const updated = [...existing];
@@ -165,7 +297,27 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
         procedureSteps: { ...prev.procedureSteps, [experimentId]: updated },
       };
     });
-  }, []);
+
+    // 2. Persist to database if authenticated
+    if (token) {
+      try {
+        await fetch('/api/progress/step', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            experimentId,
+            stepIndex,
+            isCompleted: complete,
+          }),
+        });
+      } catch (err) {
+        console.error('Error saving procedure step:', err);
+      }
+    }
+  }, [token]);
 
   const getProcedureSteps = useCallback((experimentId: string, totalSteps: number): boolean[] => {
     const existing = progress.procedureSteps[experimentId] || [];
@@ -187,6 +339,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
       getNote,
       saveProcedureStep,
       getProcedureSteps,
+      reloadProgress,
     }}>
       {children}
     </ProgressContext.Provider>
