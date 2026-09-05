@@ -20,7 +20,77 @@
   color: var(--text-tertiary);
 }
 
-/* Progress bar */
+/* Progress & Question Pills */
+.quiz-pills-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-5);
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.quiz-pills-list {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.quiz-pill {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-secondary);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.quiz-pill:hover {
+  border-color: var(--accent-primary);
+  color: var(--text-primary);
+}
+
+.quiz-pill--active {
+  border-color: var(--accent-primary);
+  background: var(--bg-primary);
+  color: var(--accent-primary);
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.quiz-pill--answered {
+  background: rgba(56, 161, 105, 0.12);
+  border-color: #38a169;
+  color: #2f855a;
+}
+
+.quiz-pill--active.quiz-pill--answered {
+  box-shadow: 0 0 0 2px rgba(56, 161, 105, 0.3);
+}
+
+.quiz-pill-check {
+  font-size: 9px;
+  margin-left: 2px;
+  font-weight: bold;
+}
+
+.quiz-warning-banner {
+  background: rgba(221, 107, 32, 0.1);
+  border: 1px solid rgba(221, 107, 32, 0.3);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  margin-bottom: var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+}
+
 .quiz-progress {
   display: flex;
   align-items: center;

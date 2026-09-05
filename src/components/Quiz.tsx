@@ -1,5 +1,5 @@
 // src/components/Quiz.tsx
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useProgress } from '../context/ProgressContext';
 import './Quiz.css';
 
@@ -25,20 +25,38 @@ export default function Quiz({ quizId, title, description, questions, variant = 
   const existingResult = progress.quizResults[quizId];
 
   const [current, setCurrent] = useState(0);
-  const [answers, setAnswers] = useState<number[]>(
-    existingResult ? existingResult.answers : new Array(questions.length).fill(-1)
-  );
-  const [submitted, setSubmitted] = useState(!!existingResult);
+  const [answers, setAnswers] = useState<number[]>(() => {
+    return existingResult?.answers && Array.isArray(existingResult.answers) && existingResult.answers.length === questions.length
+      ? existingResult.answers
+      : new Array(questions.length).fill(-1);
+  });
+  const [submitted, setSubmitted] = useState<boolean>(!!existingResult);
   const [showReview, setShowReview] = useState(false);
+  const [showUnansweredPrompt, setShowUnansweredPrompt] = useState(false);
+
+  // Sync if existing result loads from backend
+  useEffect(() => {
+    if (existingResult && !submitted) {
+      if (existingResult.answers && Array.isArray(existingResult.answers)) {
+        setAnswers(existingResult.answers);
+      }
+      setSubmitted(true);
+    }
+  }, [existingResult, submitted]);
+
+  const answeredCount = answers.filter(a => a !== -1).length;
+  const allAnswered = answeredCount === questions.length;
+  const firstUnansweredIndex = answers.findIndex(a => a === -1);
 
   const score = answers.reduce((acc, ans, i) => {
-    return acc + (ans === questions[i].answer ? 1 : 0);
+    return acc + (ans === questions[i]?.answer ? 1 : 0);
   }, 0);
 
-  const percent = Math.round((score / questions.length) * 100);
+  const percent = questions.length > 0 ? Math.round((score / questions.length) * 100) : 0;
 
   const handleSelect = useCallback((optionIndex: number) => {
     if (submitted) return;
+    setShowUnansweredPrompt(false);
     setAnswers(prev => {
       const next = [...prev];
       next[current] = optionIndex;
@@ -46,26 +64,39 @@ export default function Quiz({ quizId, title, description, questions, variant = 
     });
   }, [current, submitted]);
 
-  const handleSubmit = useCallback(() => {
+  const executeSubmit = useCallback(() => {
+    setShowUnansweredPrompt(false);
     setSubmitted(true);
+    const finalScore = answers.reduce((acc, ans, i) => {
+      return acc + (ans === questions[i]?.answer ? 1 : 0);
+    }, 0);
+
     const result = {
-      score,
+      score: finalScore,
       total: questions.length,
       answers,
       submittedAt: new Date().toISOString(),
     };
     saveQuizResult(quizId, result);
     onComplete?.();
-  }, [score, questions.length, answers, quizId, saveQuizResult, onComplete]);
+  }, [answers, questions, quizId, saveQuizResult, onComplete]);
+
+  const handleSubmitClick = useCallback(() => {
+    if (!allAnswered) {
+      setShowUnansweredPrompt(true);
+    } else {
+      executeSubmit();
+    }
+  }, [allAnswered, executeSubmit]);
 
   const handleRetake = useCallback(() => {
     setAnswers(new Array(questions.length).fill(-1));
     setSubmitted(false);
     setShowReview(false);
+    setShowUnansweredPrompt(false);
     setCurrent(0);
   }, [questions.length]);
 
-  const allAnswered = answers.every(a => a !== -1);
   const q = questions[current];
 
   return (
@@ -80,7 +111,7 @@ export default function Quiz({ quizId, title, description, questions, variant = 
         <div className="quiz-results animate-fade-in-up">
           <div className="quiz-results-score">{score}/{questions.length}</div>
           <div className="quiz-results-label">
-            {percent >= 80 ? 'Excellent work!' : percent >= 60 ? 'Good effort!' : 'Keep practising.'}
+            {percent >= 80 ? '🌟 Excellent work!' : percent >= 60 ? '👍 Good effort!' : '📚 Keep practicing!'}
           </div>
           <div className="quiz-results-bar">
             <div
@@ -91,15 +122,15 @@ export default function Quiz({ quizId, title, description, questions, variant = 
               }}
             />
           </div>
-          <p style={{ fontSize: 'var(--text-sm)', color: 'var(--text-tertiary)', marginBottom: 'var(--space-5)' }}>
+          <p style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginBottom: 'var(--space-5)' }}>
             You scored {percent}% ({score} out of {questions.length} correct)
           </p>
-          <div style={{ display: 'flex', gap: 'var(--space-3)', justifyContent: 'center' }}>
-            <button className="btn btn-secondary" onClick={() => setShowReview(true)}>
-              Review Answers
+          <div style={{ display: 'flex', gap: 'var(--space-3)', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <button className="btn btn-primary" onClick={() => setShowReview(true)}>
+              Review Detailed Answers
             </button>
-            <button className="btn btn-ghost" onClick={handleRetake}>
-              Retake
+            <button className="btn btn-secondary" onClick={handleRetake}>
+              Retake Quiz
             </button>
           </div>
         </div>
@@ -119,42 +150,64 @@ export default function Quiz({ quizId, title, description, questions, variant = 
                 className={`quiz-review-item ${isCorrect ? 'quiz-review-item--correct' : 'quiz-review-item--incorrect'}`}
               >
                 <div className="quiz-review-question">
-                  {qi + 1}. {question.q}
+                  <strong>Question {qi + 1}:</strong> {question.q}
                 </div>
                 <div className="quiz-review-answer">
-                  Your answer: {answers[qi] >= 0 ? `${optionLetters[answers[qi]]} – ${question.options[answers[qi]]}` : 'Not answered'}
+                  Your answer: {answers[qi] >= 0 ? `${optionLetters[answers[qi]]} – ${question.options[answers[qi]]}` : '⚠️ Not answered'}
                   {!isCorrect && (
-                    <span className="quiz-review-correct">
-                      {' '}· Correct: {optionLetters[question.answer]} – {question.options[question.answer]}
-                    </span>
+                    <div className="quiz-review-correct" style={{ marginTop: '4px' }}>
+                      Correct answer: <strong>{optionLetters[question.answer]} – {question.options[question.answer]}</strong>
+                    </div>
                   )}
                 </div>
               </div>
             );
           })}
           <div style={{ marginTop: 'var(--space-5)', display: 'flex', gap: 'var(--space-3)' }}>
+            <button className="btn btn-secondary" onClick={() => setShowReview(false)}>Back to Score</button>
             <button className="btn btn-ghost" onClick={handleRetake}>Retake Quiz</button>
           </div>
         </div>
       )}
 
       {/* Question view (not submitted) */}
-      {!submitted && (
+      {!submitted && q && (
         <>
-          <div className="quiz-progress">
-            <div className="quiz-progress-bar">
-              <div className="quiz-progress-fill" style={{ width: `${((current + 1) / questions.length) * 100}%` }} />
+          {/* Question Pills Navigation */}
+          <div className="quiz-pills-bar">
+            <div className="quiz-pills-list">
+              {questions.map((_, idx) => {
+                const isAnswered = answers[idx] !== -1;
+                const isCurrent = idx === current;
+                return (
+                  <button
+                    key={idx}
+                    className={`quiz-pill ${isCurrent ? 'quiz-pill--active' : ''} ${isAnswered ? 'quiz-pill--answered' : ''}`}
+                    onClick={() => {
+                      setCurrent(idx);
+                      setShowUnansweredPrompt(false);
+                    }}
+                    title={`Question ${idx + 1} (${isAnswered ? 'Answered' : 'Unanswered'})`}
+                  >
+                    {idx + 1}
+                    {isAnswered && <span className="quiz-pill-check">✓</span>}
+                  </button>
+                );
+              })}
             </div>
-            <span className="quiz-progress-text">{current + 1} / {questions.length}</span>
+            <span className="quiz-progress-text">
+              {answeredCount} of {questions.length} answered
+            </span>
           </div>
 
           <div className="quiz-question-card animate-fade-in" key={current}>
-            <div className="quiz-question-number">Question {current + 1}</div>
+            <div className="quiz-question-number">Question {current + 1} of {questions.length}</div>
             <div className="quiz-question-text">{q.q}</div>
             <div className="quiz-options" role="radiogroup" aria-label={`Question ${current + 1} options`}>
               {q.options.map((option, oi) => (
                 <button
                   key={oi}
+                  type="button"
                   className={`quiz-option${answers[current] === oi ? ' quiz-option--selected' : ''}`}
                   onClick={() => handleSelect(oi)}
                   role="radio"
@@ -167,30 +220,68 @@ export default function Quiz({ quizId, title, description, questions, variant = 
             </div>
           </div>
 
+          {/* Unanswered Prompt Warning */}
+          {showUnansweredPrompt && (
+            <div className="quiz-warning-banner animate-fade-in">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span>⚠️</span>
+                <span>
+                  You have <strong>{questions.length - answeredCount}</strong> unanswered question(s).
+                </span>
+              </div>
+              <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
+                {firstUnansweredIndex !== -1 && (
+                  <button
+                    className="btn btn-secondary btn-sm"
+                    onClick={() => {
+                      setCurrent(firstUnansweredIndex);
+                      setShowUnansweredPrompt(false);
+                    }}
+                  >
+                    Go to Question {firstUnansweredIndex + 1}
+                  </button>
+                )}
+                <button
+                  className="btn btn-primary btn-sm"
+                  onClick={executeSubmit}
+                >
+                  Submit Anyway
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Navigation Controls */}
           <div className="quiz-nav">
             <button
               className="btn btn-ghost"
               disabled={current === 0}
-              onClick={() => setCurrent(c => c - 1)}
+              onClick={() => {
+                setCurrent(c => c - 1);
+                setShowUnansweredPrompt(false);
+              }}
             >
               ← Previous
             </button>
-            {current < questions.length - 1 ? (
+            <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
+              {current < questions.length - 1 ? (
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => {
+                    setCurrent(c => c + 1);
+                    setShowUnansweredPrompt(false);
+                  }}
+                >
+                  Next →
+                </button>
+              ) : null}
               <button
                 className="btn btn-primary"
-                onClick={() => setCurrent(c => c + 1)}
-              >
-                Next →
-              </button>
-            ) : (
-              <button
-                className="btn btn-primary"
-                disabled={!allAnswered}
-                onClick={handleSubmit}
+                onClick={handleSubmitClick}
               >
                 Submit Quiz
               </button>
-            )}
+            </div>
           </div>
         </>
       )}
