@@ -1,6 +1,6 @@
 // src/components/Header.tsx
 import React from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import { useProgress } from '../context/ProgressContext';
 import { useAuth } from '../context/AuthContext';
@@ -13,6 +13,7 @@ const navItems = [
   { to: '/learning-path', label: 'Learning Path' },
   { to: '/visual-lab', label: 'Visual Lab' },
   { to: '/glossary', label: 'Glossary' },
+  { to: '/student/dashboard', label: 'My Dashboard' },
 ];
 
 function SunIcon() {
@@ -42,19 +43,13 @@ function MoonIcon() {
 export default function Header() {
   const { theme, toggleTheme } = useTheme();
   const { getOverallPercent } = useProgress();
-  const { user, isAuthenticated, isTeacher, logout } = useAuth();
-  const navigate = useNavigate();
+  const { user, isTeacher } = useAuth();
   const overallPercent = getOverallPercent();
 
   const circumference = 2 * Math.PI * 7;
   const offset = circumference - (overallPercent / 100) * circumference;
 
   const dashboardPath = isTeacher ? '/teacher/dashboard' : '/student/dashboard';
-
-  const handleLogout = () => {
-    logout();
-    navigate('/');
-  };
 
   return (
     <header className="header" role="banner">
@@ -77,14 +72,6 @@ export default function Header() {
               {item.label}
             </NavLink>
           ))}
-          {isAuthenticated && (
-            <NavLink
-              to={dashboardPath}
-              className={({ isActive }) => `header-nav-link${isActive ? ' active' : ''}`}
-            >
-              {isTeacher ? 'Teacher Dashboard' : 'My Dashboard'}
-            </NavLink>
-          )}
         </nav>
 
         <div className="header-actions">
@@ -116,33 +103,12 @@ export default function Header() {
             {theme === 'light' ? <MoonIcon /> : <SunIcon />}
           </button>
 
-          {isAuthenticated && user ? (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Link to={isTeacher ? '/teacher/dashboard' : '/student/profile'} className="header-user-btn" title="View Profile">
-                <span className="header-user-avatar">
-                  {user.name.charAt(0).toUpperCase()}
-                </span>
-                <span className="name">{isTeacher ? 'Faculty' : user.name.split(' ')[0]}</span>
-              </Link>
-              <button
-                onClick={handleLogout}
-                className="btn btn-ghost btn-sm"
-                title="Sign out"
-                style={{ padding: '6px 8px', fontSize: 'var(--text-xs)' }}
-              >
-                Sign Out
-              </button>
-            </div>
-          ) : (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Link to="/login" className="btn btn-ghost btn-sm">
-                Sign In
-              </Link>
-              <Link to="/register" className="btn btn-primary btn-sm">
-                Register
-              </Link>
-            </div>
-          )}
+          <Link to="/student/profile" className="header-user-btn" title="View Profile">
+            <span className="header-user-avatar">
+              {(user?.name || 'S').charAt(0).toUpperCase()}
+            </span>
+            <span className="name">{user?.name ? user.name.split(' ')[0] : 'Student'}</span>
+          </Link>
         </div>
       </div>
     </header>

@@ -64,12 +64,10 @@ export default function App() {
                   <Route path="/glossary" element={<Glossary />} />
                   <Route path="/visual-lab" element={<VisualLab />} />
 
-                  {/* Auth routes */}
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/register" element={<Register />} />
-
-                  {/* Dynamic Dashboard Redirect */}
-                  <Route path="/dashboard" element={<DashboardRedirect />} />
+                  {/* Direct Dashboard & Navigation (No login wall) */}
+                  <Route path="/login" element={<Navigate to="/student/dashboard" replace />} />
+                  <Route path="/register" element={<Navigate to="/student/dashboard" replace />} />
+                  <Route path="/dashboard" element={<Navigate to="/student/dashboard" replace />} />
 
                   {/* Protected Student routes */}
                   <Route

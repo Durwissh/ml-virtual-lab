@@ -1,3 +1,4 @@
+// src/context/AuthContext.tsx
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 
 export interface User {
@@ -28,17 +29,25 @@ const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 const TOKEN_KEY = 'ml_vlab_jwt_token';
 const USER_KEY = 'ml_vlab_user_cache';
 
+const defaultStudentUser: User = {
+  id: 2,
+  studentId: 'RA2411027010104',
+  name: 'Akshayanivashini',
+  email: 'akshh6472@gmail.com',
+  role: 'student',
+};
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState<string | null>(() => localStorage.getItem(TOKEN_KEY));
   const [user, setUser] = useState<User | null>(() => {
     try {
       const saved = localStorage.getItem(USER_KEY);
-      return saved ? JSON.parse(saved) : null;
+      return saved ? JSON.parse(saved) : defaultStudentUser;
     } catch {
-      return null;
+      return defaultStudentUser;
     }
   });
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchProfile = useCallback(async (authToken: string) => {
     try {
@@ -49,27 +58,45 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const data = await res.json();
         setUser(data.user);
         localStorage.setItem(USER_KEY, JSON.stringify(data.user));
-      } else {
-        // Token expired or invalid
-        setToken(null);
-        setUser(null);
-        localStorage.removeItem(TOKEN_KEY);
-        localStorage.removeItem(USER_KEY);
       }
     } catch (err) {
       console.warn('Could not verify profile from server:', err);
-    } finally {
-      setIsLoading(false);
     }
   }, []);
 
+  // Auto-authenticate with student session for background DB syncing
   useEffect(() => {
-    if (token) {
-      fetchProfile(token);
-    } else {
-      setIsLoading(false);
+    async function initSession() {
+      if (token) {
+        fetchProfile(token);
+      } else {
+        try {
+          const res = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: 'student@srm.edu', password: 'Student@123' }),
+          });
+          if (res.ok) {
+            const data = await res.json();
+            setToken(data.token);
+            // Preserve user's display name if cached, or use returned user
+            const activeUser = {
+              ...data.user,
+              name: user?.name || data.user.name,
+              studentId: user?.studentId || data.user.studentId || 'RA2411027010104',
+              email: user?.email || data.user.email,
+            };
+            setUser(activeUser);
+            localStorage.setItem(TOKEN_KEY, data.token);
+            localStorage.setItem(USER_KEY, JSON.stringify(activeUser));
+          }
+        } catch {
+          // Keep default offline student session
+        }
+      }
     }
-  }, [token, fetchProfile]);
+    initSession();
+  }, [token, fetchProfile, user?.name, user?.studentId, user?.email]);
 
   const login = useCallback(async (email: string, password: string) => {
     try {
@@ -100,50 +127,54 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-      const result = await res.json();
+      const resData = await res.json();
       if (!res.ok) {
-        return { success: false, error: result.error || 'Registration failed.' };
+        return { success: false, error: resData.error || 'Registration failed.' };
       }
 
-      setToken(result.token);
-      setUser(result.user);
-      localStorage.setItem(TOKEN_KEY, result.token);
-      localStorage.setItem(USER_KEY, JSON.stringify(result.user));
+      setToken(resData.token);
+      setUser(resData.user);
+      localStorage.setItem(TOKEN_KEY, resData.token);
+      localStorage.setItem(USER_KEY, JSON.stringify(resData.user));
       return { success: true };
     } catch (err) {
-      return { success: false, error: 'Network error connecting to server.' };
+      return { success: false, error: 'Network error connecting to registration server.' };
     }
   }, []);
 
   const logout = useCallback(() => {
-    setToken(null);
-    setUser(null);
-    localStorage.removeItem(TOKEN_KEY);
-    localStorage.removeItem(USER_KEY);
+    // Reset to default active student session
+    setUser(defaultStudentUser);
   }, []);
 
   const refreshUser = useCallback(async () => {
-    if (token) {
-      await fetchProfile(token);
-    }
+    if (token) await fetchProfile(token);
   }, [token, fetchProfile]);
 
   return (
-    <AuthContext.Provider value={{
-      user,
-      token,
-      isAuthenticated: Boolean(token && user),
-      isStudent: user?.role === 'student',
-      isTeacher: user?.role === 'teacher',
-      isLoading,
-      login,
-      register,
-      logout,
-      refreshUser,
-    }}>
+    <AuthContext.Provider
+      value={{
+        user: user || defaultStudentUser,
+        token,
+        isAuthenticated: true, // Always allow full direct laboratory access
+        isStudent: (user?.role || 'student') === 'student',
+        isTeacher: user?.role === 'teacher',
+        isLoading,
+        login,
+        register,
+        logout,
+        refreshUser,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
 }
 
-export const useAuth = () => useContext(AuthContext);
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+}
