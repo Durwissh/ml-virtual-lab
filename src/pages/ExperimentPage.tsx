@@ -50,17 +50,30 @@ export default function ExperimentPage() {
   const { id } = useParams<{ id: string }>();
   const expMeta = getExperiment(id || '');
   const content = getExperimentContent(id || '');
-  const { getExperimentProgress, markSectionComplete, setLastVisited, saveProcedureStep, getProcedureSteps } = useProgress();
+  const {
+    getExperimentProgress,
+    markSectionComplete,
+    setLastVisited,
+    saveProcedureStep,
+    getProcedureSteps,
+    getCompletionPercent,
+  } = useProgress();
 
   const [activeSection, setActiveSection] = useState<SectionKey>('aim');
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
   const progress = getExperimentProgress(id || '1');
-  const nextExp = experiments.find(e => e.number === (expMeta?.number || 0) + 1);
+  const currentNum = expMeta?.number || 0;
+  const prevExp = experiments.find(e => e.number === currentNum - 1);
+  const nextExp = experiments.find(e => e.number === currentNum + 1);
+  const completionPct = getCompletionPercent(id || '1');
 
   useEffect(() => {
-    if (id) setLastVisited(id, activeSection);
-  }, [id, activeSection, setLastVisited]);
+    if (id && expMeta) {
+      setLastVisited(id, activeSection);
+    }
+    window.scrollTo(0, 0);
+  }, [id, activeSection, setLastVisited, expMeta]);
 
   const scrollToSection = useCallback((key: SectionKey) => {
     setActiveSection(key);
@@ -74,59 +87,42 @@ export default function ExperimentPage() {
     markSectionComplete(id || '1', section);
   }, [id, markSectionComplete]);
 
-  if (!expMeta) {
+  // If experiment ID is invalid or content is not found
+  if (!expMeta || !content) {
     return (
-      <div className="exp-layout">
-        <div className="exp-main">
-          <div className="exp-content">
-            <h2>Experiment not found</h2>
-            <p>The requested experiment does not exist.</p>
-            <Link to="/experiments" className="btn btn-primary" style={{ marginTop: 'var(--space-4)' }}>
-              View All Experiments
-            </Link>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // Placeholder for experiments without full content yet
-  if (!content) {
-    return (
-      <div className="exp-layout">
-        <div className="exp-main">
-          <div className="exp-content">
-            <div className="exp-breadcrumb">
-              <Link to="/">Home</Link>
-              <span className="exp-breadcrumb-sep">/</span>
-              <Link to="/experiments">Experiments</Link>
-              <span className="exp-breadcrumb-sep">/</span>
-              <span>Experiment {String(expMeta.number).padStart(2, '0')}</span>
+      <div className="page-layout">
+        <main className="page-main" style={{ minHeight: '65vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{
+            maxWidth: '540px',
+            width: '100%',
+            textAlign: 'center',
+            padding: 'var(--space-8)',
+            backgroundColor: 'var(--bg-secondary)',
+            border: '1px solid var(--border-primary)',
+            borderRadius: 'var(--radius-lg)',
+            boxShadow: 'var(--shadow-sm)',
+          }}>
+            <div style={{
+              fontSize: 'var(--text-3xl)',
+              fontWeight: 800,
+              color: 'var(--primary, #1e3a8a)',
+              marginBottom: 'var(--space-2)',
+            }}>
+              Experiment Not Found
             </div>
-            <h1 style={{ marginBottom: 'var(--space-4)' }}>
-              {String(expMeta.number).padStart(2, '0')}. {expMeta.title}
-            </h1>
-            <div className="exp-aim-card">
-              <p className="exp-aim-text">
-                This experiment's interactive content is being built. The complete experience with theory, quizzes, visualizations, and procedures will be available soon.
-              </p>
-              <div className="exp-aim-meta">
-                <span className="exp-aim-meta-item">⏱ {expMeta.estimatedTime}</span>
-                <span className="exp-aim-meta-item">📊 {expMeta.difficulty}</span>
-                <span className="exp-aim-meta-item">📁 {expMeta.category}</span>
-              </div>
-            </div>
-            {nextExp && (
-              <Link to={`/experiment/${nextExp.id}`} className="exp-next">
-                <div>
-                  <div className="exp-next-label">Next Experiment</div>
-                  <div className="exp-next-title">{String(nextExp.number).padStart(2, '0')}. {nextExp.shortTitle}</div>
-                </div>
-                <span className="exp-next-arrow">→</span>
+            <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)', lineHeight: 1.6, marginBottom: 'var(--space-6)' }}>
+              Experiment "{id}" is not a valid curriculum module. The SRM Machine Learning laboratory includes Experiments 01 through 10.
+            </p>
+            <div style={{ display: 'flex', gap: 'var(--space-3)', justifyContent: 'center' }}>
+              <Link to="/experiments" className="btn btn-primary">
+                View All 10 Experiments
               </Link>
-            )}
+              <Link to="/" className="btn btn-secondary">
+                Return Home
+              </Link>
+            </div>
           </div>
-        </div>
+        </main>
       </div>
     );
   }
@@ -139,7 +135,12 @@ export default function ExperimentPage() {
       <aside className="exp-sidebar" aria-label="Experiment sections">
         <div className="exp-sidebar-header">
           <div className="exp-sidebar-number">{String(expMeta.number).padStart(2, '0')}</div>
-          <div className="exp-sidebar-title">{expMeta.shortTitle}</div>
+          <div>
+            <div className="exp-sidebar-title">{expMeta.shortTitle}</div>
+            <div className="exp-sidebar-badge-row">
+              <span className="badge badge-navy">{completionPct}% Complete</span>
+            </div>
+          </div>
         </div>
         <ul className="exp-sidebar-nav">
           {sections.map(s => {
@@ -161,24 +162,65 @@ export default function ExperimentPage() {
             );
           })}
         </ul>
+
+        {/* Sidebar Previous/Next Quick Nav */}
+        <div className="exp-sidebar-nav-footer">
+          {prevExp ? (
+            <Link to={`/experiment/${prevExp.id}`} className="exp-sidebar-footer-link" title={`Exp ${prevExp.number}: ${prevExp.shortTitle}`}>
+              ← Exp {String(prevExp.number).padStart(2, '0')}
+            </Link>
+          ) : (
+            <span className="exp-sidebar-footer-disabled">First Exp</span>
+          )}
+          {nextExp ? (
+            <Link to={`/experiment/${nextExp.id}`} className="exp-sidebar-footer-link" title={`Exp ${nextExp.number}: ${nextExp.shortTitle}`}>
+              Exp {String(nextExp.number).padStart(2, '0')} →
+            </Link>
+          ) : (
+            <span className="exp-sidebar-footer-disabled">Last Exp</span>
+          )}
+        </div>
       </aside>
 
       {/* ─── Main Content ─── */}
       <main className="exp-main">
         <div className="exp-content">
-          {/* Breadcrumb & Utilities */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 'var(--space-6)' }}>
-            <nav className="exp-breadcrumb" aria-label="Breadcrumb" style={{ marginBottom: 0 }}>
+          {/* Breadcrumb & Utilities Toolbar */}
+          <div className="exp-top-toolbar">
+            <nav className="exp-breadcrumb" aria-label="Breadcrumb">
               <Link to="/">Home</Link>
               <span className="exp-breadcrumb-sep">/</span>
               <Link to="/experiments">Experiments</Link>
               <span className="exp-breadcrumb-sep">/</span>
               <span>Experiment {String(expMeta.number).padStart(2, '0')}</span>
             </nav>
-            <ExperimentUtilities 
-              experimentId={id || '1'} 
-              experimentTitle={expMeta.title} 
+            <ExperimentUtilities
+              experimentId={id || '1'}
+              experimentTitle={expMeta.title}
             />
+          </div>
+
+          <h1 className="exp-main-title">
+            {String(expMeta.number).padStart(2, '0')}. {expMeta.title}
+          </h1>
+
+          {/* Compact Mobile Section Tabs */}
+          <div className="exp-mobile-section-tabs" role="tablist" aria-label="Experiment Sections">
+            {sections.map(s => {
+              const isActive = activeSection === s.key;
+              const isComplete = progress[s.key];
+              return (
+                <button
+                  key={s.key}
+                  className={`exp-mobile-tab ${isActive ? 'active' : ''} ${isComplete ? 'done' : ''}`}
+                  onClick={() => scrollToSection(s.key)}
+                  role="tab"
+                  aria-selected={isActive}
+                >
+                  {isComplete ? '✓ ' : ''}{s.label}
+                </button>
+              );
+            })}
           </div>
 
           {/* ═══ AIM ═══ */}
@@ -192,10 +234,12 @@ export default function ExperimentPage() {
                 <div className="exp-section-label">Section 01</div>
                 <h2 className="exp-section-title">Aim</h2>
               </div>
-              {!progress.aim && (
+              {!progress.aim ? (
                 <button className="btn btn-ghost btn-sm exp-mark-complete" onClick={() => handleMarkComplete('aim')}>
                   Mark Complete
                 </button>
+              ) : (
+                <span className="badge badge-navy">✓ Completed</span>
               )}
             </div>
             <div className="exp-aim-card">
@@ -203,7 +247,7 @@ export default function ExperimentPage() {
               <div className="exp-aim-objectives">
                 <h4>Learning Objectives</h4>
                 <ul>
-                  {content.learningObjectives.map((obj, i) => (
+                  {content.learningObjectives.map((obj: string, i: number) => (
                     <li key={i}>{obj}</li>
                   ))}
                 </ul>
@@ -227,57 +271,52 @@ export default function ExperimentPage() {
                 <div className="exp-section-label">Section 02</div>
                 <h2 className="exp-section-title">Theory</h2>
               </div>
-              {!progress.theory && (
+              {!progress.theory ? (
                 <button className="btn btn-ghost btn-sm exp-mark-complete" onClick={() => handleMarkComplete('theory')}>
                   Mark Complete
                 </button>
+              ) : (
+                <span className="badge badge-navy">✓ Completed</span>
               )}
             </div>
 
-            {content.theory.map(section => (
-              <div key={section.id} className="exp-theory-section">
-                <h3>{section.title}</h3>
+            {content.theory.map((section: any) => (
+              <div key={section.id} className="exp-theory-item">
+                <h3 className="exp-theory-item-title">{section.title}</h3>
 
-                {section.content && <p>{section.content}</p>}
+                {section.type === 'text' && (
+                  <div className="exp-theory-text" style={{ whiteSpace: 'pre-line' }}>
+                    {section.content}
+                  </div>
+                )}
 
-                {/* Definition list items */}
-                {section.type === 'list' && section.intro && <p>{section.intro}</p>}
-                {section.items && (
+                {section.type === 'list' && (
                   <ul className="exp-theory-list">
-                    {section.items.map((item: any, i: number) => (
+                    {section.items?.map((item: any, i: number) => (
                       <li key={i}>
-                        {item.term && <strong>{item.term}</strong>}
-                        {item.term && ' – '}
+                        {item.term && <strong>{item.term}: </strong>}
                         {item.description}
                       </li>
                     ))}
                   </ul>
                 )}
 
-                {/* Subsections */}
-                {section.subsections && (
-                  <ul className="exp-theory-list">
-                    {section.subsections.map((sub: any, i: number) => (
-                      <li key={i}>
-                        <strong>{sub.term}</strong> – {sub.description}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-
-                {/* Table */}
                 {section.table && (
-                  <div style={{ overflowX: 'auto', margin: 'var(--space-4) 0' }}>
-                    <table>
+                  <div className="exp-theory-table-wrap">
+                    <table className="exp-theory-table">
                       <thead>
                         <tr>
-                          {section.table.headers.map((h: string) => <th key={h}>{h}</th>)}
+                          {section.table.headers.map((h: string, i: number) => (
+                            <th key={i}>{h}</th>
+                          ))}
                         </tr>
                       </thead>
                       <tbody>
-                        {section.table.rows.map((row: string[], ri: number) => (
-                          <tr key={ri}>
-                            {row.map((cell: string, ci: number) => <td key={ci}>{cell}</td>)}
+                        {section.table.rows.map((row: string[], i: number) => (
+                          <tr key={i}>
+                            {row.map((cell: string, j: number) => (
+                              <td key={j}>{cell}</td>
+                            ))}
                           </tr>
                         ))}
                       </tbody>
@@ -285,45 +324,22 @@ export default function ExperimentPage() {
                   </div>
                 )}
 
-                {/* Note callout */}
-                {section.note && (
-                  <div className="exp-theory-note">
-                    <strong>Note:</strong> {section.note}
+                {section.formulas && (
+                  <div className="exp-theory-formulas">
+                    {section.formulas.map((f: any, i: number) => (
+                      <FormulaCard key={i} {...f} />
+                    ))}
                   </div>
                 )}
 
-                {/* Formulas */}
-                {section.formulas && section.formulas.map((f: any) => (
-                  <FormulaCard key={f.name} name={f.name} latex={f.latex} description={f.description} />
-                ))}
-
-                {/* Code example */}
                 {section.codeExample && (
-                  <PythonBlock
-                    title={section.codeExample.title}
-                    code={section.codeExample.code}
-                    explanation={section.codeExample.explanation}
-                  />
+                  <div className="exp-theory-code">
+                    <PythonBlock {...section.codeExample} />
+                  </div>
                 )}
 
-                {/* Visualization */}
                 {section.visualizationId && (
-                  <div style={{ marginTop: 'var(--space-6)', marginBottom: 'var(--space-6)' }}>
-                    <button 
-                      className="viz-btn" 
-                      onClick={() => {
-                        const el = document.getElementById(`viz-${section.visualizationId}`);
-                        if (el) {
-                           // small offset for header
-                           const y = el.getBoundingClientRect().top + window.scrollY - 100;
-                           window.scrollTo({ top: y, behavior: 'smooth' });
-                        }
-                      }}
-                      style={{ marginBottom: 'var(--space-4)', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
-                    >
-                      <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
-                      Visualize Concept
-                    </button>
+                  <div className="exp-visualization-card animate-fade-in" style={{ marginTop: 'var(--space-6)' }}>
                     <div id={`viz-${section.visualizationId}`}>
                       {renderVisualization(section.visualizationId)}
                     </div>
@@ -366,6 +382,13 @@ export default function ExperimentPage() {
                 <div className="exp-section-label">Section 04</div>
                 <h2 className="exp-section-title">Procedure</h2>
               </div>
+              {!progress.procedure ? (
+                <button className="btn btn-ghost btn-sm exp-mark-complete" onClick={() => handleMarkComplete('procedure')}>
+                  Mark Complete
+                </button>
+              ) : (
+                <span className="badge badge-navy">✓ Completed</span>
+              )}
             </div>
 
             {/* IPO Summary */}
@@ -387,7 +410,7 @@ export default function ExperimentPage() {
             </div>
 
             <div className="exp-procedure-steps">
-              {content.procedure.steps.map((step, i) => {
+              {content.procedure.steps.map((step: any, i: number) => {
                 const isComplete = procedureSteps[i];
                 return (
                   <div key={i} className={`exp-procedure-step${isComplete ? ' exp-procedure-step--complete' : ''}`}>
@@ -427,7 +450,7 @@ export default function ExperimentPage() {
             </div>
           </section>
 
-          {/* ═══ RESULTS ═══ */}
+          {/* ═══ RESULTS & ANALYSIS ═══ */}
           <section
             className="exp-section"
             ref={el => { sectionRefs.current.results = el; }}
@@ -438,23 +461,27 @@ export default function ExperimentPage() {
                 <div className="exp-section-label">Section 05</div>
                 <h2 className="exp-section-title">Results & Analysis</h2>
               </div>
-              {!progress.results && (
+              {!progress.results ? (
                 <button className="btn btn-ghost btn-sm exp-mark-complete" onClick={() => handleMarkComplete('results')}>
                   Mark Complete
                 </button>
+              ) : (
+                <span className="badge badge-navy">✓ Completed</span>
               )}
             </div>
 
-            <p style={{ marginBottom: 'var(--space-4)' }}>After completing the experiment, students should observe the following:</p>
+            <p style={{ marginBottom: 'var(--space-4)', color: 'var(--text-secondary)' }}>
+              After completing the experiment, students should observe and interpret the following verified experimental findings:
+            </p>
 
             <ul className="exp-results-observations">
-              {content.results.observations.map((obs, i) => (
+              {content.results.observations.map((obs: string, i: number) => (
                 <li key={i}>{obs}</li>
               ))}
             </ul>
 
             <div className="exp-results-insight">
-              <div className="exp-results-insight-label">Key Insight</div>
+              <div className="exp-results-insight-label">Verified Academic Insight</div>
               <p>{content.results.keyInsight}</p>
             </div>
           </section>
@@ -481,16 +508,44 @@ export default function ExperimentPage() {
             />
           </section>
 
-          {/* ─── Next Experiment ─── */}
-          {nextExp && (
-            <Link to={`/experiment/${nextExp.id}`} className="exp-next">
-              <div>
-                <div className="exp-next-label">Next Experiment</div>
-                <div className="exp-next-title">{String(nextExp.number).padStart(2, '0')}. {nextExp.shortTitle}</div>
-              </div>
-              <span className="exp-next-arrow">→</span>
-            </Link>
-          )}
+          {/* ─── Bottom Navigation: Previous and Next Experiments ─── */}
+          <div className="exp-bottom-nav">
+            {prevExp ? (
+              <Link to={`/experiment/${prevExp.id}`} className="exp-nav-btn exp-nav-prev">
+                <span className="exp-nav-arrow">←</span>
+                <div className="exp-nav-text">
+                  <div className="exp-nav-sub">Previous Experiment</div>
+                  <div className="exp-nav-title">{String(prevExp.number).padStart(2, '0')}. {prevExp.shortTitle}</div>
+                </div>
+              </Link>
+            ) : (
+              <Link to="/experiments" className="exp-nav-btn exp-nav-prev">
+                <span className="exp-nav-arrow">←</span>
+                <div className="exp-nav-text">
+                  <div className="exp-nav-sub">Curriculum Explorer</div>
+                  <div className="exp-nav-title">All Experiments</div>
+                </div>
+              </Link>
+            )}
+
+            {nextExp ? (
+              <Link to={`/experiment/${nextExp.id}`} className="exp-nav-btn exp-nav-next">
+                <div className="exp-nav-text">
+                  <div className="exp-nav-sub">Next Experiment</div>
+                  <div className="exp-nav-title">{String(nextExp.number).padStart(2, '0')}. {nextExp.shortTitle}</div>
+                </div>
+                <span className="exp-nav-arrow">→</span>
+              </Link>
+            ) : (
+              <Link to="/dashboard" className="exp-nav-btn exp-nav-next">
+                <div className="exp-nav-text">
+                  <div className="exp-nav-sub">Laboratory Completed</div>
+                  <div className="exp-nav-title">View Dashboard</div>
+                </div>
+                <span className="exp-nav-arrow">✓</span>
+              </Link>
+            )}
+          </div>
         </div>
       </main>
     </div>
