@@ -17,7 +17,7 @@ export interface ForestCheckpoint {
   lockMessage: string;
   relatedExpIds: string[];
   treeType: 'seed' | 'sprout' | 'sapling' | 'branching' | 'mature-tree' | 'ancient-tree';
-  // Exact percentage coordinates (0 - 100%) on the RPG dirt road
+  // Exact percentage coordinates (0 - 100%) on the widescreen RPG dirt road
   mapX: number;
   mapY: number;
 }
@@ -45,8 +45,8 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     lockMessage: 'Available to all students from the start.',
     relatedExpIds: ['1'],
     treeType: 'seed',
-    mapX: 80,
-    mapY: 7
+    mapX: 8,
+    mapY: 48
   },
   {
     id: 2,
@@ -71,8 +71,8 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     lockMessage: 'Available from the start. Recommended after ML Foundations.',
     relatedExpIds: ['1'],
     treeType: 'sprout',
-    mapX: 53,
-    mapY: 23
+    mapX: 25,
+    mapY: 72
   },
   {
     id: 3,
@@ -96,8 +96,8 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     lockMessage: 'Available to all students. Put theory into practice.',
     relatedExpIds: ['1'],
     treeType: 'sapling',
-    mapX: 35,
-    mapY: 39
+    mapX: 42,
+    mapY: 50
   },
   {
     id: 4,
@@ -121,8 +121,8 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     lockMessage: 'Complete Experiment 1 or submit its quiz to unlock the Observatory.',
     relatedExpIds: ['1'],
     treeType: 'branching',
-    mapX: 55,
-    mapY: 54
+    mapX: 58,
+    mapY: 49
   },
   {
     id: 5,
@@ -146,8 +146,8 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     lockMessage: 'Complete Experiment 1 results to unlock algorithm comparisons.',
     relatedExpIds: ['2', '4', '6', '8', '9'],
     treeType: 'mature-tree',
-    mapX: 45,
-    mapY: 72
+    mapX: 74,
+    mapY: 62
   },
   {
     id: 6,
@@ -171,7 +171,7 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     lockMessage: 'Complete the foundational experiments and results analysis to unlock the Summit.',
     relatedExpIds: ['1', '2', '3', '10'],
     treeType: 'ancient-tree',
-    mapX: 28,
-    mapY: 88
+    mapX: 89,
+    mapY: 46
   }
 ];

@@ -67,12 +67,12 @@ export default function ForestMap({
         </div>
       </div>
 
-      {/* ─── Top-Down 2D RPG Forest Map Canvas ─── */}
+      {/* ─── Top-Down 2D Widescreen RPG Forest Map Canvas ─── */}
       <div className="forest-rpg-canvas">
         {/* Background RPG Illustrated Forest Image */}
         <img
-          src="/assets/forest_rpg_map.jpg"
-          alt="Top-Down Forest RPG Map"
+          src="/assets/forest_wide_rpg_map.jpg"
+          alt="Top-Down Forest RPG Widescreen Map"
           className="forest-rpg-bg-image"
           loading="eager"
         />
@@ -95,7 +95,7 @@ export default function ForestMap({
           className="forest-player-avatar"
           style={{
             left: `${activeCheckpoint.mapX}%`,
-            top: `${activeCheckpoint.mapY - 4}%`,
+            top: `${activeCheckpoint.mapY - 6}%`,
           }}
           title={`You are here: ${activeCheckpoint.name}`}
         >
