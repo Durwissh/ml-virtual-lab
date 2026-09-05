@@ -1,6 +1,6 @@
 // src/pages/LearningPath.tsx
 import React, { useState, useMemo, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useProgress } from '../context/ProgressContext';
 import { FOREST_CHECKPOINTS, ForestCheckpoint } from '../components/forest/forestData';
 import ForestMap from '../components/forest/ForestMap';
@@ -17,7 +17,6 @@ export default function LearningPath() {
   // Experiment completion metrics
   const exp1Percent = getCompletionPercent('1');
   const exp2Percent = getCompletionPercent('2');
-  const exp3Percent = getCompletionPercent('3');
   const exp10Percent = getCompletionPercent('10');
   const hasStartedExp1 = exp1Percent > 0;
   const isExp1Complete = exp1Percent === 100;
@@ -25,7 +24,7 @@ export default function LearningPath() {
 
   // Determine dynamic status for each of the 6 forest checkpoints
   const checkpointStates: Record<number, { status: CheckpointStatus; isLocked: boolean }> = useMemo(() => {
-    // 1. Foundations: Available from start / Complete if exp1 started
+    // 1. Foundations: Available from start / Complete if exp1 started or any progress made
     const s1Complete = hasStartedExp1 || overallPercent > 0;
 
     // 2. Dataset Grove: Complete if Exp 1 theory/procedure done
@@ -35,7 +34,7 @@ export default function LearningPath() {
     const s3Complete = isExp1Complete;
     const s3Current = hasStartedExp1 && !isExp1Complete;
 
-    // 4. Results Observatory: Unlocked if exp1 has started or quiz attempted; Complete if results marked or 100%
+    // 4. Results Observatory: Unlocked if exp1 has started; Complete if results marked or 100%
     const s4Unlocked = hasStartedExp1 || hasAnyQuizAttempt;
     const s4Complete = progress.experiments['1']?.results || progress.experiments['1']?.posttest || isExp1Complete;
 
@@ -109,68 +108,16 @@ export default function LearningPath() {
   return (
     <div className="forest-page-wrapper animate-fade-in">
       <div className="forest-container">
-        {/* ─── Top Student Progress Header ─── */}
-        <header className="forest-progress-header">
-          <div className="forest-header-main">
-            <div className="forest-header-title-row">
-              <span className="forest-brand-tag">🌲 YOUR LEARNING JOURNEY</span>
-              <span className="forest-counter-tag">
-                <strong>{completedCount}</strong> / 6 Checkpoints Completed
-              </span>
-            </div>
-
-            <h1 className="forest-main-title">Interactive Learning Forest</h1>
-            <p className="forest-main-subtitle">
-              Follow the winding forest path through every core stage of Machine Learning—from foundations and feature engineering to experimental mastery.
-            </p>
-
-            {/* Progress Bar */}
-            <div className="forest-progress-bar-wrap">
-              <div className="forest-progress-bar-bg">
-                <div
-                  className="forest-progress-bar-fill"
-                  style={{ width: `${journeyProgressPct}%` }}
-                />
-              </div>
-              <span className="forest-progress-pct-badge">{journeyProgressPct}%</span>
-            </div>
-          </div>
-
-          {/* Dynamic "Next Up" Banner */}
-          <div className="forest-next-up-card">
-            <div className="forest-next-up-left">
-              <span className="forest-next-label">⚡ NEXT RECOMMENDED ACTION:</span>
-              <div className="forest-next-title">
-                {nextCheckpoint.icon} {nextCheckpoint.name} · {nextCheckpoint.subtitle}
-              </div>
-              <p className="forest-next-desc">
-                {checkpointStates[nextCheckpoint.id]?.status === 'completed'
-                  ? 'All foundational stages completed! Advance to higher-level algorithm benchmarking.'
-                  : nextCheckpoint.description}
-              </p>
-            </div>
-
-            <button
-              type="button"
-              className="btn btn-primary btn-lg forest-continue-btn"
-              onClick={handleContinueLearning}
-            >
-              Continue Learning →
-            </button>
-          </div>
-        </header>
-
         {/* ─── The Interactive Digital Forest Map ─── */}
         <section className="forest-map-section" aria-label="Interactive Forest Map">
-          <div className="forest-map-instruction">
-            <span className="instruction-icon">👆</span>
-            <span>Click on any checkpoint tree along the forest trail to view objectives & laboratory actions</span>
-          </div>
-
           <ForestMap
             checkpointStates={checkpointStates}
             selectedCheckpoint={selectedCheckpoint}
             onSelectCheckpoint={handleSelectCheckpoint}
+            completedCount={completedCount}
+            journeyProgressPct={journeyProgressPct}
+            nextCheckpoint={nextCheckpoint}
+            onContinue={handleContinueLearning}
           />
         </section>
 
@@ -181,25 +128,6 @@ export default function LearningPath() {
             status={checkpointStates[selectedCheckpoint.id]?.status || 'available'}
           />
         </section>
-
-        {/* ─── Forest Trailhead & Basecamp Links ─── */}
-        <footer className="forest-footer-card">
-          <div className="forest-footer-content">
-            <span className="forest-camp-icon">🏕️ 🌲 🔥</span>
-            <h2 className="forest-footer-title">Looking for the Complete Laboratory Index?</h2>
-            <p className="forest-footer-desc">
-              Access all 10 guided experiments, formulas, D3 sandboxes, and academic definitions directly from the laboratory hub.
-            </p>
-            <div className="forest-footer-actions">
-              <Link to="/experiments" className="btn btn-primary">
-                Explore All 10 Experiments →
-              </Link>
-              <Link to="/glossary" className="btn btn-secondary">
-                Master Glossary (102 Terms)
-              </Link>
-            </div>
-          </div>
-        </footer>
       </div>
     </div>
   );
