@@ -17,7 +17,7 @@ export interface ForestCheckpoint {
   lockMessage: string;
   relatedExpIds: string[];
   treeType: 'seed' | 'sprout' | 'sapling' | 'branching' | 'mature-tree' | 'ancient-tree';
-  // Precise percentage coordinates (0 - 100%) on the top-down RPG road
+  // Exact percentage coordinates (0 - 100%) on the RPG dirt road
   mapX: number;
   mapY: number;
 }
@@ -29,7 +29,7 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     name: 'ML Foundations',
     stageName: 'The Seed',
     growthStage: 'Stage 1: Seed & Germination',
-    subtitle: 'Planting the Core Concepts',
+    subtitle: 'Planting Core Concepts',
     locationName: 'The Trailhead Seedbed',
     icon: '🌰',
     category: 'Foundations',
@@ -45,8 +45,8 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     lockMessage: 'Available to all students from the start.',
     relatedExpIds: ['1'],
     treeType: 'seed',
-    mapX: 76,
-    mapY: 8
+    mapX: 80,
+    mapY: 7
   },
   {
     id: 2,
@@ -71,8 +71,8 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     lockMessage: 'Available from the start. Recommended after ML Foundations.',
     relatedExpIds: ['1'],
     treeType: 'sprout',
-    mapX: 46,
-    mapY: 25
+    mapX: 53,
+    mapY: 23
   },
   {
     id: 3,
@@ -96,8 +96,8 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     lockMessage: 'Available to all students. Put theory into practice.',
     relatedExpIds: ['1'],
     treeType: 'sapling',
-    mapX: 33,
-    mapY: 42
+    mapX: 35,
+    mapY: 39
   },
   {
     id: 4,
@@ -121,8 +121,8 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     lockMessage: 'Complete Experiment 1 or submit its quiz to unlock the Observatory.',
     relatedExpIds: ['1'],
     treeType: 'branching',
-    mapX: 60,
-    mapY: 58
+    mapX: 55,
+    mapY: 54
   },
   {
     id: 5,
@@ -146,8 +146,8 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     lockMessage: 'Complete Experiment 1 results to unlock algorithm comparisons.',
     relatedExpIds: ['2', '4', '6', '8', '9'],
     treeType: 'mature-tree',
-    mapX: 46,
-    mapY: 75
+    mapX: 45,
+    mapY: 72
   },
   {
     id: 6,
@@ -171,7 +171,7 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     lockMessage: 'Complete the foundational experiments and results analysis to unlock the Summit.',
     relatedExpIds: ['1', '2', '3', '10'],
     treeType: 'ancient-tree',
-    mapX: 26,
-    mapY: 90
+    mapX: 28,
+    mapY: 88
   }
 ];

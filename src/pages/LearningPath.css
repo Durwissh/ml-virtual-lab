@@ -1,49 +1,47 @@
-/* src/pages/LearningPath.css - Full Bleed Top-Down RPG Learning Forest */
+/* src/pages/LearningPath.css - Calibrated Top-Down RPG Learning Forest */
 
 .forest-page-wrapper {
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background: #17381f;
-  padding: var(--header-height) 0 0 0;
+  background: #0e1e13;
+  padding: calc(var(--header-height) + 12px) var(--space-3) 40px;
   margin: 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
   overflow-x: hidden;
 }
 
-/* ─── Edge-to-Edge Fullscreen RPG Viewport ─── */
+/* ─── Seamless RPG Viewport Container ─── */
 .forest-rpg-viewport {
   position: relative;
   width: 100%;
-  min-height: calc(100vh - var(--header-height));
-  background: #17381f;
-  overflow: hidden;
-  user-select: none;
+  max-width: 1100px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  user-select: none;
 }
 
 /* ─── Floating Top Game HUD ─── */
 .forest-floating-hud {
-  position: absolute;
-  top: 18px;
-  left: 24px;
-  right: 24px;
+  position: relative;
+  width: 100%;
+  max-width: 820px;
+  margin-bottom: 12px;
   z-index: 30;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-3);
-  background: rgba(12, 26, 17, 0.88);
+  background: rgba(12, 26, 17, 0.92);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border: 1.5px solid rgba(52, 211, 153, 0.4);
   border-radius: var(--radius-2xl);
-  padding: 10px 22px;
+  padding: 10px 20px;
   box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6);
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 .forest-hud-left {
@@ -59,7 +57,7 @@
   letter-spacing: 0.12em;
   color: #6ee7b7;
   background: rgba(16, 185, 129, 0.25);
-  padding: 5px 14px;
+  padding: 4px 12px;
   border-radius: var(--radius-full);
   border: 1px solid rgba(52, 211, 153, 0.45);
   display: inline-flex;
@@ -84,7 +82,7 @@
 }
 
 .forest-hud-bar {
-  width: 140px;
+  width: 130px;
   height: 8px;
   background: rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -145,23 +143,23 @@
   transform: translateX(3px);
 }
 
-/* ─── Full-Bleed 2D RPG Forest Canvas ─── */
+/* ─── 2D RPG Forest Canvas (Calibrated Aspect Ratio) ─── */
 .forest-rpg-canvas {
   position: relative;
   width: 100%;
-  min-height: calc(100vh - var(--header-height));
-  height: 1250px;
-  background: #17381f;
+  max-width: 820px;
+  aspect-ratio: 9 / 16;
+  border-radius: var(--radius-3xl);
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 40px rgba(16, 185, 129, 0.2);
+  border: 2px solid rgba(52, 211, 153, 0.35);
   overflow: hidden;
+  background: #102616;
 }
 
 .forest-rpg-bg-image {
-  position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center top;
+  object-fit: fill;
   display: block;
   pointer-events: none;
 }
@@ -191,10 +189,10 @@
   animation: ffFloat 5s ease-in-out infinite alternate;
 }
 
-.ff-1 { top: 12%; left: 68%; animation-duration: 6s; }
-.ff-2 { top: 24%; left: 45%; animation-duration: 4.5s; animation-delay: -2s; }
-.ff-3 { top: 38%; left: 28%; animation-duration: 7s; animation-delay: -3s; }
-.ff-4 { top: 52%; left: 62%; animation-duration: 5.5s; animation-delay: -1s; }
+.ff-1 { top: 10%; left: 72%; animation-duration: 6s; }
+.ff-2 { top: 22%; left: 48%; animation-duration: 4.5s; animation-delay: -2s; }
+.ff-3 { top: 38%; left: 30%; animation-duration: 7s; animation-delay: -3s; }
+.ff-4 { top: 54%; left: 60%; animation-duration: 5.5s; animation-delay: -1s; }
 .ff-5 { top: 70%; left: 42%; animation-duration: 6.5s; animation-delay: -4s; }
 .ff-6 { top: 86%; left: 24%; animation-duration: 5s; }
 .ff-7 { top: 62%; right: 18%; animation-duration: 6.2s; animation-delay: -2.5s; }
@@ -319,10 +317,10 @@
 /* Tree Canopy & Botanical Growth Node */
 .forest-tree-canopy {
   position: relative;
-  width: 64px;
-  height: 64px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  background: rgba(15, 23, 42, 0.92);
+  background: rgba(15, 23, 42, 0.94);
   border: 3.5px solid #10b981;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
   display: flex;
@@ -333,33 +331,33 @@
 
 .canopy-seed {
   border-color: #d97706;
-  background: rgba(69, 26, 3, 0.92);
+  background: rgba(69, 26, 3, 0.94);
 }
 
 .canopy-sprout {
   border-color: #84cc16;
-  background: rgba(26, 46, 15, 0.92);
+  background: rgba(26, 46, 15, 0.94);
 }
 
 .canopy-sapling {
   border-color: #10b981;
-  background: rgba(6, 46, 26, 0.92);
+  background: rgba(6, 46, 26, 0.94);
 }
 
 .canopy-branching {
   border-color: #06b6d4;
-  background: rgba(8, 47, 73, 0.92);
+  background: rgba(8, 47, 73, 0.94);
 }
 
 .canopy-mature-tree {
   border-color: #22c55e;
-  background: rgba(5, 46, 22, 0.92);
+  background: rgba(5, 46, 22, 0.94);
 }
 
 .canopy-ancient-tree {
   border-color: #eab308;
-  background: rgba(66, 32, 6, 0.92);
-  box-shadow: 0 0 25px rgba(234, 179, 8, 0.5), 0 8px 24px rgba(0, 0, 0, 0.7);
+  background: rgba(66, 32, 6, 0.94);
+  box-shadow: 0 0 25px rgba(234, 179, 8, 0.6), 0 8px 24px rgba(0, 0, 0, 0.7);
 }
 
 .forest-node-wrapper.is-selected .forest-tree-canopy {
@@ -379,7 +377,7 @@
 }
 
 .forest-tree-leaves .tree-art {
-  font-size: 2.1rem;
+  font-size: 1.9rem;
   line-height: 1;
 }
 
@@ -422,15 +420,15 @@
 
 /* Label Banner */
 .forest-node-label-plate {
-  margin-top: 5px;
+  margin-top: 4px;
   background: rgba(15, 23, 42, 0.94);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--radius-md);
-  padding: 4px 10px;
+  padding: 3px 8px;
   text-align: center;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(10px);
-  max-width: 145px;
+  max-width: 140px;
   pointer-events: none;
 }
 
@@ -439,7 +437,7 @@
   align-items: center;
   justify-content: center;
   gap: 4px;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 }
 
 .forest-step-tag {
@@ -450,7 +448,7 @@
 }
 
 .forest-growth-badge {
-  font-size: 8.5px;
+  font-size: 8px;
   font-weight: 800;
   color: #facc15;
   letter-spacing: 0.04em;
@@ -493,20 +491,11 @@
 }
 
 .forest-label-name {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 800;
   color: #f8fafc;
   white-space: nowrap;
   line-height: 1.2;
-}
-
-.forest-label-sub {
-  font-size: 8.5px;
-  color: #94a3b8;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 125px;
 }
 
 /* ─── Sleek Game Quest Modal Overlay ─── */
@@ -867,9 +856,6 @@
     align-items: flex-start;
     gap: 8px;
     padding: 8px 14px;
-    top: 10px;
-    left: 10px;
-    right: 10px;
   }
 
   .forest-hud-bar {
@@ -882,24 +868,20 @@
   }
 
   .forest-tree-canopy {
-    width: 52px;
-    height: 52px;
+    width: 48px;
+    height: 48px;
   }
 
   .forest-tree-leaves .tree-art {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
 
   .forest-node-label-plate {
-    max-width: 100px;
-    padding: 2px 5px;
+    max-width: 95px;
+    padding: 2px 4px;
   }
 
   .forest-label-name {
-    font-size: 9.5px;
-  }
-
-  .forest-label-sub {
-    display: none;
+    font-size: 9px;
   }
 }
