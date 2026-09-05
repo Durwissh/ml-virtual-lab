@@ -2,13 +2,21 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useProgress } from '../context/ProgressContext';
-import { learningPathLevels } from '../data/learningPathData';
+import { learningPathLevels, LearningPathExperiment } from '../data/learningPathData';
 import './LearningPath.css';
 
 export default function LearningPath() {
   const { getCompletionPercent, getOverallPercent } = useProgress();
   const overallPercent = getOverallPercent();
   const [selectedLevel, setSelectedLevel] = useState<number | 'all'>('all');
+  const [expandedTopics, setExpandedTopics] = useState<Record<string, boolean>>({});
+
+  const toggleTopics = (expId: string) => {
+    setExpandedTopics(prev => ({
+      ...prev,
+      [expId]: !prev[expId],
+    }));
+  };
 
   const filteredLevels = selectedLevel === 'all'
     ? learningPathLevels
@@ -29,16 +37,16 @@ export default function LearningPath() {
       {/* ─── Hero Header ─── */}
       <div className="lp-hero">
         <div className="lp-hero-content">
-          <div className="lp-badge">SRM Department of Computing Technologies</div>
-          <h1 className="lp-title">Machine Learning Curriculum Path</h1>
+          <div className="lp-badge">SRM Machine Learning Curriculum</div>
+          <h1 className="lp-title">Curriculum Roadmap & Learning Path</h1>
           <p className="lp-subtitle">
-            A comprehensive 6-level pedagogical journey covering 10 foundational experiments from data pre-processing and linear models to deep neural network foundations.
+            A structured pedagogical journey across 6 progressive milestones and 10 interactive laboratory experiments.
           </p>
 
           <div className="lp-progress-card">
             <div className="lp-progress-info">
               <div>
-                <span className="lp-progress-label">Curriculum Progress</span>
+                <span className="lp-progress-label">Overall Progress</span>
                 <span className="lp-progress-stat">
                   <strong>{totalCompleted}</strong> of 10 Experiments Mastered
                 </span>
@@ -52,56 +60,68 @@ export default function LearningPath() {
         </div>
       </div>
 
-      {/* ─── Level Filter Navigation ─── */}
-      <div className="lp-filters-bar" role="navigation" aria-label="Level filters">
-        <button
-          className={`lp-filter-btn${selectedLevel === 'all' ? ' lp-filter-btn--active' : ''}`}
-          onClick={() => setSelectedLevel('all')}
-        >
-          All 6 Levels
-        </button>
-        {learningPathLevels.map(lvl => (
+      {/* ─── Level Roadmap Stepper Bar ─── */}
+      <div className="lp-stepper-container" role="navigation" aria-label="Curriculum Milestones">
+        <div className="lp-stepper-track">
           <button
-            key={lvl.levelNumber}
-            className={`lp-filter-btn${selectedLevel === lvl.levelNumber ? ' lp-filter-btn--active' : ''}`}
-            onClick={() => setSelectedLevel(lvl.levelNumber)}
+            className={`lp-step-pill${selectedLevel === 'all' ? ' lp-step-pill--active' : ''}`}
+            onClick={() => setSelectedLevel('all')}
           >
-            Level {lvl.levelNumber}
+            <span className="lp-step-num">All</span>
+            <span className="lp-step-title">Full Path</span>
           </button>
-        ))}
+          {learningPathLevels.map((lvl) => {
+            const isSelected = selectedLevel === lvl.levelNumber;
+            const completedCount = lvl.experiments.filter(e => getCompletionPercent(e.id) === 100).length;
+            const isDone = completedCount === lvl.experiments.length;
+
+            return (
+              <button
+                key={lvl.levelNumber}
+                className={`lp-step-pill${isSelected ? ' lp-step-pill--active' : ''}${isDone ? ' lp-step-pill--done' : ''}`}
+                onClick={() => setSelectedLevel(lvl.levelNumber)}
+              >
+                <span className="lp-step-num">L{lvl.levelNumber}</span>
+                <span className="lp-step-title">{lvl.levelTitle.split('—')[1]?.trim() || lvl.levelTitle}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* ─── Level Progression ─── */}
       <div className="lp-levels-wrapper">
         {filteredLevels.map((lvl) => {
-          // Compute level completion
           const levelExpCount = lvl.experiments.length;
           const levelCompletedCount = lvl.experiments.filter(e => getCompletionPercent(e.id) === 100).length;
           const isLevelComplete = levelCompletedCount === levelExpCount;
 
           return (
             <section key={lvl.levelNumber} className="lp-level-section">
+              {/* Level Section Header */}
               <div className="lp-level-header">
-                <div className="lp-level-header-left">
-                  <span className="lp-level-num-pill">
-                    Level {lvl.levelNumber}
-                  </span>
+                <div className="lp-level-header-main">
+                  <span className="lp-level-badge">Level 0{lvl.levelNumber}</span>
                   <div>
                     <h2 className="lp-level-heading">{lvl.levelTitle}</h2>
                     <p className="lp-level-tagline">{lvl.tagline} — {lvl.description}</p>
                   </div>
                 </div>
-                <div className="lp-level-header-right">
-                  <span className={`lp-level-status-tag ${isLevelComplete ? 'complete' : levelCompletedCount > 0 ? 'in-progress' : 'available'}`}>
-                    {isLevelComplete ? '✓ Level Mastered' : `${levelCompletedCount}/${levelExpCount} Finished`}
+                <div className="lp-level-header-status">
+                  <span className={`lp-level-status-pill ${isLevelComplete ? 'complete' : levelCompletedCount > 0 ? 'in-progress' : 'available'}`}>
+                    {isLevelComplete ? '✓ Level Complete' : `${levelCompletedCount} of ${levelExpCount} Finished`}
                   </span>
                 </div>
               </div>
 
-              {/* Experiments Grid for this Level */}
-              <div className="lp-exp-grid">
-                {lvl.experiments.map(exp => {
+              {/* Experiment Cards List (Spacious & Clean) */}
+              <div className="lp-exp-list">
+                {lvl.experiments.map((exp: LearningPathExperiment) => {
                   const percent = getCompletionPercent(exp.id);
+                  const isExpanded = !!expandedTopics[exp.id];
+                  const initialTopics = exp.topics.slice(0, 4);
+                  const remainingTopicsCount = exp.topics.length - 4;
+
                   let statusLabel = 'Available';
                   let statusClass = 'available';
                   if (percent === 100) {
@@ -118,53 +138,75 @@ export default function LearningPath() {
                       className="lp-exp-card"
                       style={{ '--exp-color': exp.accentColor } as React.CSSProperties}
                     >
-                      <div className="lp-exp-card-header">
-                        <div className="lp-exp-number-tag">
-                          Exp {String(exp.number).padStart(2, '0')}
-                        </div>
-                        <div className="lp-exp-meta-tags">
+                      {/* Top Meta Row */}
+                      <div className="lp-exp-top-row">
+                        <div className="lp-exp-ident">
+                          <span className="lp-exp-num">
+                            EXP {String(exp.number).padStart(2, '0')}
+                          </span>
                           <span className="badge badge-navy">{exp.category}</span>
-                          <span className={`badge ${exp.difficulty === 'Beginner' ? 'badge-navy' : 'badge-navy'}`}>
-                            {exp.difficulty}
-                          </span>
-                          <span className={`lp-status-badge ${statusClass}`}>
-                            {percent === 100 ? '✓ Completed' : statusLabel}
-                          </span>
+                          <span className="badge badge-navy">{exp.difficulty}</span>
                         </div>
+                        <span className={`lp-status-badge ${statusClass}`}>
+                          {percent === 100 ? '✓ Completed' : statusLabel}
+                        </span>
                       </div>
 
+                      {/* Title & Description */}
                       <h3 className="lp-exp-title">{exp.title}</h3>
                       <p className="lp-exp-short-desc">{exp.shortDescription}</p>
 
-                      {/* Concepts / Topics Chips */}
-                      <div className="lp-topics-container">
-                        <div className="lp-topics-header">Core Topics & Concepts:</div>
-                        <div className="lp-topics-list">
-                          {exp.topics.map((topic, ti) => (
+                      {/* Key Takeaway Highlight */}
+                      <div className="lp-takeaway-bar">
+                        <span className="lp-takeaway-icon">💡</span>
+                        <div className="lp-takeaway-content">
+                          <strong>Core Insight:</strong> {exp.keyTakeaway}
+                        </div>
+                      </div>
+
+                      {/* Core Topics / Concepts (Clean chips with expandable toggle) */}
+                      <div className="lp-topics-block">
+                        <div className="lp-topics-header-row">
+                          <span className="lp-topics-label">Key Topics Covered ({exp.topics.length}):</span>
+                          <button
+                            type="button"
+                            className="lp-topics-toggle-btn"
+                            onClick={() => toggleTopics(exp.id)}
+                            aria-expanded={isExpanded}
+                          >
+                            {isExpanded ? '▲ Show Less' : `▼ View All ${exp.topics.length} Concepts`}
+                          </button>
+                        </div>
+
+                        <div className="lp-topics-chips">
+                          {(isExpanded ? exp.topics : initialTopics).map((topic, ti) => (
                             <span key={ti} className="lp-topic-chip">
                               {topic}
                             </span>
                           ))}
+                          {!isExpanded && remainingTopicsCount > 0 && (
+                            <button
+                              type="button"
+                              className="lp-topic-more-pill"
+                              onClick={() => toggleTopics(exp.id)}
+                            >
+                              +{remainingTopicsCount} more
+                            </button>
+                          )}
                         </div>
                       </div>
 
-                      {/* Prerequisites */}
+                      {/* Prerequisites if any */}
                       {exp.prerequisites && exp.prerequisites.length > 0 && (
-                        <div className="lp-prereq-bar">
+                        <div className="lp-prereq-row">
                           <span className="lp-prereq-label">Prerequisites:</span>
                           <span className="lp-prereq-text">{exp.prerequisites.join(' · ')}</span>
                         </div>
                       )}
 
-                      {/* Key Takeaway */}
-                      <div className="lp-takeaway-bar">
-                        <span className="lp-takeaway-icon">💡</span>
-                        <span className="lp-takeaway-text">{exp.keyTakeaway}</span>
-                      </div>
-
-                      {/* Card Footer with Progress & Action Link */}
+                      {/* Footer Row */}
                       <div className="lp-exp-footer">
-                        <div className="lp-exp-footer-left">
+                        <div className="lp-exp-footer-meta">
                           <span className="lp-exp-time">⏱ {exp.estimatedTime}</span>
                           {percent > 0 && (
                             <div className="lp-mini-progress">
@@ -172,7 +214,8 @@ export default function LearningPath() {
                             </div>
                           )}
                         </div>
-                        <Link to={`/experiment/${exp.id}`} className="btn btn-primary btn-sm lp-action-btn">
+
+                        <Link to={`/experiment/${exp.id}`} className="btn btn-primary lp-action-btn">
                           {percent === 100 ? 'Review Experiment →' : percent > 0 ? 'Resume Experiment →' : 'Start Experiment →'}
                         </Link>
                       </div>
