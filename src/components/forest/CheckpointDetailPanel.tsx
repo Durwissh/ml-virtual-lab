@@ -37,6 +37,7 @@ export default function CheckpointDetailPanel({
         <div className="forest-detail-badges">
           <span className="forest-detail-num">STEP {checkpoint.number} OF 06</span>
           <span className="forest-detail-cat">{checkpoint.category}</span>
+          <span className="forest-detail-growth">🌱 {checkpoint.growthStage}</span>
           {isCompleted && <span className="forest-status-badge completed">✓ Completed</span>}
           {isCurrent && <span className="forest-status-badge current">● Current Stage</span>}
           {status === 'available' && <span className="forest-status-badge available">○ Available</span>}

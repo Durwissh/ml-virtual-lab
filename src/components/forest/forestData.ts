@@ -7,6 +7,7 @@ export interface ForestCheckpoint {
   subtitle: string;
   locationName: string;
   icon: string;
+  growthStage: string;
   category: string;
   description: string;
   learnObjectives: string[];
@@ -14,7 +15,7 @@ export interface ForestCheckpoint {
   route: string;
   lockMessage: string;
   relatedExpIds: string[];
-  treeType: 'foundations' | 'preprocessing' | 'pipeline' | 'evaluation' | 'benchmarking' | 'assessment';
+  treeType: 'seed' | 'sprout' | 'sapling' | 'young-tree' | 'ancient-tree' | 'world-tree';
   // Exact percentage coordinates (0 - 100%) on the widescreen RPG road
   mapX: number;
   mapY: number;
@@ -27,7 +28,8 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     name: 'ML Foundations',
     subtitle: 'Core Paradigms & Lifecycle',
     locationName: 'Foundations Clearing',
-    icon: '🧠',
+    icon: '🌱',
+    growthStage: 'Seed Stage',
     category: 'Foundations',
     description: 'Establish foundational machine learning principles: discover how algorithms learn from data patterns, compare Supervised, Unsupervised, and Reinforcement paradigms, and explore real-world use cases.',
     learnObjectives: [
@@ -40,7 +42,7 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     route: '/experiment/1#aim',
     lockMessage: 'Available to all students from the start.',
     relatedExpIds: ['1'],
-    treeType: 'foundations',
+    treeType: 'seed',
     mapX: 8,
     mapY: 48
   },
@@ -50,7 +52,8 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     name: 'Dataset Pre-processing',
     subtitle: 'Cleaning & Feature Engineering',
     locationName: 'Data Engineering Station',
-    icon: '📊',
+    icon: '🌿',
+    growthStage: 'Sprout Stage',
     category: 'Data Engineering',
     description: 'Master tabular data hygiene: handle missing values with statistical imputation, apply One-Hot/Label encoding, and perform numerical normalization/standardization without data leakage.',
     learnObjectives: [
@@ -64,7 +67,7 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     route: '/experiment/1#theory',
     lockMessage: 'Available from the start. Recommended after ML Foundations.',
     relatedExpIds: ['1'],
-    treeType: 'preprocessing',
+    treeType: 'sprout',
     mapX: 25,
     mapY: 72
   },
@@ -74,7 +77,8 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     name: 'Pipeline Execution',
     subtitle: 'Interactive Model Training',
     locationName: 'Virtual Laboratory',
-    icon: '🔬',
+    icon: '🪴',
+    growthStage: 'Sapling Stage',
     category: 'Hands-On Lab',
     description: 'Execute hands-on experimentation in the interactive Virtual Lab: configure data processing parameters, execute transformation pipelines, and inspect distribution shifts live.',
     learnObjectives: [
@@ -87,7 +91,7 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     route: '/experiment/1',
     lockMessage: 'Available to all students. Put theory into practice.',
     relatedExpIds: ['1'],
-    treeType: 'pipeline',
+    treeType: 'sapling',
     mapX: 42,
     mapY: 50
   },
@@ -97,7 +101,8 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     name: 'Model Evaluation',
     subtitle: 'Performance Metrics & Validation',
     locationName: 'Evaluation Observatory',
-    icon: '📈',
+    icon: '🌳',
+    growthStage: 'Young Tree Stage',
     category: 'Model Evaluation',
     description: 'Diagnose model efficacy using statistical indicators: calculate MSE, RMSE, and R² for regression; analyze Confusion Matrices, Precision, Recall, and F1-Score for classification; identify Overfitting vs. Underfitting.',
     learnObjectives: [
@@ -110,7 +115,7 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     route: '/experiment/1#results',
     lockMessage: 'Complete Experiment 1 or submit its quiz to unlock the Observatory.',
     relatedExpIds: ['1'],
-    treeType: 'evaluation',
+    treeType: 'young-tree',
     mapX: 58,
     mapY: 49
   },
@@ -120,7 +125,8 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     name: 'Algorithm Benchmarking',
     subtitle: 'Model Comparison & Selection',
     locationName: 'Benchmarking Pavilion',
-    icon: '⚖️',
+    icon: '🌲',
+    growthStage: 'Blossom Tree Stage',
     category: 'Model Comparison',
     description: 'Benchmark diverse machine learning algorithms against one another: compare Linear Regression, Decision Trees, and Support Vector Machines across accuracy, convergence speed, and complexity.',
     learnObjectives: [
@@ -133,7 +139,7 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     route: '/experiment/2',
     lockMessage: 'Complete Experiment 1 results to unlock algorithm comparisons.',
     relatedExpIds: ['2', '4', '6', '8', '9'],
-    treeType: 'benchmarking',
+    treeType: 'ancient-tree',
     mapX: 74,
     mapY: 62
   },
@@ -143,7 +149,8 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     name: 'Knowledge Assessment',
     subtitle: 'Certification & Final Testing',
     locationName: 'Assessment Summit',
-    icon: '🏆',
+    icon: '✨',
+    growthStage: 'Master World Tree',
     category: 'Mastery & Certification',
     description: 'Validate your machine learning proficiency: take the comprehensive knowledge assessment, test your analytical problem solving, and achieve certified mastery recognition.',
     learnObjectives: [
@@ -156,7 +163,7 @@ export const FOREST_CHECKPOINTS: ForestCheckpoint[] = [
     route: '/experiment/1#posttest',
     lockMessage: 'Complete the foundational experiments and results analysis to unlock the Summit.',
     relatedExpIds: ['1', '2', '3', '10'],
-    treeType: 'assessment',
+    treeType: 'world-tree',
     mapX: 89,
     mapY: 46
   }
