@@ -1,13 +1,11 @@
 // src/pages/Dashboard.tsx
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 import { useProgress } from '../context/ProgressContext';
 import { experiments } from '../data/experiments';
 import './Dashboard.css';
 
 export default function Dashboard() {
-  const { user, signOut } = useAuth();
   const {
     progress,
     getOverallPercent,
@@ -15,9 +13,8 @@ export default function Dashboard() {
     getExperimentProgress,
     deleteNote,
     toggleBookmark,
-    syncing
+    resetAllProgress,
   } = useProgress();
-  const navigate = useNavigate();
 
   const overallPercent = getOverallPercent();
 
@@ -48,44 +45,42 @@ export default function Dashboard() {
     <div className="page-layout">
       <main className="page-main">
         <div className="dashboard-container">
-          {/* Header Profile Section */}
+          {/* Header Section */}
           <div className="dashboard-header-card animate-fade-in">
             <div className="dashboard-profile-info">
               <div className="dashboard-avatar">
-                {user ? user.fullName.charAt(0).toUpperCase() : 'S'}
+                M
               </div>
               <div>
                 <div className="dashboard-badge-row">
-                  <span className="badge badge-navy">Student Portal</span>
-                  {syncing && <span className="badge badge-gold">Syncing with Cloud…</span>}
+                  <span className="badge badge-navy">Student Laboratory Dashboard</span>
+                  <span className="badge badge-teal">Local Workspace Active</span>
                 </div>
                 <h1 className="dashboard-name">
-                  {user ? user.fullName : 'Guest Student'}
+                  ML Virtual Lab Progress Center
                 </h1>
                 <p className="dashboard-email">
-                  {user ? user.email : 'Local session (Log in to sync progress across devices)'}
+                  SRM Institute of Science and Technology · Department of Computing Technologies
                 </p>
                 <div className="dashboard-dept">
-                  SRM Institute of Science and Technology · Machine Learning Virtual Lab
+                  Your experiment milestones, quiz scores, bookmarks, and lab notes are saved automatically in your browser.
                 </div>
               </div>
             </div>
 
             <div className="dashboard-header-actions">
-              {user ? (
+              {(overallPercent > 0 || bookmarksList.length > 0 || notesEntries.length > 0) && (
                 <button
-                  onClick={async () => {
-                    await signOut();
-                    navigate('/');
+                  onClick={() => {
+                    if (window.confirm('Are you sure you want to reset all your laboratory progress, quiz results, and notes?')) {
+                      resetAllProgress();
+                    }
                   }}
-                  className="btn btn-secondary"
+                  className="btn btn-secondary btn-sm"
+                  title="Reset local progress"
                 >
-                  Sign Out
+                  Reset Progress
                 </button>
-              ) : (
-                <Link to="/login" className="btn btn-primary">
-                  Sign In / Register
-                </Link>
               )}
             </div>
           </div>
@@ -147,7 +142,6 @@ export default function Dashboard() {
               <div className="exp-progress-list">
                 {experiments.map(exp => {
                   const pct = getCompletionPercent(exp.id);
-                  const expProgress = getExperimentProgress(exp.id);
                   const isDone = pct === 100;
 
                   return (

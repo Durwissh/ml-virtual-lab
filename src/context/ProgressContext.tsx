@@ -1,7 +1,5 @@
 // src/context/ProgressContext.tsx
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { supabase, isSupabaseConfigured } from '../lib/supabase';
-import { useAuth } from './AuthContext';
 
 export interface ExperimentProgress {
   aim: boolean;
@@ -64,8 +62,6 @@ function loadLocalProgress(): ProgressState {
 
 interface ProgressContextType {
   progress: ProgressState;
-  syncing: boolean;
-  syncError: string | null;
   markSectionComplete: (experimentId: string, section: keyof ExperimentProgress) => void;
   saveQuizResult: (quizId: string, result: QuizResult) => void;
   getExperimentProgress: (experimentId: string) => ExperimentProgress;
@@ -79,123 +75,25 @@ interface ProgressContextType {
   getNote: (key: string) => string;
   saveProcedureStep: (experimentId: string, stepIndex: number, complete: boolean) => void;
   getProcedureSteps: (experimentId: string, totalSteps: number) => boolean[];
-  refreshFromCloud: () => Promise<void>;
+  resetAllProgress: () => void;
 }
 
 const ProgressContext = createContext<ProgressContextType>({} as ProgressContextType);
 
 export function ProgressProvider({ children }: { children: React.ReactNode }) {
-  const { user } = useAuth();
   const [progress, setProgress] = useState<ProgressState>(loadLocalProgress);
-  const [syncing, setSyncing] = useState<boolean>(false);
-  const [syncError, setSyncError] = useState<string | null>(null);
 
-  // Always keep local storage updated
+  // Keep local storage updated
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
     } catch (e) {
-      console.warn('LocalStorage save error:', e);
+      console.warn('LocalStorage save warning:', e);
     }
   }, [progress]);
 
-  // Load from Supabase whenever authenticated user changes
-  const refreshFromCloud = useCallback(async () => {
-    if (!user || !isSupabaseConfigured || !supabase) return;
-
-    setSyncing(true);
-    setSyncError(null);
-
-    try {
-      // 1. Fetch experiment progress
-      const { data: expData, error: expErr } = await supabase
-        .from('experiment_progress')
-        .select('*')
-        .eq('user_id', user.id);
-
-      if (expErr) throw expErr;
-
-      const experimentsMap: Record<string, ExperimentProgress> = {};
-      expData?.forEach(row => {
-        experimentsMap[row.experiment_id] = {
-          aim: !!row.aim,
-          theory: !!row.theory,
-          pretest: !!row.pretest,
-          procedure: !!row.procedure,
-          results: !!row.results,
-          posttest: !!row.posttest,
-        };
-      });
-
-      // 2. Fetch quiz results
-      const { data: quizData, error: quizErr } = await supabase
-        .from('quiz_results')
-        .select('*')
-        .eq('user_id', user.id);
-
-      if (quizErr) throw quizErr;
-
-      const quizMap: Record<string, QuizResult> = {};
-      quizData?.forEach(row => {
-        quizMap[row.quiz_id] = {
-          score: row.score,
-          total: row.total,
-          answers: row.answers || [],
-          submittedAt: row.submitted_at,
-        };
-      });
-
-      // 3. Fetch bookmarks
-      const { data: bmData, error: bmErr } = await supabase
-        .from('bookmarks')
-        .select('*')
-        .eq('user_id', user.id);
-
-      if (bmErr) throw bmErr;
-
-      const bookmarksList: BookmarkItem[] = (bmData || []).map(row => ({
-        id: row.id,
-        type: row.type || 'section',
-        experimentId: row.experiment_id,
-        title: row.title,
-        addedAt: row.added_at,
-      }));
-
-      // 4. Fetch notes
-      const { data: notesData, error: notesErr } = await supabase
-        .from('notes')
-        .select('*')
-        .eq('user_id', user.id);
-
-      if (notesErr) throw notesErr;
-
-      const notesMap: Record<string, string> = {};
-      notesData?.forEach(row => {
-        notesMap[row.key] = row.text;
-      });
-
-      // Merge cloud data with existing local data
-      setProgress(prev => ({
-        ...prev,
-        experiments: { ...prev.experiments, ...experimentsMap },
-        quizResults: { ...prev.quizResults, ...quizMap },
-        bookmarks: bookmarksList.length > 0 ? bookmarksList : prev.bookmarks,
-        notes: { ...prev.notes, ...notesMap },
-      }));
-    } catch (err: any) {
-      console.warn('Notice: Cloud progress sync error, using local fallback:', err?.message || err);
-      setSyncError('Cloud sync paused (using local state)');
-    } finally {
-      setSyncing(false);
-    }
-  }, [user]);
-
-  useEffect(() => {
-    refreshFromCloud();
-  }, [refreshFromCloud]);
-
   // Mark section complete
-  const markSectionComplete = useCallback(async (experimentId: string, section: keyof ExperimentProgress) => {
+  const markSectionComplete = useCallback((experimentId: string, section: keyof ExperimentProgress) => {
     setProgress(prev => {
       const current = prev.experiments[experimentId] || defaultProgress;
       const updatedExp = {
@@ -203,61 +101,23 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
         [section]: true,
       };
 
-      const nextState = {
+      return {
         ...prev,
         experiments: {
           ...prev.experiments,
           [experimentId]: updatedExp,
         },
       };
-
-      // Background cloud sync if user is logged in
-      if (user && isSupabaseConfigured && supabase) {
-        supabase
-          .from('experiment_progress')
-          .upsert({
-            user_id: user.id,
-            experiment_id: experimentId,
-            [section]: true,
-            updated_at: new Date().toISOString(),
-          }, { onConflict: 'user_id,experiment_id' })
-          .then(({ error }) => {
-            if (error) console.warn('Supabase experiment_progress sync warning:', error.message);
-          });
-      }
-
-      return nextState;
     });
-  }, [user]);
+  }, []);
 
   // Save quiz result
-  const saveQuizResult = useCallback(async (quizId: string, result: QuizResult) => {
-    setProgress(prev => {
-      const nextState = {
-        ...prev,
-        quizResults: { ...prev.quizResults, [quizId]: result },
-      };
-
-      // Background cloud sync
-      if (user && isSupabaseConfigured && supabase) {
-        supabase
-          .from('quiz_results')
-          .upsert({
-            user_id: user.id,
-            quiz_id: quizId,
-            score: result.score,
-            total: result.total,
-            answers: result.answers,
-            submitted_at: result.submittedAt,
-          }, { onConflict: 'user_id,quiz_id' })
-          .then(({ error }) => {
-            if (error) console.warn('Supabase quiz_results sync warning:', error.message);
-          });
-      }
-
-      return nextState;
-    });
-  }, [user]);
+  const saveQuizResult = useCallback((quizId: string, result: QuizResult) => {
+    setProgress(prev => ({
+      ...prev,
+      quizResults: { ...prev.quizResults, [quizId]: result },
+    }));
+  }, []);
 
   const getExperimentProgress = useCallback((experimentId: string): ExperimentProgress => {
     return progress.experiments[experimentId] || defaultProgress;
@@ -297,80 +157,36 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
 
       if (exists) {
         updated = prev.bookmarks.filter(b => b.id !== bookmark.id);
-        if (user && isSupabaseConfigured && supabase) {
-          supabase
-            .from('bookmarks')
-            .delete()
-            .match({ id: bookmark.id, user_id: user.id })
-            .then(() => {});
-        }
       } else {
         const newItem: BookmarkItem = {
           ...bookmark,
           addedAt: new Date().toISOString(),
         };
         updated = [...prev.bookmarks, newItem];
-        if (user && isSupabaseConfigured && supabase) {
-          supabase
-            .from('bookmarks')
-            .upsert({
-              id: bookmark.id,
-              user_id: user.id,
-              experiment_id: bookmark.experimentId,
-              type: bookmark.type,
-              title: bookmark.title,
-              added_at: newItem.addedAt,
-            })
-            .then(() => {});
-        }
       }
 
       return { ...prev, bookmarks: updated };
     });
-  }, [user]);
+  }, []);
 
   const isBookmarked = useCallback((id: string): boolean => {
     return progress.bookmarks.some(b => b.id === id);
   }, [progress.bookmarks]);
 
   const saveNote = useCallback((key: string, text: string) => {
-    setProgress(prev => {
-      const nextNotes = { ...prev.notes, [key]: text };
-
-      if (user && isSupabaseConfigured && supabase) {
-        supabase
-          .from('notes')
-          .upsert({
-            key,
-            user_id: user.id,
-            text,
-            updated_at: new Date().toISOString(),
-          }, { onConflict: 'key,user_id' })
-          .then(({ error }) => {
-            if (error) console.warn('Supabase notes sync warning:', error.message);
-          });
-      }
-
-      return { ...prev, notes: nextNotes };
-    });
-  }, [user]);
+    setProgress(prev => ({
+      ...prev,
+      notes: { ...prev.notes, [key]: text },
+    }));
+  }, []);
 
   const deleteNote = useCallback((key: string) => {
     setProgress(prev => {
       const nextNotes = { ...prev.notes };
       delete nextNotes[key];
-
-      if (user && isSupabaseConfigured && supabase) {
-        supabase
-          .from('notes')
-          .delete()
-          .match({ key, user_id: user.id })
-          .then(() => {});
-      }
-
       return { ...prev, notes: nextNotes };
     });
-  }, [user]);
+  }, []);
 
   const getNote = useCallback((key: string): string => {
     return progress.notes[key] || '';
@@ -393,11 +209,21 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
     return Array.from({ length: totalSteps }, (_, i) => existing[i] || false);
   }, [progress.procedureSteps]);
 
+  const resetAllProgress = useCallback(() => {
+    localStorage.removeItem(STORAGE_KEY);
+    setProgress({
+      experiments: {},
+      quizResults: {},
+      procedureSteps: {},
+      lastVisited: null,
+      bookmarks: [],
+      notes: {},
+    });
+  }, []);
+
   return (
     <ProgressContext.Provider value={{
       progress,
-      syncing,
-      syncError,
       markSectionComplete,
       saveQuizResult,
       getExperimentProgress,
@@ -411,7 +237,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
       getNote,
       saveProcedureStep,
       getProcedureSteps,
-      refreshFromCloud,
+      resetAllProgress,
     }}>
       {children}
     </ProgressContext.Provider>

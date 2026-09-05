@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
-import { useAuth } from '../context/AuthContext';
 import { useProgress } from '../context/ProgressContext';
 import srmLogo from '../assets/srm-logo.png';
 import './Header.css';
@@ -61,7 +60,6 @@ function CloseIcon() {
 
 export default function Header() {
   const { theme, toggleTheme } = useTheme();
-  const { user } = useAuth();
   const { getOverallPercent } = useProgress();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -121,17 +119,6 @@ export default function Header() {
             </Link>
           )}
 
-          {user ? (
-            <Link to="/dashboard" className="header-user-btn" title={`Signed in as ${user.fullName}`}>
-              <span className="header-user-initial">{user.fullName.charAt(0).toUpperCase()}</span>
-              <span className="header-user-name">{user.fullName.split(' ')[0]}</span>
-            </Link>
-          ) : (
-            <Link to="/login" className="btn btn-secondary btn-sm header-login-btn">
-              Sign In
-            </Link>
-          )}
-
           <button
             className="header-icon-btn"
             onClick={toggleTheme}
@@ -167,22 +154,6 @@ export default function Header() {
                 {item.label}
               </NavLink>
             ))}
-
-            <div className="header-mobile-auth">
-              {user ? (
-                <Link to="/dashboard" className="header-mobile-user-card" onClick={() => setMobileMenuOpen(false)}>
-                  <div className="header-user-initial">{user.fullName.charAt(0).toUpperCase()}</div>
-                  <div>
-                    <div className="header-mobile-user-name">{user.fullName}</div>
-                    <div className="header-mobile-user-sub">View Student Dashboard →</div>
-                  </div>
-                </Link>
-              ) : (
-                <Link to="/login" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }} onClick={() => setMobileMenuOpen(false)}>
-                  Student Sign In / Register
-                </Link>
-              )}
-            </div>
           </div>
         </div>
       )}
