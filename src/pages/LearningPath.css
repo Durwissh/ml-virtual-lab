@@ -1,4 +1,4 @@
-/* src/pages/LearningPath.css - Screen-Fitted Top-Down RPG Learning Forest (Zero Scrollbars) */
+/* src/pages/LearningPath.css - 100% Full-Screen Edge-to-Edge RPG Forest Map */
 
 .forest-page-wrapper {
   position: relative;
@@ -7,92 +7,85 @@
   height: calc(100vh - var(--header-height));
   max-height: calc(100vh - var(--header-height));
   background: #0b180f;
-  padding: 8px 16px 8px 16px;
+  padding: 0;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
   overflow: hidden;
   box-sizing: border-box;
 }
 
-/* ─── Seamless Screen-Fitted RPG Viewport ─── */
+/* ─── 100% Edge-to-Edge RPG Viewport ─── */
 .forest-rpg-viewport {
   position: relative;
   width: 100%;
   height: 100%;
-  max-width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  user-select: none;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
-  box-sizing: border-box;
+  user-select: none;
 }
 
-/* ─── Compact Floating Top Game HUD ─── */
+/* ─── Floating Top Game HUD Overlay (Over Map) ─── */
 .forest-floating-hud {
-  position: relative;
-  width: 100%;
-  max-width: 1200px;
-  margin-bottom: 6px;
-  flex-shrink: 0;
+  position: absolute;
+  top: 14px;
+  left: 24px;
+  right: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
   z-index: 30;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-3);
-  background: rgba(12, 26, 17, 0.94);
+  background: rgba(12, 26, 17, 0.92);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border: 1.5px solid rgba(52, 211, 153, 0.4);
   border-radius: var(--radius-xl);
-  padding: 6px 18px;
-  box-shadow: 0 8px 24px -5px rgba(0, 0, 0, 0.6);
+  padding: 8px 20px;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.7);
 }
 
 .forest-hud-left {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-4);
   flex-wrap: wrap;
 }
 
 .forest-hud-badge {
-  font-size: 10.5px;
+  font-size: 11px;
   font-weight: 900;
   letter-spacing: 0.12em;
   color: #6ee7b7;
   background: rgba(16, 185, 129, 0.25);
-  padding: 3px 10px;
+  padding: 4px 12px;
   border-radius: var(--radius-full);
   border: 1px solid rgba(52, 211, 153, 0.45);
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
 }
 
 .forest-hud-progress-wrap {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: var(--space-3);
 }
 
 .forest-hud-step-text {
-  font-size: 11px;
+  font-size: 11.5px;
   color: #94a3b8;
 }
 
 .forest-hud-step-text strong {
   color: #4ade80;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .forest-hud-bar {
-  width: 130px;
-  height: 6px;
+  width: 140px;
+  height: 7px;
   background: rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: var(--radius-full);
@@ -107,11 +100,11 @@
 }
 
 .forest-hud-pct {
-  font-size: 10.5px;
+  font-size: 11px;
   font-weight: 800;
   color: #6ee7b7;
   background: rgba(16, 185, 129, 0.25);
-  padding: 1px 6px;
+  padding: 2px 7px;
   border-radius: var(--radius-full);
 }
 
@@ -123,16 +116,16 @@
 .forest-hud-continue-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: var(--radius-lg);
-  padding: 6px 15px;
-  font-size: 11px;
+  padding: 6px 16px;
+  font-size: 11.5px;
   font-weight: 800;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.45);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.45);
   transition: all 0.2s ease;
   white-space: nowrap;
 }
@@ -152,25 +145,22 @@
   transform: translateX(3px);
 }
 
-/* ─── 16:9 Screen-Fitted RPG Forest Canvas ─── */
+/* ─── 100% Full-Bleed Edge-to-Edge RPG Forest Canvas ─── */
 .forest-rpg-canvas {
-  position: relative;
-  flex: 1;
-  width: auto;
-  max-width: 100%;
-  max-height: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: var(--radius-2xl);
-  box-shadow: 0 15px 50px -10px rgba(0, 0, 0, 0.85), 0 0 30px rgba(16, 185, 129, 0.2);
-  border: 2px solid rgba(52, 211, 153, 0.35);
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
   overflow: hidden;
   background: #102616;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .forest-rpg-bg-image {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: fill;
@@ -331,8 +321,8 @@
 /* Tree Canopy & Botanical Growth Node */
 .forest-tree-canopy {
   position: relative;
-  width: 52px;
-  height: 52px;
+  width: 54px;
+  height: 54px;
   border-radius: 50%;
   background: rgba(15, 23, 42, 0.94);
   border: 3px solid #10b981;
@@ -391,7 +381,7 @@
 }
 
 .forest-tree-leaves .tree-art {
-  font-size: 1.7rem;
+  font-size: 1.8rem;
   line-height: 1;
 }
 
@@ -438,11 +428,11 @@
   background: rgba(15, 23, 42, 0.94);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--radius-md);
-  padding: 2px 7px;
+  padding: 2px 8px;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(10px);
-  max-width: 130px;
+  max-width: 135px;
   pointer-events: none;
 }
 
@@ -455,14 +445,14 @@
 }
 
 .forest-step-tag {
-  font-size: 8px;
+  font-size: 8.5px;
   font-weight: 800;
   letter-spacing: 0.06em;
   color: #38bdf8;
 }
 
 .forest-growth-badge {
-  font-size: 7.5px;
+  font-size: 8px;
   font-weight: 800;
   color: #facc15;
   letter-spacing: 0.04em;
@@ -481,7 +471,7 @@
 }
 
 .forest-current-pill {
-  font-size: 7.5px;
+  font-size: 8px;
   font-weight: 800;
   color: #38bdf8;
   background: rgba(14, 165, 233, 0.25);
@@ -490,7 +480,7 @@
 }
 
 .forest-done-pill {
-  font-size: 7.5px;
+  font-size: 8px;
   font-weight: 800;
   color: #4ade80;
   background: rgba(34, 197, 94, 0.25);
@@ -499,13 +489,13 @@
 }
 
 .forest-locked-pill {
-  font-size: 7.5px;
+  font-size: 8px;
   font-weight: 700;
   color: #64748b;
 }
 
 .forest-label-name {
-  font-size: 9.5px;
+  font-size: 10px;
   font-weight: 800;
   color: #f8fafc;
   white-space: nowrap;
@@ -870,6 +860,9 @@
     align-items: flex-start;
     gap: 6px;
     padding: 6px 12px;
+    top: 8px;
+    left: 10px;
+    right: 10px;
   }
 
   .forest-hud-bar {
@@ -882,21 +875,21 @@
   }
 
   .forest-tree-canopy {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
   }
 
   .forest-tree-leaves .tree-art {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
 
   .forest-node-label-plate {
-    max-width: 85px;
-    padding: 1px 3px;
+    max-width: 90px;
+    padding: 1px 4px;
   }
 
   .forest-label-name {
-    font-size: 8px;
+    font-size: 8.5px;
   }
 
   .forest-growth-badge {
