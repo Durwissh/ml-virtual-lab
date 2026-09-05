@@ -4,12 +4,12 @@
   position: relative;
   min-height: calc(100vh - var(--header-height));
   background: var(--bg-primary);
-  padding: calc(var(--header-height) + 32px) var(--space-6) 120px;
+  padding: calc(var(--header-height) + 40px) var(--space-6) 160px;
   overflow-x: hidden;
 }
 
 .lp-journey-container {
-  max-width: 1080px;
+  max-width: 1140px;
   margin: 0 auto;
   position: relative;
 }
@@ -17,8 +17,8 @@
 /* ─── Compact Sticky Stage Indicator ─── */
 .lp-sticky-tracker {
   position: fixed;
-  top: calc(var(--header-height) + 16px);
-  right: var(--space-6);
+  top: calc(var(--header-height) + 20px);
+  right: var(--space-8);
   z-index: 40;
   pointer-events: none;
 }
@@ -26,20 +26,20 @@
 .lp-tracker-inner {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  padding: 6px 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  padding: 8px 18px;
   border-radius: var(--radius-full);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
   pointer-events: auto;
 }
 
 .lp-tracker-label {
   font-size: 11px;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   color: var(--accent-text);
   text-transform: uppercase;
 }
@@ -47,12 +47,12 @@
 .lp-tracker-dots {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
 
 .lp-tracker-dot {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: var(--border-secondary);
   transition: all var(--duration-fast) var(--ease-out);
@@ -60,8 +60,8 @@
 
 .lp-tracker-dot.active {
   background: var(--accent-primary);
-  transform: scale(1.3);
-  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.3);
+  transform: scale(1.35);
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3);
 }
 
 .lp-tracker-dot.completed {
@@ -71,8 +71,8 @@
 /* ─── Compact Hero ─── */
 .lp-journey-hero {
   text-align: center;
-  padding: var(--space-4) 0 var(--space-10);
-  max-width: 640px;
+  padding: var(--space-6) 0 var(--space-12);
+  max-width: 680px;
   margin: 0 auto;
 }
 
@@ -80,58 +80,62 @@
   display: inline-block;
   font-size: 11px;
   font-weight: 800;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent-text);
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-3);
+  background: var(--accent-subtle);
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-secondary);
 }
 
 .lp-hero-headline {
-  font-size: clamp(2rem, 4vw, var(--text-4xl));
+  font-size: clamp(2.2rem, 4.5vw, var(--text-5xl));
   font-weight: 800;
   color: var(--text-primary);
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
   line-height: 1.15;
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-4);
 }
 
 .lp-hero-subline {
   font-size: var(--text-base);
   color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: var(--space-5);
+  line-height: 1.75;
+  margin-bottom: var(--space-6);
 }
 
 .lp-hero-start-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 20px;
-  background: var(--accent-subtle);
-  border: 1px solid var(--border-secondary);
+  gap: 8px;
+  padding: 10px 24px;
+  background: #111827;
+  border: 1px solid #374151;
   border-radius: var(--radius-full);
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   font-weight: 700;
-  color: var(--accent-text);
+  color: #ffffff;
   cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transition: all var(--duration-fast) var(--ease-out);
 }
 
 .lp-hero-start-btn:hover {
-  background: var(--accent-primary);
-  color: white;
-  border-color: var(--accent-primary);
-  transform: translateY(1px);
+  background: #000000;
+  transform: translateY(2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
 /* ─── The Road Wrapper ─── */
 .lp-road-wrapper {
   position: relative;
   width: 100%;
-  margin-top: var(--space-4);
+  margin-top: var(--space-6);
 }
 
-/* SVG Road Track */
+/* ─── Bold Black SVG Road Track ─── */
 .lp-road-svg-layer {
   position: absolute;
   top: 0;
@@ -148,36 +152,38 @@
   overflow: visible;
 }
 
+/* Outer Roadbed (Curb / Shadow) */
 .lp-road-bed {
-  stroke: var(--border-secondary);
-  stroke-width: 32px;
+  stroke: rgba(0, 0, 0, 0.18);
+  stroke-width: 48px;
   stroke-linecap: round;
   stroke-linejoin: round;
-  opacity: 0.45;
 }
 
 [data-theme="dark"] .lp-road-bed {
-  stroke: #1e293b;
-  opacity: 0.8;
+  stroke: rgba(0, 0, 0, 0.6);
+  stroke-width: 52px;
 }
 
+/* Asphalt Black Road Surface */
 .lp-road-surface {
-  stroke: var(--bg-surface);
-  stroke-width: 24px;
+  stroke: #18181b; /* Deep Black Asphalt */
+  stroke-width: 36px;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
 [data-theme="dark"] .lp-road-surface {
-  stroke: #0f172a;
+  stroke: #09090b;
 }
 
+/* Road Yellow/Amber Center Dividing Line */
 .lp-road-dash {
-  stroke: var(--accent-primary);
-  stroke-width: 2px;
-  stroke-dasharray: 8 10;
+  stroke: #fbbf24;
+  stroke-width: 3px;
+  stroke-dasharray: 12 14;
   stroke-linecap: round;
-  opacity: 0.7;
+  opacity: 0.95;
 }
 
 /* Road Start Marker */
@@ -187,35 +193,35 @@
   align-items: center;
   position: relative;
   z-index: 3;
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-10);
 }
 
 .lp-start-badge {
   font-size: 11px;
   font-weight: 800;
-  letter-spacing: 0.1em;
-  color: var(--accent-text);
-  background: var(--card-bg);
-  border: 1px solid var(--border-secondary);
-  padding: 4px 14px;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+  background: #18181b;
+  border: 1px solid #3f3f46;
+  padding: 6px 18px;
   border-radius: var(--radius-full);
-  margin-bottom: 8px;
-  box-shadow: var(--shadow-sm);
+  margin-bottom: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .lp-start-node {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  background: var(--accent-primary);
-  box-shadow: 0 0 0 4px var(--accent-subtle);
+  background: #fbbf24;
+  box-shadow: 0 0 0 6px rgba(251, 191, 36, 0.25);
 }
 
-/* ─── Milestones Track ─── */
+/* ─── Milestones Track with Spacious Spacing ─── */
 .lp-milestones-track {
   display: flex;
   flex-direction: column;
-  gap: 120px;
+  gap: 160px; /* Generous breathing room between milestones */
   position: relative;
   z-index: 2;
   padding: 40px 0;
@@ -224,7 +230,7 @@
 /* Row (Left vs Right Alternating) */
 .lp-milestone-row {
   display: grid;
-  grid-template-columns: 1fr 60px 1fr;
+  grid-template-columns: 1fr 80px 1fr;
   align-items: center;
   position: relative;
   transition: all var(--duration-normal) var(--ease-out);
@@ -243,8 +249,8 @@
 
 .lp-row-left .lp-node-connector {
   grid-column: 1 / 3;
-  right: 30px;
-  width: 40px;
+  right: 40px;
+  width: 48px;
 }
 
 /* Right card placement */
@@ -260,15 +266,15 @@
 
 .lp-row-right .lp-node-connector {
   grid-column: 2 / 4;
-  left: 30px;
-  width: 40px;
+  left: 40px;
+  width: 48px;
 }
 
-/* Node Anchor Pin */
+/* Node Anchor Pin on Road */
 .lp-road-node-anchor {
   position: relative;
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -277,49 +283,50 @@
 
 .lp-node-pulse-ring {
   position: absolute;
-  inset: -4px;
+  inset: -6px;
   border-radius: 50%;
-  background: rgba(74, 144, 226, 0.15);
+  background: rgba(24, 24, 27, 0.15);
   transition: all var(--duration-normal) var(--ease-out);
 }
 
 .lp-node-core {
-  width: 36px;
-  height: 36px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  background: var(--card-bg);
-  border: 2px solid var(--border-secondary);
+  background: #18181b;
+  border: 3px solid #fbbf24;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: var(--text-xs);
   font-weight: 800;
-  color: var(--text-secondary);
-  box-shadow: var(--shadow-sm);
+  color: #fbbf24;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
   transition: all var(--duration-normal) var(--ease-out);
 }
 
 .lp-node-num {
   font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
 }
 
 .lp-node-check {
-  color: #38a169;
-  font-size: 14px;
+  color: #4ade80;
+  font-size: 16px;
   font-weight: 800;
 }
 
 /* Active Row State */
 .lp-row--active .lp-node-core {
-  border-color: var(--accent-primary);
-  background: var(--accent-primary);
-  color: white;
-  box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.25);
-  transform: scale(1.1);
+  border-color: #38bdf8;
+  background: #0f172a;
+  color: #38bdf8;
+  box-shadow: 0 0 0 6px rgba(56, 189, 248, 0.35);
+  transform: scale(1.15);
 }
 
 .lp-row--active .lp-node-pulse-ring {
-  background: rgba(74, 144, 226, 0.25);
+  background: rgba(56, 189, 248, 0.25);
   animation: lpNodePulse 2s infinite ease-out;
 }
 
@@ -335,120 +342,125 @@
 }
 
 .lp-row--completed .lp-node-core {
-  border-color: #38a169;
-  background: rgba(56, 161, 105, 0.12);
-  color: #2f855a;
+  border-color: #4ade80;
+  background: #064e3b;
+  color: #4ade80;
 }
 
 /* Connector Line */
 .lp-node-connector {
   position: absolute;
   top: 50%;
-  height: 2px;
-  background: var(--border-secondary);
+  height: 3px;
+  background: #18181b;
   z-index: 2;
-  transition: background var(--duration-normal) var(--ease-out);
+  transition: all var(--duration-normal) var(--ease-out);
 }
 
 .lp-row--active .lp-node-connector {
   background: var(--accent-primary);
+  box-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
 }
 
-/* ─── Compact Milestone Card ─── */
+/* ─── Spacious Milestone Card ─── */
 .lp-milestone-card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: var(--radius-xl);
-  padding: var(--space-6) var(--space-7);
-  max-width: 440px;
+  border-radius: var(--radius-2xl);
+  padding: 32px 36px; /* Generous breathing room */
+  max-width: 480px;
   width: 100%;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-4);
   transition: all var(--duration-normal) var(--ease-out);
   position: relative;
   z-index: 4;
 }
 
 .lp-row--active .lp-milestone-card {
-  border-color: var(--card-hover-border);
-  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.12), 0 0 0 1px var(--accent-subtle);
-  transform: translateY(-2px);
+  border-color: var(--accent-primary);
+  box-shadow: 0 20px 40px -15px rgba(74, 144, 226, 0.2), 0 0 0 1px var(--accent-primary);
+  transform: translateY(-3px);
 }
 
 .lp-milestone-card:hover {
   border-color: var(--card-hover-border);
   box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 /* Card Header */
 .lp-card-header {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: var(--space-3);
   flex-wrap: wrap;
+  padding-bottom: 2px;
 }
 
 .lp-step-label {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   color: var(--accent-text);
   background: var(--accent-subtle);
-  padding: 2px 8px;
+  padding: 3px 10px;
   border-radius: var(--radius-sm);
 }
 
 .lp-category-label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
   color: var(--text-tertiary);
   text-transform: uppercase;
 }
 
 .lp-completed-pill {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   color: #2f855a;
   background: rgba(56, 161, 105, 0.12);
-  padding: 2px 7px;
+  padding: 3px 10px;
   border-radius: var(--radius-full);
   margin-left: auto;
 }
 
 /* Title & Purpose */
 .lp-card-title {
-  font-size: var(--text-lg);
-  font-weight: 700;
+  font-size: clamp(1.25rem, 2vw, 1.45rem);
+  font-weight: 800;
   color: var(--text-primary);
-  line-height: 1.3;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
 }
 
 .lp-card-purpose {
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.75;
 }
 
 /* Learn Block */
 .lp-card-learn-block {
   background: var(--bg-secondary);
   border: 1px solid var(--border-secondary);
-  border-radius: var(--radius-md);
-  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .lp-learn-heading {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-muted);
   display: block;
-  margin-bottom: 4px;
 }
 
 .lp-learn-list {
@@ -457,7 +469,7 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 8px; /* Uncongested list items */
 }
 
 .lp-learn-item {
@@ -465,42 +477,46 @@
   color: var(--text-primary);
   display: flex;
   align-items: flex-start;
-  gap: 6px;
-  line-height: 1.4;
+  gap: 8px;
+  line-height: 1.55;
 }
 
 .lp-learn-bullet {
   color: var(--accent-text);
   font-weight: bold;
+  font-size: var(--text-sm);
+  line-height: 1;
+  margin-top: 1px;
 }
 
 /* Related Experiments Chips */
 .lp-card-experiments {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
+  padding-top: 4px;
 }
 
 .lp-exp-label {
   font-size: 10px;
   font-weight: 800;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   color: var(--text-muted);
 }
 
 .lp-exp-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 6px;
 }
 
 .lp-exp-chip {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   background: var(--bg-secondary);
   border: 1px solid var(--border-secondary);
-  padding: 3px 8px;
+  padding: 4px 10px;
   border-radius: var(--radius-sm);
   text-decoration: none;
   transition: all var(--duration-fast) var(--ease-out);
@@ -509,23 +525,24 @@
 .lp-exp-chip:hover {
   border-color: var(--accent-primary);
   background: var(--accent-subtle);
+  transform: translateY(-1px);
 }
 
 .lp-chip-num {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 800;
   color: var(--accent-text);
 }
 
 .lp-chip-name {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text-secondary);
 }
 
 /* Card Footer CTA */
 .lp-card-footer {
-  padding-top: var(--space-2);
+  padding-top: var(--space-3);
 }
 
 .lp-card-cta-btn {
@@ -533,13 +550,13 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 9px 16px;
-  font-size: var(--text-xs);
+  padding: 12px 20px;
+  font-size: var(--text-sm);
   font-weight: 700;
   color: var(--accent-text);
   background: var(--accent-subtle);
   border: 1px solid var(--border-secondary);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   cursor: pointer;
   transition: all var(--duration-fast) var(--ease-out);
 }
@@ -548,6 +565,7 @@
   background: var(--accent-primary);
   color: white;
   border-color: var(--accent-primary);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.25);
 }
 
 /* ─── Terminus / Finish Line ─── */
@@ -556,73 +574,77 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-top: 40px;
+  margin-top: 60px;
   position: relative;
   z-index: 3;
 }
 
 .lp-finish-node {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: #38a169;
-  box-shadow: 0 0 0 6px rgba(56, 161, 105, 0.2);
-  margin-bottom: var(--space-6);
+  box-shadow: 0 0 0 8px rgba(56, 161, 105, 0.25);
+  margin-bottom: var(--space-8);
 }
 
 .lp-finish-card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: var(--radius-2xl);
-  padding: var(--space-8) var(--space-10);
-  max-width: 580px;
+  padding: var(--space-10) var(--space-12);
+  max-width: 640px;
   width: 100%;
   box-shadow: var(--shadow-md);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-4);
 }
 
 .lp-finish-tag {
   font-size: 11px;
   font-weight: 800;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   color: #38a169;
   text-transform: uppercase;
 }
 
 .lp-finish-title {
-  font-size: var(--text-xl);
+  font-size: var(--text-2xl);
   font-weight: 800;
   color: var(--text-primary);
   line-height: 1.25;
 }
 
 .lp-finish-desc {
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 .lp-finish-actions {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-  margin-top: var(--space-2);
+  gap: var(--space-4);
+  margin-top: var(--space-3);
   flex-wrap: wrap;
   justify-content: center;
 }
 
+.lp-finish-actions .btn {
+  padding: 12px 28px;
+}
+
 /* ─── Responsive Queries ─── */
-@media (max-width: 900px) {
+@media (max-width: 960px) {
   .lp-milestones-track {
-    gap: 80px;
+    gap: 90px;
   }
 
   .lp-milestone-row {
-    grid-template-columns: 40px 1fr;
-    gap: var(--space-4);
+    grid-template-columns: 50px 1fr;
+    gap: var(--space-5);
   }
 
   .lp-row-left .lp-milestone-card,
@@ -651,31 +673,33 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 20px;
-    width: 2px;
-    background: var(--border-secondary);
+    left: 25px;
+    width: 6px;
+    background: #18181b;
+    border-radius: var(--radius-full);
     z-index: 1;
   }
 
   .lp-road-start-marker {
     align-items: flex-start;
-    padding-left: 14px;
+    padding-left: 17px;
   }
 
   .lp-road-terminus {
     align-items: flex-start;
-    padding-left: 12px;
+    padding-left: 15px;
     text-align: left;
   }
 
   .lp-finish-card {
     align-items: flex-start;
+    padding: var(--space-6);
   }
 }
 
 @media (max-width: 640px) {
   .lp-journey-page {
-    padding: calc(var(--header-height) + 20px) var(--space-4) 80px;
+    padding: calc(var(--header-height) + 24px) var(--space-4) 80px;
   }
 
   .lp-sticky-tracker {
@@ -683,7 +707,7 @@
   }
 
   .lp-milestone-card {
-    padding: var(--space-5);
+    padding: var(--space-6);
   }
 
   .lp-finish-actions {
