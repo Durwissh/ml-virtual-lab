@@ -1,13 +1,16 @@
-/* src/pages/LearningPath.css - 100% Full-Screen Edge-to-Edge RPG Forest Map */
+/* src/pages/LearningPath.css - Full-Screen Technical RPG Learning Forest */
 
 .forest-page-wrapper {
   position: relative;
   width: 100vw;
   max-width: 100%;
-  height: calc(100vh - var(--header-height));
-  max-height: calc(100vh - var(--header-height));
+  height: 100vh;
+  min-height: 100vh;
   background: #0b180f;
-  padding: 0;
+  padding-top: var(--header-height);
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
   margin: 0;
   overflow: hidden;
   box-sizing: border-box;
@@ -22,6 +25,7 @@
   padding: 0;
   overflow: hidden;
   user-select: none;
+  background: #0b180f;
 }
 
 /* ─── Floating Top Game HUD Overlay (Over Map) ─── */
@@ -318,11 +322,11 @@
   100% { transform: scale(1.5); opacity: 0; }
 }
 
-/* Tree Canopy & Botanical Growth Node */
+/* Technical Node Canopy */
 .forest-tree-canopy {
   position: relative;
-  width: 54px;
-  height: 54px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   background: rgba(15, 23, 42, 0.94);
   border: 3px solid #10b981;
@@ -333,32 +337,32 @@
   transition: all 0.3s ease;
 }
 
-.canopy-seed {
-  border-color: #d97706;
-  background: rgba(69, 26, 3, 0.94);
+.canopy-foundations {
+  border-color: #38bdf8;
+  background: rgba(8, 47, 73, 0.94);
 }
 
-.canopy-sprout {
+.canopy-preprocessing {
   border-color: #84cc16;
   background: rgba(26, 46, 15, 0.94);
 }
 
-.canopy-sapling {
+.canopy-pipeline {
   border-color: #10b981;
   background: rgba(6, 46, 26, 0.94);
 }
 
-.canopy-branching {
+.canopy-evaluation {
   border-color: #06b6d4;
   background: rgba(8, 47, 73, 0.94);
 }
 
-.canopy-mature-tree {
-  border-color: #22c55e;
-  background: rgba(5, 46, 22, 0.94);
+.canopy-benchmarking {
+  border-color: #a855f7;
+  background: rgba(46, 16, 73, 0.94);
 }
 
-.canopy-ancient-tree {
+.canopy-assessment {
   border-color: #eab308;
   background: rgba(66, 32, 6, 0.94);
   box-shadow: 0 0 20px rgba(234, 179, 8, 0.6), 0 6px 20px rgba(0, 0, 0, 0.7);
@@ -381,7 +385,7 @@
 }
 
 .forest-tree-leaves .tree-art {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   line-height: 1;
 }
 
@@ -428,11 +432,11 @@
   background: rgba(15, 23, 42, 0.94);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--radius-md);
-  padding: 2px 8px;
+  padding: 3px 8px;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(10px);
-  max-width: 135px;
+  max-width: 140px;
   pointer-events: none;
 }
 
@@ -451,27 +455,8 @@
   color: #38bdf8;
 }
 
-.forest-growth-badge {
-  font-size: 8px;
-  font-weight: 800;
-  color: #facc15;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  margin-bottom: 1px;
-}
-
-.forest-growth-badge-detail {
-  font-size: 10px;
-  font-weight: 800;
-  color: #fde047;
-  background: rgba(250, 204, 21, 0.16);
-  border: 1px solid rgba(250, 204, 21, 0.35);
-  padding: 3px 8px;
-  border-radius: var(--radius-sm);
-}
-
 .forest-current-pill {
-  font-size: 8px;
+  font-size: 7.5px;
   font-weight: 800;
   color: #38bdf8;
   background: rgba(14, 165, 233, 0.25);
@@ -480,7 +465,7 @@
 }
 
 .forest-done-pill {
-  font-size: 8px;
+  font-size: 7.5px;
   font-weight: 800;
   color: #4ade80;
   background: rgba(34, 197, 94, 0.25);
@@ -489,7 +474,7 @@
 }
 
 .forest-locked-pill {
-  font-size: 8px;
+  font-size: 7.5px;
   font-weight: 700;
   color: #64748b;
 }
@@ -500,6 +485,15 @@
   color: #f8fafc;
   white-space: nowrap;
   line-height: 1.2;
+}
+
+.forest-label-sub {
+  font-size: 8px;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 125px;
 }
 
 /* ─── Sleek Game Quest Modal Overlay ─── */
@@ -892,7 +886,7 @@
     font-size: 8.5px;
   }
 
-  .forest-growth-badge {
+  .forest-label-sub {
     display: none;
   }
 }

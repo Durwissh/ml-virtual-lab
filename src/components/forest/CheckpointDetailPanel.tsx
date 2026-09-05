@@ -36,7 +36,6 @@ export default function CheckpointDetailPanel({
       <div className="forest-detail-top">
         <div className="forest-detail-badges">
           <span className="forest-detail-num">STEP {checkpoint.number} OF 06</span>
-          <span className="forest-growth-badge-detail">🌱 {checkpoint.growthStage}</span>
           <span className="forest-detail-cat">{checkpoint.category}</span>
           {isCompleted && <span className="forest-status-badge completed">✓ Completed</span>}
           {isCurrent && <span className="forest-status-badge current">● Current Stage</span>}
@@ -57,13 +56,13 @@ export default function CheckpointDetailPanel({
         )}
       </div>
 
-      {/* Main Header with Tree/Location Icon & Title */}
+      {/* Main Header with Technical Icon & Title */}
       <div className="forest-detail-header">
         <div className="forest-detail-icon-circle">
           <span className="forest-detail-emoji">{checkpoint.icon}</span>
         </div>
         <div className="forest-detail-title-wrap">
-          <div className="forest-detail-location-tag">📍 {checkpoint.locationName} · {checkpoint.stageName}</div>
+          <div className="forest-detail-location-tag">📍 {checkpoint.locationName}</div>
           <h2 className="forest-detail-title">{checkpoint.name}</h2>
           <p className="forest-detail-subtitle">{checkpoint.subtitle}</p>
         </div>
@@ -76,7 +75,7 @@ export default function CheckpointDetailPanel({
       <div className="forest-detail-objectives">
         <div className="forest-objectives-header">
           <span className="forest-objectives-icon">🎯</span>
-          <span className="forest-objectives-title">Learning Objectives & Knowledge Milestones</span>
+          <span className="forest-objectives-title">Core Learning Objectives & Technical Milestones</span>
         </div>
         <ul className="forest-objectives-list">
           {checkpoint.learnObjectives.map((obj, i) => (
