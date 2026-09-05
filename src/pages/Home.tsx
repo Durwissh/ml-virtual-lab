@@ -242,16 +242,14 @@ export default function Home() {
 
           <div className="home-pillars">
             {pillars.map((p, i) => (
-              <React.Fragment key={p.title}>
-                <div className="home-pillar">
+              <div key={p.title} className="home-pillar-card">
+                <div className="home-pillar-header">
                   <div className="home-pillar-icon">{p.icon}</div>
-                  <h3 className="home-pillar-title">{p.title}</h3>
-                  <p className="home-pillar-desc">{p.desc}</p>
+                  <span className="home-pillar-step-badge">STEP 0{i + 1}</span>
                 </div>
-                {i < pillars.length - 1 && (
-                  <div className="home-pillar-arrow">→</div>
-                )}
-              </React.Fragment>
+                <h3 className="home-pillar-title">{p.title}</h3>
+                <p className="home-pillar-desc">{p.desc}</p>
+              </div>
             ))}
           </div>
         </div>
