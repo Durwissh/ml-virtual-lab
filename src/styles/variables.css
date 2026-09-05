@@ -1,0 +1,232 @@
+/* ═══════════════════════════════════════════════
+   Design Tokens – ML Virtual Lab
+   ═══════════════════════════════════════════════ */
+
+:root {
+  /* ─── Core Palette ─── */
+  --navy-900: #0d1f33;
+  --navy-800: #132d49;
+  --navy-700: #1a3b5d;
+  --navy-600: #244e78;
+  --navy-500: #2e6193;
+  --navy-400: #4a7fb5;
+  --navy-300: #7ba3cc;
+  --navy-200: #afc8e3;
+  --navy-100: #dae6f2;
+  --navy-50:  #eef3f9;
+
+  --neutral-950: #0a0a0b;
+  --neutral-900: #131416;
+  --neutral-800: #1e2023;
+  --neutral-700: #2d3036;
+  --neutral-600: #44484f;
+  --neutral-500: #6b707a;
+  --neutral-400: #9499a4;
+  --neutral-300: #b8bcc5;
+  --neutral-200: #d5d8de;
+  --neutral-100: #eceef1;
+  --neutral-50:  #f6f7f8;
+
+  --accent-blue: #4a90e2;
+  --accent-blue-light: #6fa8eb;
+  --accent-blue-dark: #3178d0;
+
+  --gold-500: #d4af37;
+  --gold-400: #e0c35e;
+  --gold-300: #ebda94;
+
+  --success: #2d8a56;
+  --success-light: #e8f5ed;
+  --warning: #c47f17;
+  --warning-light: #fdf3d7;
+  --error: #c53030;
+  --error-light: #fee2e2;
+  --info: #2b6cb0;
+  --info-light: #e3effc;
+
+  /* ─── Typography ─── */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+  --text-xs:   0.75rem;   /* 12px */
+  --text-sm:   0.8125rem; /* 13px */
+  --text-base: 0.9375rem; /* 15px */
+  --text-md:   1rem;      /* 16px */
+  --text-lg:   1.125rem;  /* 18px */
+  --text-xl:   1.25rem;   /* 20px */
+  --text-2xl:  1.5rem;    /* 24px */
+  --text-3xl:  1.875rem;  /* 30px */
+  --text-4xl:  2.25rem;   /* 36px */
+  --text-5xl:  3rem;      /* 48px */
+
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  --leading-tight: 1.25;
+  --leading-snug:  1.375;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.75;
+
+  --tracking-tight: -0.015em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.025em;
+
+  /* ─── Spacing ─── */
+  --space-1:  0.25rem;  /* 4px */
+  --space-2:  0.5rem;   /* 8px */
+  --space-3:  0.75rem;  /* 12px */
+  --space-4:  1rem;     /* 16px */
+  --space-5:  1.25rem;  /* 20px */
+  --space-6:  1.5rem;   /* 24px */
+  --space-8:  2rem;     /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+
+  /* ─── Radius ─── */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-full: 9999px;
+
+  /* ─── Shadows ─── */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.06), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+
+  /* ─── Transitions ─── */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+
+  /* ─── Z-index ─── */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+
+  /* ─── Layout ─── */
+  --header-height: 60px;
+  --sidebar-width: 260px;
+  --content-max-width: 880px;
+  --page-max-width: 1280px;
+}
+
+/* ═══════════════════════════════════════════════
+   Light Theme (default)
+   ═══════════════════════════════════════════════ */
+[data-theme="light"], :root {
+  --bg-primary: #f9fafb;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f1f3f5;
+  --bg-elevated: #ffffff;
+  --bg-inset: #eef0f3;
+  --bg-overlay: rgba(0, 0, 0, 0.4);
+
+  --text-primary: #1a1d21;
+  --text-secondary: #4a5060;
+  --text-tertiary: #6b707a;
+  --text-muted: #9499a4;
+  --text-inverse: #ffffff;
+
+  --border-primary: #d5d8de;
+  --border-secondary: #e8eaed;
+  --border-focus: var(--accent-blue);
+
+  --accent: var(--navy-700);
+  --accent-hover: var(--navy-600);
+  --accent-subtle: var(--navy-50);
+  --accent-text: var(--navy-700);
+
+  --code-bg: #f5f6f8;
+  --code-border: #e2e5ea;
+  --code-text: #1a1d21;
+
+  --card-bg: #ffffff;
+  --card-border: #e8eaed;
+  --card-hover-border: #d0d4da;
+
+  --sidebar-bg: #ffffff;
+  --sidebar-border: #e8eaed;
+
+  --header-bg: rgba(255, 255, 255, 0.92);
+  --header-border: #e8eaed;
+
+  --quiz-correct: #e8f5ed;
+  --quiz-incorrect: #fee2e2;
+  --quiz-correct-border: #2d8a56;
+  --quiz-incorrect-border: #c53030;
+
+  --viz-grid: #e8eaed;
+  --viz-axis: #6b707a;
+  --viz-point: var(--accent-blue);
+  --viz-line: var(--navy-700);
+}
+
+/* ═══════════════════════════════════════════════
+   Dark Theme
+   ═══════════════════════════════════════════════ */
+[data-theme="dark"] {
+  --bg-primary: #0f1117;
+  --bg-secondary: #181b22;
+  --bg-tertiary: #1e222b;
+  --bg-elevated: #1e222b;
+  --bg-inset: #141720;
+  --bg-overlay: rgba(0, 0, 0, 0.6);
+
+  --text-primary: #e4e6eb;
+  --text-secondary: #a8adb7;
+  --text-tertiary: #7d8290;
+  --text-muted: #5a5f6b;
+  --text-inverse: #0f1117;
+
+  --border-primary: #2d3240;
+  --border-secondary: #242837;
+  --border-focus: var(--accent-blue);
+
+  --accent: #6fa8eb;
+  --accent-hover: #8dbaf0;
+  --accent-subtle: rgba(74, 144, 226, 0.1);
+  --accent-text: #6fa8eb;
+
+  --code-bg: #141720;
+  --code-border: #2d3240;
+  --code-text: #d4d8e0;
+
+  --card-bg: #181b22;
+  --card-border: #242837;
+  --card-hover-border: #3a3f50;
+
+  --sidebar-bg: #141720;
+  --sidebar-border: #242837;
+
+  --header-bg: rgba(15, 17, 23, 0.92);
+  --header-border: #242837;
+
+  --quiz-correct: rgba(45, 138, 86, 0.15);
+  --quiz-incorrect: rgba(197, 48, 48, 0.15);
+  --quiz-correct-border: #3da66a;
+  --quiz-incorrect-border: #e05353;
+
+  --viz-grid: #2d3240;
+  --viz-axis: #5a5f6b;
+  --viz-point: #6fa8eb;
+  --viz-line: #8dbaf0;
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.35), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+}

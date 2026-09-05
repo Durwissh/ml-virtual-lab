@@ -1,0 +1,39 @@
+/* src/components/FormulaCard.css */
+
+.formula-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-secondary);
+  border-left: 3px solid var(--accent-text);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  margin: var(--space-5) 0;
+}
+
+.formula-card-label {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--accent-text);
+  margin-bottom: var(--space-3);
+}
+
+.formula-card-math {
+  padding: var(--space-3) 0;
+  text-align: center;
+  overflow-x: auto;
+}
+
+.formula-card-desc {
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+  line-height: var(--leading-relaxed);
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-secondary);
+  margin-bottom: 0;
+}
+
+.inline-math {
+  vertical-align: baseline;
+}

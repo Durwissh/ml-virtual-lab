@@ -1,0 +1,4682 @@
+﻿<USER_REQUEST>
+
+
+
+
+
+
+
+
+Machine Learning
+Virtual Laboratory Manual
+
+____________________________________________________________
+
+A Comprehensive Laboratory Manual
+for 10 Experiments
+
+Table of Contents
+
+Experiment 1: Data Pre-processing for Machine Learning	10
+1. AIM	10
+2. THEORY	10
+2.1 Introduction to Data Pre-processing	10
+2.2 Data Quality and Common Issues	10
+2.3 Handling Missing Values	10
+2.4 Numerical and Categorical Variables	11
+2.5 Feature Scaling	12
+2.6 Outliers	13
+2.7 Train-Test Splitting	13
+2.8 Data Leakage	13
+2.9 Advantages of Proper Pre-processing	14
+2.10 Limitations and Considerations	14
+2.11 Applications	15
+3. PRETEST	15
+4. PROCEDURE	18
+4.1 V-Lab Workflow	18
+4.2 Input ? Process ? Output	18
+5. RESULTS AND ANALYSIS	18
+6. POSTTEST	19
+Experiment 2: Linear Regression	23
+1. AIM	23
+2. THEORY	23
+2.1 What Is Regression?	23
+2.2 Linear Relationship	23
+2.3 Simple Linear Regression	23
+2.4 Multiple Linear Regression	23
+2.5 Residuals and the Least-Squares Method	23
+2.6 Model Evaluation Metrics	24
+2.7 Illustrative Python Example	24
+2.8 Advantages	25
+2.9 Limitations	26
+2.10 Applications	26
+3. PRETEST	26
+4. PROCEDURE	29
+4.1 V-Lab Workflow	29
+4.2 Input ? Process ? Output	29
+5. RESULTS AND ANALYSIS	30
+6. POSTTEST	30
+Experiment 3: Cross-Validation for Model Evaluation	34
+1. AIM	34
+2. THEORY	34
+2.1 Need for Model Evaluation	34
+2.2 Train / Validation / Test Concepts	34
+2.3 Cross-Validation	34
+2.4 K-Fold Cross-Validation	34
+2.5 Interpreting Cross-Validation Results	35
+2.6 Stratified K-Fold	35
+2.7 Data Leakage During Cross-Validation	35
+2.8 Cross-Validation and Hyperparameter Tuning	35
+2.9 Illustrative Python Example	35
+2.10 Advantages	36
+2.11 Limitations	37
+3. PRETEST	37
+4. PROCEDURE	40
+4.1 V-Lab Workflow	40
+4.2 Input ? Process ? Output	40
+5. RESULTS AND ANALYSIS	40
+6. POSTTEST	41
+Experiment 4: Logistic Regression for Binary Classification	45
+1. AIM	45
+2. THEORY	45
+2.1 Classification vs. Regression	45
+2.2 Why 'Logistic Regression' for Classification?	45
+2.3 The Logistic (Sigmoid) Function	45
+2.4 Decision Threshold and Class Prediction	45
+2.5 Confusion Matrix	46
+2.6 Classification Metrics	46
+2.7 Illustrative Python Example	47
+2.8 Coefficients in Logistic Regression	48
+2.9 Advantages	48
+2.10 Limitations	48
+2.11 Applications	48
+3. PRETEST	48
+4. PROCEDURE	51
+4.1 V-Lab Workflow	51
+4.2 Input ? Process ? Output	52
+5. RESULTS AND ANALYSIS	52
+6. POSTTEST	52
+Experiment 5: Principal Component Analysis (PCA)	56
+1. AIM	56
+2. THEORY	56
+2.1 The Problem of High-Dimensional Data	56
+2.2 What Is Dimensionality Reduction?	56
+2.3 Principal Component Analysis	56
+2.4 Key Concepts	56
+2.5 How PCA Works	57
+2.6 Explained Variance	57
+2.7 Importance of Scaling Before PCA	57
+2.8 Illustrative Python Example	57
+2.9 Reconstruction Concept	58
+2.10 Advantages	58
+2.11 Limitations	59
+2.12 Applications	59
+3. PRETEST	59
+4. PROCEDURE	62
+4.1 V-Lab Workflow	62
+4.2 Input ? Process ? Output	62
+5. RESULTS AND ANALYSIS	63
+6. POSTTEST	63
+Experiment 6: Support Vector Machine Classification	67
+1. AIM	67
+2. THEORY	67
+2.1 Classification and Decision Boundaries	67
+2.2 Hyperplane	67
+2.3 Margin and Maximum-Margin Principle	67
+2.4 Support Vectors	67
+2.5 The Decision Function	67
+2.6 Linear SVM	67
+2.7 The Kernel Trick	68
+2.8 Important Parameters	68
+2.9 Illustrative Python Example	68
+2.10 Advantages	70
+2.11 Limitations	70
+2.12 Applications	70
+3. PRETEST	70
+4. PROCEDURE	73
+4.1 V-Lab Workflow	73
+4.2 Input ? Process ? Output	74
+5. RESULTS AND ANALYSIS	74
+6. POSTTEST	74
+Experiment 7: K-Means Clustering	78
+1. AIM	78
+2. THEORY	78
+2.1 Unsupervised Learning	78
+2.2 What Is Clustering?	78
+2.3 K-Means Algorithm	78
+2.4 The K-Means Process	78
+2.5 Inertia (Within-Cluster Sum of Squares)	79
+2.6 The Elbow Method	79
+2.7 Illustrative Python Example	79
+2.8 Sensitivity to Initialisation and Outliers	80
+2.9 Advantages	80
+2.10 Limitations	80
+2.11 Applications	81
+3. PRETEST	81
+4. PROCEDURE	84
+4.1 V-Lab Workflow	84
+4.2 Input ? Process ? Output	84
+5. RESULTS AND ANALYSIS	84
+6. POSTTEST	85
+Experiment 8: Decision Tree Classification	89
+1. AIM	89
+2. THEORY	89
+2.1 What Is a Decision Tree?	89
+2.2 Tree Structure	89
+2.3 How Predictions Are Made	89
+2.4 Splitting Criteria	89
+2.5 Tree Depth and Overfitting	90
+2.6 Pruning	90
+2.7 Important Parameters	90
+2.8 Illustrative Python Example	90
+2.9 Advantages	91
+2.10 Limitations	92
+2.11 Applications	92
+3. PRETEST	92
+4. PROCEDURE	95
+4.1 V-Lab Workflow	95
+4.2 Input ? Process ? Output	95
+5. RESULTS AND ANALYSIS	96
+6. POSTTEST	96
+Experiment 9: Random Forest Classification	100
+1. AIM	100
+2. THEORY	100
+2.1 Ensemble Learning	100
+2.2 From Decision Tree to Random Forest	100
+2.3 How Random Forest Works	100
+2.4 Key Parameter: n_estimators	101
+2.5 Feature Importance	101
+2.6 Overfitting and Generalisation	101
+2.7 Illustrative Python Example	101
+2.8 Advantages	103
+2.9 Limitations	103
+2.10 Applications	103
+3. PRETEST	103
+4. PROCEDURE	106
+4.1 V-Lab Workflow	106
+4.2 Input ? Process ? Output	106
+5. RESULTS AND ANALYSIS	107
+6. POSTTEST	107
+Experiment 10: Artificial Neural Network using Perceptron Learning	111
+1. AIM	111
+2. THEORY	111
+2.1 Biological Inspiration	111
+2.2 The Artificial Neuron	111
+2.3 Weighted Sum	111
+2.4 Activation Function	111
+2.5 The Perceptron Learning Algorithm	112
+2.6 Learning Rate	112
+2.7 Epoch	112
+2.8 Linear Separability	112
+2.9 Limitations of a Single Perceptron	112
+2.10 Illustrative Python Example	113
+2.11 Advantages	114
+2.12 Limitations	114
+2.13 From Perceptron to Multi-Layer Networks	114
+2.14 Applications of Perceptron Learning	114
+3. PRETEST	115
+4. PROCEDURE	118
+4.1 V-Lab Workflow	118
+4.2 Input ? Process ? Output	118
+5. RESULTS AND ANALYSIS	118
+6. POSTTEST	119
+
+
+
+
+Experiment 1: Data Pre-processing for Machine Learning
+1. AIM
+To understand and implement essential data pre-processing techniques-handling missing values, encoding categorical variables, feature scaling, and train-test splitting-that prepare raw data for subsequent machine learning models.
+2. THEORY
+2.1 Introduction to Data Pre-processing
+Machine learning algorithms learn patterns from data. However, real-world data is rarely clean or ready for direct use. It may contain missing entries, inconsistent formats, categorical text, or features measured on vastly different scales. Data pre-processing is the collection of techniques used to transform raw data into a suitable format for machine learning algorithms.
+Pre-processing is not itself a predictive machine learning algorithm. It does not generate predictions or classifications. Instead, it prepares the input data so that the models trained on it can perform effectively.
+2.2 Data Quality and Common Issues
+Real-world datasets commonly suffer from the following issues:
+* Missing values - entries that are absent due to collection errors, sensor failures, or incomplete surveys.
+* Inconsistent data types - numerical features stored as text, or dates in different formats.
+* Categorical variables - text labels (e.g., 'Red', 'Green') that algorithms cannot process directly.
+* Differing feature scales - one feature ranges from 0 to 1 while another ranges from 0 to 100,000.
+* Outliers - extreme values that may distort model training.
+2.3 Handling Missing Values
+Common strategies for dealing with missing values include:
+* Removal - dropping rows or columns with missing values. Simple but can cause significant data loss.
+* Imputation - replacing missing values with a computed substitute such as the column mean, median, or mode.
+* Advanced imputation - using models (e.g., k-nearest neighbours) to predict missing values from other features.
+Python Example - Handling Missing Values
+import pandas as pd
+from sklearn.impute import SimpleImputer
+
+# Sample data with missing values
+data = {'Age': [25, 30, None, 22, 28],
+        'Salary': [50000, None, 70000, 45000, 60000]}
+df = pd.DataFrame(data)
+
+# Impute missing values with the column mean
+imputer = SimpleImputer(strategy='mean')
+df_imputed = pd.DataFrame(imputer.fit_transform(df), columns=df.columns)
+print(df_imputed)
+  SimpleImputer replaces each missing value with the mean of that column.
+  Other strategies include 'median', 'most_frequent', and 'constant'.
+  The imputer is first fitted (it learns the means) and then transforms the data.
+2.4 Numerical and Categorical Variables
+Machine learning algorithms generally require numerical input. Categorical variables-features that take discrete text labels-must be converted into numbers.
+Two widely used encoding methods are:
+Method
+Description
+Example
+Label Encoding
+Assigns a unique integer to each category.
+Red?0, Green?1, Blue?2
+One-Hot Encoding
+Creates a binary column for each category.
+Red?[1,0,0], Green?[0,1,0]
+Label encoding introduces an implicit ordinal relationship (0 < 1 < 2), which may mislead algorithms. One-hot encoding avoids this but increases the number of features.
+
+
+Python Example - Encoding Categorical Variables
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+
+# Label Encoding
+le = LabelEncoder()
+colours = ['Red', 'Green', 'Blue', 'Green', 'Red']
+encoded = le.fit_transform(colours)
+print("Label Encoded:", encoded)
+
+# One-Hot Encoding using pandas
+df = pd.DataFrame({'Colour': colours})
+df_onehot = pd.get_dummies(df, columns=['Colour'], dtype=int)
+print(df_onehot)
+  LabelEncoder converts each unique string to an integer.
+  pd.get_dummies creates separate binary columns for each category.
+  One-hot encoding is generally preferred for nominal (unordered) categories.
+2.5 Feature Scaling
+When features are measured on different scales, algorithms that rely on distance calculations (e.g., k-nearest neighbours, support vector machines, neural networks) or gradient-based optimisation can be negatively affected. Feature scaling brings all numerical features to a comparable range.
+Min-Max Normalisation
+Rescales each feature to a fixed range, typically [0, 1]:
+X' = (X - X_min) / (X_max - X_min)
+where X is the original value, X_min and X_max are the minimum and maximum values of that feature.
+Standardisation (Z-score Normalisation)
+Centres each feature around zero with unit standard deviation:
+Z = (X -  ) / s
+where   is the feature mean and s is the feature standard deviation. After standardisation, the transformed feature has a mean of approximately 0 and a standard deviation of approximately 1.
+Normalisation and standardisation are different transformations. Normalisation rescales values to a bounded range; standardisation centres and scales by variance.
+
+
+Python Example - Feature Scaling
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
+import numpy as np
+
+X = np.array([[100, 0.5], [200, 1.5], [300, 2.5], [400, 3.5]])
+
+# Min-Max Normalisation
+mm_scaler = MinMaxScaler()
+X_minmax = mm_scaler.fit_transform(X)
+print("Min-Max Scaled:\n", X_minmax)
+
+# Standardisation
+std_scaler = StandardScaler()
+X_standard = std_scaler.fit_transform(X)
+print("Standardised:\n", X_standard)
+  MinMaxScaler maps each feature to the [0, 1] range.
+  StandardScaler transforms features to have zero mean and unit variance.
+  Both scalers first fit (learn parameters) then transform the data.
+2.6 Outliers
+Outliers are data points that differ significantly from the majority. They can arise from measurement errors, data entry mistakes, or genuinely rare events. Outliers may skew model training, particularly for algorithms sensitive to variance. Common detection methods include z-score analysis and the interquartile range (IQR) method.
+2.7 Train-Test Splitting
+To evaluate how well a model generalises to unseen data, the dataset is divided into a training set (used to fit the model) and a test set (used to evaluate performance). A common split ratio is 80:20 or 70:30.
+Python Example - Train-Test Split
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import load_iris
+
+X, y = load_iris(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+print(f"Training samples: {X_train.shape[0]}")
+print(f"Test samples:     {X_test.shape[0]}")
+  test_size=0.2 reserves 20% of the data for testing.
+  random_state ensures reproducibility across runs.
+  The split must happen before any preprocessing that learns from data.
+2.8 Data Leakage
+Data leakage occurs when information from the test set inadvertently influences the training process. A common mistake is fitting a scaler or imputer on the entire dataset before splitting. This allows test-set statistics (mean, standard deviation, min, max) to influence the transformation applied to training data.
+The correct workflow is:
+* Step 1: Split the data into training and test sets.
+* Step 2: Fit preprocessing transformations on the training data only.
+* Step 3: Transform the training data using the fitted transformer.
+* Step 4: Transform the test data using the same fitted transformer (without re-fitting).
+Python Example - Leakage-Safe Preprocessing with Pipeline
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import load_iris
+
+X, y = load_iris(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# Pipeline ensures scaler is fit only on training data
+pipe = Pipeline([
+    ('scaler', StandardScaler()),
+    ('model', LogisticRegression(max_iter=200))
+])
+
+pipe.fit(X_train, y_train)
+score = pipe.score(X_test, y_test)
+print(f"Test accuracy: {score:.4f}")
+  Pipeline chains preprocessing and modelling into a single object.
+  When pipe.fit() is called, the scaler is fitted only on X_train.
+  When pipe.score() is called on X_test, the scaler transforms X_test using training statistics.
+  This prevents data leakage automatically.
+2.9 Advantages of Proper Pre-processing
+* Improves model accuracy and convergence speed.
+* Prevents biased learning from features on larger scales.
+* Handles missing data gracefully instead of crashing the training process.
+* Makes the dataset compatible with a wide range of algorithms.
+2.10 Limitations and Considerations
+* Imputation introduces synthetic values; it does not recover true data.
+* Encoding choices can introduce unintended ordinal relationships.
+* Scaling does not fix fundamentally flawed or irrelevant features.
+* Over-aggressive outlier removal may discard genuine data points.
+2.11 Applications
+* Every supervised and unsupervised learning workflow requires some form of preprocessing.
+* Medical datasets with missing patient records.
+* Financial data with mixed numerical and categorical attributes.
+* Natural language processing pipelines where text must be encoded numerically.
+3. PRETEST
+Answer all 20 questions. Each question has exactly one correct answer.
+1. What is the primary purpose of data pre-processing in machine learning?
+A) To generate predictions from raw data
+B) To transform raw data into a suitable format for ML algorithms
+C) To select the best ML algorithm automatically
+D) To visualise data distributions
+2. Which of the following is NOT a common data quality issue?
+A) Missing values
+B) Categorical variables
+C) Properly normalised features
+D) Outliers
+3. What does imputation mean in the context of missing data?
+A) Deleting rows with missing values
+B) Replacing missing values with computed substitutes
+C) Converting missing values to zero
+D) Ignoring missing values during training
+4. Which imputation strategy replaces missing values with the most frequently occurring value?
+A) mean
+B) median
+C) most_frequent
+D) constant
+5. Label encoding assigns each category a unique ___.
+A) binary vector
+B) float value
+C) integer
+D) random string
+6. Why might label encoding be problematic for nominal categories?
+A) It creates too many columns
+B) It introduces an artificial ordinal relationship
+C) It cannot handle more than two categories
+D) It requires normalisation afterward
+7. One-hot encoding converts a categorical column with k categories into ___.
+A) 1 column
+B) k columns
+C) k-1 columns (always)
+D) 2 columns
+8. What range does Min-Max normalisation typically scale features to?
+A) -1 to 1
+B) 0 to 1
+C) 0 to 100
+D) -8 to +8
+9. In the standardisation formula Z = (X -  ) / s, what does s represent?
+A) Feature mean
+B) Feature standard deviation
+C) Feature variance
+D) Feature range
+10. After standardisation, the transformed feature has approximately which mean and standard deviation?
+A) Mean = 0, SD = 0
+B) Mean = 1, SD = 0
+C) Mean = 0, SD = 1
+D) Mean = 0.5, SD = 0.5
+11. Which statement about normalisation and standardisation is correct?
+A) They are the same transformation
+B) Normalisation rescales to a bounded range; standardisation centres by mean and scales by variance
+C) Standardisation always maps values to [0, 1]
+D) Normalisation requires computing the mean
+12. What is a common train-test split ratio?
+A) 50:50
+B) 80:20
+C) 99:1
+D) 60:40:20
+13. Why is the data split into training and test sets?
+A) To make training faster
+B) To evaluate how well the model generalises to unseen data
+C) To remove outliers
+D) To perform feature encoding
+14. What is data leakage?
+A) Losing data due to hardware failure
+B) Test-set information improperly influencing the training process
+C) A data compression technique
+D) The process of splitting data into folds
+15. In a leakage-safe workflow, when should a scaler be fitted?
+A) On the entire dataset before splitting
+B) On the test set only
+C) On the training set only, after splitting
+D) On neither set
+16. Which Python class chains preprocessing and modelling to prevent leakage?
+A) SimpleImputer
+B) Pipeline
+C) ColumnTransformer
+D) GridSearchCV
+17. Which of the following is an outlier detection method?
+A) One-hot encoding
+B) Label encoding
+C) IQR method
+D) Train-test split
+18. Is data pre-processing itself a predictive machine learning algorithm?
+A) Yes, it predicts target values
+B) Yes, it classifies data points
+C) No, it prepares data for subsequent models
+D) No, but it computes accuracy scores
+19. What does the parameter random_state do in train_test_split?
+A) Sets the test set size
+B) Ensures reproducibility of the split
+C) Removes random noise from data
+D) Selects features randomly
+20. Which scaler would you use if you want features centred around zero with unit variance?
+A) MinMaxScaler
+B) StandardScaler
+C) MaxAbsScaler
+D) RobustScaler
+
+Pretest - Answer Key
+Q
+Ans
+Q
+Ans
+Q
+Ans
+Q
+Ans
+1
+B
+6
+B
+11
+B
+16
+B
+2
+C
+7
+B
+12
+B
+17
+C
+3
+B
+8
+B
+13
+B
+18
+C
+4
+C
+9
+B
+14
+B
+19
+B
+5
+C
+10
+C
+15
+C
+20
+B
+4. PROCEDURE
+4.1 V-Lab Workflow
+Follow these steps to perform the data pre-processing experiment in the virtual laboratory:
+* Step 1: Load the provided dataset and inspect its structure (number of rows, columns, data types).
+* Step 2: Identify columns with missing values and apply an appropriate imputation strategy (mean, median, or mode).
+* Step 3: Identify categorical columns and apply label encoding or one-hot encoding as appropriate.
+* Step 4: Apply feature scaling (Min-Max normalisation or standardisation) to numerical columns.
+* Step 5: Split the processed data into training and test sets using an 80:20 ratio.
+* Step 6: Verify the shapes of the resulting training and test arrays.
+* Step 7: Optionally, construct a Pipeline to chain the preprocessing and a simple model, ensuring no data leakage.
+4.2 Input ? Process ? Output
+Stage
+Details
+Input
+Raw dataset (CSV or built-in) with missing values, categorical features, and varying scales.
+Process
+Imputation ? Encoding ? Scaling ? Train-Test Split.
+Output
+Clean, numerically encoded, scaled training and test sets ready for model training.
+5. RESULTS AND ANALYSIS
+After completing the experiment, students should observe the following:
+* Missing values are replaced with imputed values; no NaN entries remain in the processed data.
+* Categorical columns are replaced by integer codes (label encoding) or binary indicator columns (one-hot encoding).
+* Scaled features fall within [0, 1] for Min-Max or have approximately zero mean and unit variance for standardisation.
+* Training and test sets have the expected number of samples based on the chosen split ratio.
+* When a Pipeline is used, the scaler statistics are derived only from the training set.
+Students should understand that pre-processing does not produce prediction accuracy or classification metrics. Accuracy, precision, recall, R , etc., are computed after a model is trained on the preprocessed data. The success of preprocessing is measured by the cleanliness, consistency, and leakage-free preparation of the dataset.
+6. POSTTEST
+Answer all 20 questions. Each question has exactly one correct answer.
+1. A dataset has 1000 rows and a column 'Income' with 50 missing values. After applying SimpleImputer(strategy='mean'), how many rows remain?
+A) 950
+B) 1000
+C) 1050
+D) Depends on the mean value
+2. You encode the column ['Small', 'Medium', 'Large'] using LabelEncoder. The algorithm may incorrectly assume that:
+A) All categories have equal frequency
+B) Large > Medium > Small numerically, implying an ordinal relationship
+C) The feature is continuous
+D) Missing values exist
+3. After applying MinMaxScaler, feature values range from 0.0 to 1.0. A new test sample has a feature value larger than any in the training set. Its scaled value will be:
+A) Exactly 1.0
+B) Greater than 1.0
+C) Exactly 0.0
+D) Negative
+4. A colleague fits StandardScaler on the full dataset before splitting. What risk does this introduce?
+A) The model will run slower
+B) Data leakage - test statistics influence the training transformation
+C) The features will be unnormalised
+D) The scaler will raise an error
+5. In sklearn, which method learns the scaling parameters without transforming the data?
+A) transform()
+B) fit()
+C) fit_transform()
+D) predict()
+6. Given the code: pipe = Pipeline([('scaler', StandardScaler()), ('clf', LogisticRegression())]), what happens when pipe.fit(X_train, y_train) is called?
+A) Only the scaler is fitted
+B) Only the classifier is fitted
+C) The scaler is fitted on X_train, then the classifier is fitted on scaled X_train
+D) The scaler and classifier are fitted on X_test
+7. You apply one-hot encoding to a column with 5 unique categories. How many new binary columns are created?
+A) 1
+B) 4
+C) 5
+D) 10
+8. Which preprocessing step is most important before applying k-nearest neighbours?
+A) One-hot encoding only
+B) Feature scaling
+C) Removing the target column
+D) Sorting the data
+9. What is the standardised value of X = 50 when   = 50 and s = 10?
+A) -1.0
+B) 0.0
+C) 1.0
+D) 5.0
+10. If X_min = 10 and X_max = 60, what is the Min-Max normalised value of X = 35?
+A) 0.25
+B) 0.50
+C) 0.75
+D) 0.35
+11. Why should you NOT evaluate preprocessing quality using prediction accuracy?
+A) Because preprocessing has no hyper-parameters
+B) Because preprocessing is not a predictive algorithm; accuracy belongs to the model
+C) Because accuracy can only be used for classification
+D) Because preprocessing always achieves 100% accuracy
+12. Which imputation strategy is most suitable for a skewed numerical feature?
+A) Mean
+B) Median
+C) Mode
+D) Constant (0)
+13. After train_test_split with test_size=0.3, what fraction of the data is in the training set?
+A) 0.3
+B) 0.5
+C) 0.7
+D) 1.0
+14. You notice that after encoding, a feature has values {0, 1, 2}. Which encoding was most likely applied?
+A) One-hot encoding
+B) Label encoding
+C) Standardisation
+D) Min-Max normalisation
+15. A Pipeline with StandardScaler and SVC is used with cross_val_score. Is the scaler re-fitted for each fold?
+A) No, it is fitted once on all data
+B) Yes, the pipeline ensures the scaler is fitted only on the training fold each time
+C) No, the scaler is never fitted during cross-validation
+D) Yes, but only on the test fold
+16. What does df.isnull().sum() return for a pandas DataFrame?
+A) Total number of rows
+B) Count of missing values per column
+C) Boolean mask of the DataFrame
+D) List of column names
+17. Which is the correct order for a leakage-free workflow?
+A) Scale ? Split ? Train
+B) Split ? Fit scaler on train ? Transform train and test ? Train model
+C) Train model ? Split ? Scale
+D) Scale ? Train ? Split ? Test
+18. RobustScaler uses which statistics to scale features?
+A) Mean and standard deviation
+B) Minimum and maximum
+C) Median and interquartile range
+D) Mode and range
+19. You have a binary categorical column ('Yes'/'No'). Which encoding is simplest and appropriate?
+A) One-hot encoding into 2 columns
+B) Label encoding (Yes?1, No?0)
+C) Ordinal encoding with 10 bins
+D) Target encoding
+20. After pre-processing, you observe that all features have mean   0 and std   1. Which transformation was applied?
+A) Min-Max normalisation
+B) Standardisation
+C) Log transformation
+D) One-hot encoding
+
+Posttest - Answer Key
+Q
+Ans
+Q
+Ans
+Q
+Ans
+Q
+Ans
+1
+B
+6
+C
+11
+B
+16
+B
+2
+B
+7
+C
+12
+B
+17
+B
+3
+B
+8
+B
+13
+C
+18
+C
+4
+B
+9
+B
+14
+B
+19
+B
+5
+B
+10
+B
+15
+B
+20
+B
+
+
+Experiment 2: Linear Regression
+1. AIM
+To understand the concept of linear regression, implement a simple linear regression model using Python, and evaluate model performance using standard regression metrics (MAE, MSE, RMSE, R ).
+2. THEORY
+2.1 What Is Regression?
+Regression is a supervised learning task where the model learns a mapping from input features to a continuous numerical output (the target variable). Unlike classification, which predicts discrete categories, regression predicts a quantity-for example, predicting house prices, temperatures, or sales revenue.
+2.2 Linear Relationship
+Linear regression assumes a linear relationship between the input features and the target variable. The model fits a straight line (in simple regression) or a hyperplane (in multiple regression) that best describes the data.
+2.3 Simple Linear Regression
+When there is a single input feature x, the model equation is:
+y = b0 + b1   x
+where:
+* y is the predicted target value.
+* b0 (intercept) is the value of y when x = 0.
+* b1 (coefficient/slope) is the change in y for a one-unit increase in x.
+* x is the input feature.
+2.4 Multiple Linear Regression
+When there are n input features, the model generalises to:
+y = b0 + b1x1 + b2x2 + ... + b?x?
+Each coefficient b? represents the contribution of feature x? to the prediction, holding all other features constant.
+2.5 Residuals and the Least-Squares Method
+A residual is the difference between the actual value and the predicted value for a data point:
+Residual = y_actual - y_predicted
+The ordinary least-squares (OLS) method finds the coefficients that minimise the sum of squared residuals. This ensures the fitted line is as close as possible to the observed data points.
+2.6 Model Evaluation Metrics
+The quality of a regression model is assessed using several metrics:
+Mean Absolute Error (MAE)
+MAE = (1/n) ?|y? - y?|
+Average of the absolute differences between actual and predicted values. Easy to interpret; measured in the same units as the target.
+Mean Squared Error (MSE)
+MSE = (1/n) ?(y? - y?) 
+Average of the squared differences. Penalises larger errors more heavily than MAE.
+Root Mean Squared Error (RMSE)
+RMSE = v(MSE)
+Square root of MSE. Measured in the same units as the target, making it more interpretable than MSE.
+Coefficient of Determination (R )
+R  = 1 - [?(y? - y?)  / ?(y? - ?) ]
+where ? is the mean of actual values. R  measures the proportion of variance in the target explained by the model. R  = 1 indicates a perfect fit; R  = 0 indicates the model explains no variance better than using the mean.
+Metric
+Measures
+Ideal Value
+MAE
+Average absolute error
+0 (lower is better)
+MSE
+Average squared error
+0 (lower is better)
+RMSE
+Root of average squared error
+0 (lower is better)
+R 
+Proportion of variance explained
+1 (higher is better)
+
+
+2.7 Illustrative Python Example
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.datasets import fetch_california_housing
+import numpy as np
+
+# Load dataset
+data = fetch_california_housing()
+X, y = data.data, data.target
+
+# Train-test split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# Create and train the model
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# Predictions
+y_pred = model.predict(X_test)
+
+# Coefficients
+print("Intercept:", model.intercept_)
+print("Coefficients:", model.coef_)
+
+# Evaluation metrics
+mae = mean_absolute_error(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
+rmse = np.sqrt(mse)
+r2 = r2_score(y_test, y_pred)
+
+print(f"MAE:  {mae:.4f}")
+print(f"MSE:  {mse:.4f}")
+print(f"RMSE: {rmse:.4f}")
+print(f"R :   {r2:.4f}")
+  LinearRegression() creates a linear regression model using ordinary least squares.
+  fit() learns the coefficients and intercept from the training data.
+  predict() computes predicted target values for new data.
+  model.intercept_ is b0; model.coef_ is the array of coefficients [b1, b2, ...].
+  MAE, MSE, RMSE, and R  quantify how well predictions match actual values.
+2.8 Advantages
+* Simple to understand, implement, and interpret.
+* Computationally efficient even on large datasets.
+* Coefficients provide direct insight into feature importance and direction of effect.
+* Works well when the underlying relationship is approximately linear.
+2.9 Limitations
+* Assumes a linear relationship - performs poorly on non-linear data.
+* Sensitive to outliers, which can disproportionately influence the fitted line.
+* Assumes independence and homoscedasticity (constant variance) of residuals.
+* Multicollinearity among features can make coefficient estimates unstable.
+2.10 Applications
+* Predicting house prices based on features like area, location, and number of rooms.
+* Estimating sales revenue from advertising expenditure.
+* Forecasting temperatures or energy consumption.
+* Modelling dose-response relationships in pharmacology.
+3. PRETEST
+Answer all 20 questions. Each question has exactly one correct answer.
+1. Linear regression predicts a ___ target variable.
+A) categorical
+B) continuous
+C) binary
+D) ordinal
+2. In the equation y = b0 + b1x, what does b0 represent?
+A) The slope
+B) The intercept
+C) The feature value
+D) The residual
+3. What does the slope b1 indicate?
+A) The predicted value when x = 0
+B) The change in y for a one-unit change in x
+C) The error of the model
+D) The mean of y
+4. The ordinary least-squares method minimises the sum of ___.
+A) absolute residuals
+B) squared residuals
+C) cubed residuals
+D) log residuals
+5. Which metric is in the same units as the target variable?
+A) MSE
+B) R 
+C) RMSE
+D) Variance
+6. An R  value of 0.85 means the model explains ___ of the variance.
+A) 15%
+B) 85%
+C) 0.85 units
+D) 100%
+7. What is the ideal R  value for a perfect model?
+A) 0
+B) 0.5
+C) 1
+D) -8
+8. MAE stands for ___.
+A) Maximum Absolute Error
+B) Mean Absolute Error
+C) Median Absolute Error
+D) Minimum Absolute Error
+9. Which metric penalises large errors more - MAE or MSE?
+A) MAE
+B) MSE
+C) Both equally
+D) Neither
+10. In multiple linear regression with 5 features, how many coefficients (excluding intercept) are there?
+A) 1
+B) 5
+C) 10
+D) 25
+11. A residual is defined as ___.
+A) predicted - mean
+B) actual - predicted
+C) actual - mean
+D) predicted - actual
+12. Which Python class implements linear regression in scikit-learn?
+A) LogisticRegression
+B) LinearRegression
+C) Ridge
+D) Lasso
+13. The method that trains the linear regression model is called ___.
+A) predict()
+B) fit()
+C) score()
+D) transform()
+14. Which attribute stores the learned coefficients after fitting?
+A) model.weights_
+B) model.coef_
+C) model.params_
+D) model.beta_
+15. If RMSE = 3.0, what is MSE?
+A) 3.0
+B) 6.0
+C) 9.0
+D) 1.73
+16. Linear regression is a ___ learning algorithm.
+A) unsupervised
+B) supervised
+C) reinforcement
+D) semi-supervised
+17. What assumption does linear regression make about the relationship between features and target?
+A) Logarithmic
+B) Polynomial
+C) Linear
+D) Exponential
+18. Multicollinearity refers to ___.
+A) Missing values in the target
+B) High correlation among input features
+C) Non-linear target distribution
+D) Imbalanced class distribution
+19. Which of the following is NOT a valid regression metric?
+A) MAE
+B) R 
+C) F1-score
+D) RMSE
+20. If all residuals are zero, what is the R  value?
+A) 0
+B) 0.5
+C) 1
+D) Undefined
+
+Pretest - Answer Key
+Q
+Ans
+Q
+Ans
+Q
+Ans
+Q
+Ans
+1
+B
+6
+B
+11
+B
+16
+B
+2
+B
+7
+C
+12
+B
+17
+C
+3
+B
+8
+B
+13
+B
+18
+B
+4
+B
+9
+B
+14
+B
+19
+C
+5
+C
+10
+B
+15
+C
+20
+C
+4. PROCEDURE
+4.1 V-Lab Workflow
+* Step 1: Load the dataset (e.g., California Housing or a provided CSV) and inspect features and target.
+* Step 2: Split the data into training set (80%) and test set (20%).
+* Step 3: Create a LinearRegression model and fit it on the training data.
+* Step 4: Use the trained model to predict target values on the test set.
+* Step 5: Retrieve and interpret the model's intercept and coefficients.
+* Step 6: Compute evaluation metrics: MAE, MSE, RMSE, R .
+* Step 7: Analyse the results - assess whether the model adequately captures the relationship.
+
+
+4.2 Input ? Process ? Output
+Stage
+Details
+Input
+Dataset with numerical features and a continuous target variable.
+Process
+Train-test split ? Model fitting (OLS) ? Prediction on test set.
+Output
+Predicted values, intercept, coefficients, MAE, MSE, RMSE, R .
+5. RESULTS AND ANALYSIS
+After completing the experiment, students should observe and interpret:
+* The intercept (b0) - the baseline predicted value when all features are zero.
+* The coefficients - each coefficient indicates how much the target changes per unit change in that feature.
+* Positive coefficients indicate a direct relationship; negative coefficients indicate an inverse relationship.
+* MAE and RMSE should be compared against the scale of the target variable to assess practical significance.
+* R  close to 1 indicates the model captures most of the variance; values near 0 suggest a poor fit.
+Students should recognise that a good R  on the test set indicates the model generalises well. A large gap between training R  and test R  may indicate overfitting.
+6. POSTTEST
+Answer all 20 questions. Each question has exactly one correct answer.
+1. A linear regression model has coefficients [2.5, -1.3] and intercept 4.0. For input [3, 2], what is the predicted value?
+A) 8.9
+B) 9.1
+C) 8.1
+D) 11.5
+2. After training, model.coef_ returns [0.5, -0.2, 1.1]. Which feature has the strongest positive influence?
+A) Feature 1 (0.5)
+B) Feature 2 (-0.2)
+C) Feature 3 (1.1)
+D) Cannot determine
+3. You obtain MAE = 2.5 and the target ranges from 0 to 100. Is this model performing well?
+A) Yes, the error is small relative to the target range
+B) No, MAE should always be less than 1
+C) It depends on R  only
+D) Cannot determine without MSE
+4. Your model gives R  = 0.95 on training data but R  = 0.60 on test data. What does this suggest?
+A) The model is underfitting
+B) The model is overfitting
+C) The model is perfect
+D) The test set is too large
+5. Which code correctly computes RMSE from MSE?
+A) rmse = mse ** 2
+B) rmse = np.sqrt(mse)
+C) rmse = mse / n
+D) rmse = np.log(mse)
+6. A negative R  value indicates that ___.
+A) The model is perfect
+B) The model performs worse than simply predicting the mean
+C) There is a calculation error
+D) The target is categorical
+7. In scikit-learn, which function computes R ?
+A) accuracy_score
+B) r2_score
+C) f1_score
+D) roc_auc_score
+8. You train a model with 3 features. model.coef_ has shape ___.
+A) (3,)
+B) (1,)
+C) (3, 3)
+D) (1, 3)
+9. Adding more features to a linear regression model always improves R  on the ___.
+A) Test set
+B) Training set
+C) Both equally
+D) Neither
+10. Which assumption is violated if residuals form a curved pattern when plotted against predicted values?
+A) Homoscedasticity
+B) Linearity
+C) Independence
+D) Normality
+11. For the code: model.fit(X_train, y_train); pred = model.predict(X_test), what does pred contain?
+A) Training labels
+B) Test feature values
+C) Predicted target values for X_test
+D) Residuals
+12. If you reverse actual and predicted in mean_squared_error(y_pred, y_test), does the result change?
+A) Yes, dramatically
+B) No, MSE is symmetric
+C) It raises an error
+D) It returns the negative value
+13. A dataset has features with very different scales (e.g., 0-1 vs 0-100000). How does this affect linear regression?
+A) It makes the model invalid
+B) The coefficient magnitudes differ in scale, but predictions are unaffected by feature scaling in OLS
+C) The model will always overfit
+D) It prevents the model from converging
+14. What value does model.intercept_ return?
+A) An array of coefficients
+B) A single scalar value
+C) The R  score
+D) The residual sum of squares
+15. Which of the following would likely cause poor linear regression performance?
+A) A linear relationship between features and target
+B) A quadratic relationship between the feature and target
+C) Having a large training set
+D) Using standardised features
+16. What does mean_absolute_error(y_test, y_pred) return?
+A) A value always between 0 and 1
+B) The average of absolute differences between actual and predicted values
+C) The square root of the variance
+D) The maximum prediction error
+17. In simple linear regression with one feature, the model has how many parameters?
+A) 1 (slope only)
+B) 2 (slope and intercept)
+C) 3
+D) Depends on data size
+18. Your model produces identical predictions for all test samples. What is likely wrong?
+A) The model is overfitting
+B) All features may be constant, or the model learned zero coefficients
+C) The test set is too small
+D) R  is too high
+19. To predict house prices using area and number of rooms, which type of regression is appropriate?
+A) Simple linear regression
+B) Multiple linear regression
+C) Logistic regression
+D) Polynomial regression
+20. After model.fit(X_train, y_train), calling model.score(X_test, y_test) returns the ___.
+A) MAE
+B) MSE
+C) R  score
+D) RMSE
+
+Posttest - Answer Key
+Q
+Ans
+Q
+Ans
+Q
+Ans
+Q
+Ans
+1
+A
+6
+B
+11
+C
+16
+B
+2
+C
+7
+B
+12
+B
+17
+B
+3
+A
+8
+A
+13
+B
+18
+B
+4
+B
+9
+B
+14
+B
+19
+B
+5
+B
+10
+B
+15
+B
+20
+C
+
+
+Experiment 3: Cross-Validation for Model Evaluation
+1. AIM
+To understand cross-validation as a model evaluation and resampling strategy, implement K-Fold cross-validation using Python, and interpret fold scores, mean score, and standard deviation to assess model generalisability.
+2. THEORY
+2.1 Need for Model Evaluation
+A machine learning model that performs well on training data may fail on new, unseen data. This gap between training performance and real-world performance is the problem of generalisation. Model evaluation techniques help estimate how well a model will generalise before it is deployed.
+2.2 Train / Validation / Test Concepts
+A simple approach is to split data into training and test sets. However, if the model is tuned repeatedly based on test-set performance, the test set effectively becomes part of the training process. A three-way split introduces a validation set:
+* Training set - used to fit the model.
+* Validation set - used to tune hyperparameters and compare models.
+* Test set - held out until final evaluation; provides an unbiased performance estimate.
+A fixed single split, however, may not be representative. The performance estimate depends heavily on which samples happen to be in the validation set.
+2.3 Cross-Validation
+Cross-validation addresses this limitation by systematically rotating through multiple train/validation splits. It is an evaluation/resampling strategy, not itself a predictive model. Any model (e.g., linear regression, decision tree, SVM) can be evaluated using cross-validation.
+2.4 K-Fold Cross-Validation
+The most common form is K-Fold Cross-Validation:
+* The dataset is divided into K equal (or approximately equal) subsets called folds.
+* In each iteration, one fold is used as the validation set and the remaining K-1 folds form the training set.
+* The model is trained and evaluated K times, each time with a different validation fold.
+* This produces K performance scores (one per fold).
+Common values for K are 5 and 10.
+2.5 Interpreting Cross-Validation Results
+The K fold scores are summarised as:
+* Mean score - average performance across all folds. This is the primary estimate of model quality.
+* Standard deviation - measures variability across folds. A high standard deviation suggests the model's performance is sensitive to the choice of training data.
+2.6 Stratified K-Fold
+For classification tasks, Stratified K-Fold ensures that each fold preserves the same proportion of each class as the full dataset. This prevents folds with very few (or no) samples of a minority class, which could give misleading scores.
+2.7 Data Leakage During Cross-Validation
+If preprocessing (e.g., scaling) is applied to the entire dataset before cross-validation, information from validation folds leaks into training folds. To avoid this, preprocessing must be included inside the cross-validation loop - typically by using a Pipeline.
+2.8 Cross-Validation and Hyperparameter Tuning
+Cross-validation is commonly used within hyperparameter tuning (e.g., GridSearchCV). For each candidate set of hyperparameters, cross-validation estimates performance. The best-performing configuration is then selected and retrained on the full training set.
+2.9 Illustrative Python Example
+from sklearn.model_selection import cross_val_score, KFold, StratifiedKFold
+from sklearn.linear_model import LogisticRegression
+from sklearn.datasets import load_iris
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+import numpy as np
+
+# Load dataset
+X, y = load_iris(return_X_y=True)
+
+# Define model inside a Pipeline to avoid leakage
+pipe = Pipeline([
+    ('scaler', StandardScaler()),
+    ('clf', LogisticRegression(max_iter=200))
+])
+
+# 5-Fold Cross-Validation
+cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+scores = cross_val_score(pipe, X, y, cv=cv, scoring='accuracy')
+
+print("Fold scores:", scores)
+print(f"Mean accuracy: {scores.mean():.4f}")
+print(f"Standard deviation: {scores.std():.4f}")
+  cross_val_score handles the entire K-fold process: splitting, training, and evaluating.
+  StratifiedKFold preserves class proportions in each fold (important for classification).
+  The Pipeline ensures the scaler is fitted only on training folds, preventing leakage.
+  scores is an array of 5 accuracy values (one per fold).
+  Mean and standard deviation summarise overall performance and stability.
+Python Example - Examining Each Fold with KFold
+from sklearn.model_selection import KFold
+from sklearn.linear_model import LinearRegression
+from sklearn.datasets import fetch_california_housing
+from sklearn.metrics import r2_score
+
+X, y = fetch_california_housing(return_X_y=True)
+
+kf = KFold(n_splits=5, shuffle=True, random_state=42)
+model = LinearRegression()
+
+for fold, (train_idx, val_idx) in enumerate(kf.split(X), 1):
+    X_train, X_val = X[train_idx], X[val_idx]
+    y_train, y_val = y[train_idx], y[val_idx]
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_val)
+    print(f"Fold {fold}: R  = {r2_score(y_val, y_pred):.4f}")
+  KFold.split() yields training and validation indices for each fold.
+  The model is re-trained from scratch in every fold.
+  Each fold produces an independent R  score, giving insight into performance variability.
+2.10 Advantages
+* Uses all data for both training and validation - no sample is wasted.
+* Provides a more reliable performance estimate than a single train-test split.
+* Reduces variance of the performance estimate compared to a single hold-out.
+* Helps detect overfitting when individual fold scores vary widely.
+2.11 Limitations
+* Computationally expensive - the model is trained K times.
+* Not suitable for very large datasets where even a single training run is slow.
+* Does not eliminate the need for a separate held-out test set for final evaluation.
+* Results can vary with different random seeds or K values.
+3. PRETEST
+Answer all 20 questions. Each question has exactly one correct answer.
+1. Cross-validation is best described as ___.
+A) A predictive model
+B) An evaluation/resampling strategy
+C) A feature selection technique
+D) A data augmentation method
+2. In 5-fold cross-validation, how many times is the model trained?
+A) 1
+B) 2
+C) 5
+D) 10
+3. In K-fold cross-validation, each fold serves as the validation set exactly ___ time(s).
+A) 0
+B) 1
+C) K
+D) K-1
+4. Why is a single train-test split sometimes unreliable?
+A) It takes too long
+B) Performance depends heavily on which samples are in the test set
+C) It always overfits
+D) It cannot be used with classification
+5. What does generalisation mean in machine learning?
+A) Memorising the training data
+B) Performing well on new, unseen data
+C) Using all features
+D) Achieving 100% training accuracy
+6. What is the purpose of a validation set?
+A) Final evaluation
+B) Tuning hyperparameters and comparing models
+C) Generating new data
+D) Removing missing values
+7. In Stratified K-Fold, what is preserved across folds?
+A) Feature order
+B) Class proportions
+C) Sample size
+D) Alphabetical order
+8. Mean accuracy across 5 folds is computed as ___.
+A) Maximum of fold scores
+B) Sum of fold scores divided by 5
+C) Product of fold scores
+D) Minimum of fold scores
+9. A high standard deviation across fold scores suggests ___.
+A) Excellent model stability
+B) The model's performance varies across subsets of data
+C) The model has converged
+D) Cross-validation is unnecessary
+10. Which function in scikit-learn performs cross-validation and returns fold scores?
+A) train_test_split
+B) cross_val_score
+C) fit
+D) GridSearchCV
+11. The parameter cv=10 in cross_val_score means ___.
+A) 10 features are selected
+B) 10-fold cross-validation
+C) 10 models are ensembled
+D) The model trains for 10 epochs
+12. What happens if you scale the entire dataset before cross-validation?
+A) Nothing; it is the recommended approach
+B) Data leakage - validation folds influence the scaling
+C) The model trains faster
+D) The folds become unequal
+13. To prevent leakage during cross-validation, you should ___.
+A) Use a larger K value
+B) Include preprocessing inside a Pipeline
+C) Skip feature scaling entirely
+D) Use the test set for validation
+14. Which is larger: 5-fold or 10-fold cross-validation training set per fold?
+A) 5-fold (uses 4/5 of data for training)
+B) 10-fold (uses 9/10 of data for training)
+C) Both are equal
+D) It depends on the dataset
+15. Cross-validation can be used for ___.
+A) Classification only
+B) Regression only
+C) Both classification and regression
+D) Neither
+16. After cross-validation selects the best hyperparameters, the final model is typically ___.
+A) Not trained at all
+B) Retrained on the full training set with those hyperparameters
+C) Used directly from the last fold
+D) Retrained on the test set
+17. How many validation scores does 7-fold cross-validation produce?
+A) 1
+B) 6
+C) 7
+D) 14
+18. Shuffle parameter in KFold controls ___.
+A) Feature order
+B) Whether samples are randomly shuffled before splitting into folds
+C) The scoring metric
+D) The number of folds
+19. Which cross-validation variant is preferred for imbalanced classification datasets?
+A) KFold
+B) StratifiedKFold
+C) LeaveOneOut
+D) RepeatedKFold
+20. Cross-validation replaces the need for a final test set. True or False?
+A) True
+B) False
+C) Only for classification
+D) Only when K > 10
+
+Pretest - Answer Key
+Q
+Ans
+Q
+Ans
+Q
+Ans
+Q
+Ans
+1
+B
+6
+B
+11
+B
+16
+B
+2
+C
+7
+B
+12
+B
+17
+C
+3
+B
+8
+B
+13
+B
+18
+B
+4
+B
+9
+B
+14
+B
+19
+B
+5
+B
+10
+B
+15
+C
+20
+B
+4. PROCEDURE
+4.1 V-Lab Workflow
+* Step 1: Load the dataset and select a classification or regression model.
+* Step 2: Choose the number of folds (K), typically 5 or 10.
+* Step 3: Optionally wrap preprocessing and the model in a Pipeline.
+* Step 4: Run cross_val_score with the chosen model, data, and CV strategy.
+* Step 5: Examine the individual fold scores.
+* Step 6: Compute the mean score and standard deviation.
+* Step 7: Interpret the results - assess both average performance and stability.
+4.2 Input ? Process ? Output
+Stage
+Details
+Input
+Dataset, ML model, number of folds (K).
+Process
+K iterations of train-validate splits; model fitted and scored each time.
+Output
+K fold scores, mean score, standard deviation.
+5. RESULTS AND ANALYSIS
+After completing the experiment, students should observe and interpret:
+* An array of K scores - one per fold.
+* The mean score represents the overall estimated performance of the model.
+* A low standard deviation indicates the model performs consistently across different data subsets.
+* A high standard deviation may indicate sensitivity to particular data splits or insufficient data.
+* Comparing cross-validation scores across models helps select the best-performing algorithm.
+Students should understand that cross-validation provides an estimate of generalisation performance. It does not itself produce a final deployable model. The final model is typically retrained on the full training set using the best hyperparameters identified during cross-validation.
+6. POSTTEST
+Answer all 20 questions. Each question has exactly one correct answer.
+1. You run 5-fold CV and get scores [0.90, 0.88, 0.92, 0.87, 0.93]. What is the mean accuracy?
+A) 0.88
+B) 0.90
+C) 0.92
+D) 0.93
+2. For the same scores [0.90, 0.88, 0.92, 0.87, 0.93], the standard deviation is approximately ___.
+A) 0.001
+B) 0.024
+C) 0.10
+D) 0.50
+3. You compare Model A (mean CV = 0.85, std = 0.02) vs Model B (mean CV = 0.86, std = 0.10). Which observation is most appropriate?
+A) Model B is clearly better
+B) Both are similar in mean, but Model A is more stable
+C) Model A is overfitting
+D) Standard deviation does not matter
+4. In cross_val_score(model, X, y, cv=10), how many train-validate splits occur?
+A) 5
+B) 10
+C) 20
+D) 1
+5. A pipeline with StandardScaler and SVC is used in cross_val_score. How often is the scaler fitted?
+A) Once on the full dataset
+B) Once per fold, on the training fold only
+C) Twice per fold
+D) Never
+6. What happens if you increase K from 5 to 20?
+A) Each training set becomes smaller
+B) Each training set becomes larger, but computation increases
+C) Nothing changes
+D) The model overfits more
+7. Leave-One-Out CV (LOOCV) is K-Fold with K equal to ___.
+A) 2
+B) 5
+C) The number of samples
+D) The number of features
+8. You use cross_val_score with scoring='neg_mean_squared_error'. Why is the sign negative?
+A) It indicates an error in the code
+B) Scikit-learn convention: higher is better, so errors are negated
+C) MSE is always negative
+D) The model is performing poorly
+9. After CV selects the best model, you retrain it on all training data. Why?
+A) To waste more time
+B) To give the final model access to the maximum amount of training data
+C) Because CV results are invalid
+D) To check for data leakage
+10. For a binary classification task with 60% class 0 and 40% class 1, StratifiedKFold ensures each fold has approximately ___.
+A) 50% class 0, 50% class 1
+B) 60% class 0, 40% class 1
+C) All class 0 in one fold
+D) Random proportions
+11. Which is the correct interpretation of a single fold in 5-fold CV?
+A) The model is trained on 1/5 of data and tested on 4/5
+B) The model is trained on 4/5 of data and tested on 1/5
+C) The model is trained and tested on the same 1/5
+D) The model is trained on all data
+12. If K = 1, cross-validation becomes ___.
+A) Standard training without validation
+B) Leave-One-Out
+C) Impossible
+D) The same as K = 2
+13. You use cross_val_score(pipe, X, y, cv=5, scoring='accuracy') for regression. What happens?
+A) It works correctly
+B) It raises an error because accuracy is not valid for regression
+C) It returns R  automatically
+D) It returns zero
+14. RepeatedKFold with n_repeats=3 and n_splits=5 produces how many total fold scores?
+A) 3
+B) 5
+C) 8
+D) 15
+15. Cross-validation is particularly useful when the dataset is ___.
+A) Very large (millions of rows)
+B) Small to moderate, where every sample matters
+C) Entirely unlabelled
+D) Already split into predefined folds
+16. Which code correctly creates a 10-fold CV splitter?
+A) KFold(n_splits=10)
+B) KFold(n_folds=10)
+C) KFold(k=10)
+D) KFold(splits=10)
+17. During 5-fold CV on 100 samples, each validation fold contains approximately ___ samples.
+A) 5
+B) 10
+C) 20
+D) 50
+18. You notice fold 3 has a much lower score than other folds. What might this indicate?
+A) A bug in the code
+B) That fold contains unusual or difficult samples
+C) The model is perfect
+D) K is too small
+19. What is the main computational disadvantage of cross-validation?
+A) It requires extra data
+B) The model must be trained K times instead of once
+C) It can only be used with neural networks
+D) It eliminates the training set
+20. After cross-validation, you report a single performance number. This should be the ___.
+A) Best fold score
+B) Worst fold score
+C) Mean of fold scores
+D) Median of fold scores
+
+Posttest - Answer Key
+Q
+Ans
+Q
+Ans
+Q
+Ans
+Q
+Ans
+1
+B
+6
+B
+11
+B
+16
+A
+2
+B
+7
+C
+12
+A
+17
+C
+3
+B
+8
+B
+13
+B
+18
+B
+4
+B
+9
+B
+14
+D
+19
+B
+5
+B
+10
+B
+15
+B
+20
+C
+
+
+Experiment 4: Logistic Regression for Binary Classification
+1. AIM
+To understand the concept of logistic regression for binary classification, implement it in Python using scikit-learn, and evaluate model performance using a confusion matrix, accuracy, precision, recall, and F1-score.
+2. THEORY
+2.1 Classification vs. Regression
+Classification is a supervised learning task where the model predicts a discrete class label. In binary classification, there are exactly two classes (e.g., spam/not-spam, positive/negative). This is fundamentally different from regression, which predicts a continuous numerical value.
+2.2 Why 'Logistic Regression' for Classification?
+Despite its name, logistic regression is predominantly used for classification. The name comes from the fact that the model uses a logistic (sigmoid) function to transform a linear combination of features into a probability. The underlying computation is a regression on the log-odds, but the final output is a class prediction.
+2.3 The Logistic (Sigmoid) Function
+Logistic regression first computes a linear combination of input features:
+z = b0 + b1x1 + b2x2 + ... + b?x?
+This linear value z is then passed through the sigmoid function:
+s(z) = 1 / (1 + e??)
+Properties of the sigmoid function:
+* Output is always between 0 and 1, interpretable as a probability.
+* When z = 0, s(z) = 0.5.
+* As z ? +8, s(z) ? 1.
+* As z ? -8, s(z) ? 0.
+2.4 Decision Threshold and Class Prediction
+The sigmoid output is interpreted as the probability that the sample belongs to class 1. A decision threshold (commonly 0.5) determines the predicted class:
+* If s(z) = 0.5 ? predict class 1
+* If s(z) < 0.5 ? predict class 0
+The threshold can be adjusted depending on the application (e.g., medical diagnosis may use a lower threshold to reduce false negatives).
+2.5 Confusion Matrix
+A confusion matrix summarises classification performance:
+
+Predicted Positive
+Predicted Negative
+Actual Positive
+True Positive (TP)
+False Negative (FN)
+Actual Negative
+False Positive (FP)
+True Negative (TN)
+* TP - correctly predicted positive.
+* TN - correctly predicted negative.
+* FP - incorrectly predicted positive (Type I error).
+* FN - incorrectly predicted negative (Type II error).
+2.6 Classification Metrics
+Accuracy
+Accuracy = (TP + TN) / (TP + TN + FP + FN)
+Proportion of correct predictions overall. Can be misleading for imbalanced datasets.
+Precision
+Precision = TP / (TP + FP)
+Of all samples predicted as positive, what fraction are truly positive? High precision means few false positives.
+Recall (Sensitivity)
+Recall = TP / (TP + FN)
+Of all actual positives, what fraction are correctly identified? High recall means few false negatives.
+F1-Score
+F1 = 2   (Precision   Recall) / (Precision + Recall)
+Harmonic mean of precision and recall. Useful when both metrics are important and the dataset is imbalanced.
+2.7 Illustrative Python Example
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import (accuracy_score, precision_score,
+                             recall_score, f1_score, confusion_matrix)
+from sklearn.datasets import load_breast_cancer
+
+# Load binary classification dataset
+X, y = load_breast_cancer(return_X_y=True)
+
+# Split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# Train logistic regression model
+model = LogisticRegression(max_iter=10000, random_state=42)
+model.fit(X_train, y_train)
+
+# Predictions
+y_pred = model.predict(X_test)
+
+# Probability estimates
+y_proba = model.predict_proba(X_test)
+print("Sample probabilities (first 3):", y_proba[:3])
+
+# Confusion matrix
+cm = confusion_matrix(y_test, y_pred)
+print("Confusion Matrix:\n", cm)
+
+# Metrics
+print(f"Accuracy:  {accuracy_score(y_test, y_pred):.4f}")
+print(f"Precision: {precision_score(y_test, y_pred):.4f}")
+print(f"Recall:    {recall_score(y_test, y_pred):.4f}")
+print(f"F1-Score:  {f1_score(y_test, y_pred):.4f}")
+  LogisticRegression(max_iter=10000) allows sufficient iterations for convergence.
+  fit() trains the model on the training data.
+  predict() returns class labels (0 or 1).
+  predict_proba() returns probability estimates for each class.
+  confusion_matrix() provides TP, TN, FP, FN counts.
+  accuracy_score, precision_score, recall_score, f1_score compute respective metrics.
+2.8 Coefficients in Logistic Regression
+Like linear regression, logistic regression produces coefficients (model.coef_) and an intercept (model.intercept_). Each coefficient indicates the effect of that feature on the log-odds of the positive class. A positive coefficient increases the probability of class 1; a negative coefficient decreases it.
+2.9 Advantages
+* Simple, fast, and interpretable.
+* Outputs calibrated probabilities, not just class labels.
+* Works well for linearly separable data.
+* Coefficients provide insight into feature importance.
+2.10 Limitations
+* Assumes a linear decision boundary in the feature space.
+* Struggles with complex, non-linear relationships without feature engineering.
+* Sensitive to multicollinearity among features.
+* May require feature scaling for optimal convergence.
+2.11 Applications
+* Email spam detection (spam vs. not spam).
+* Medical diagnosis (disease present vs. absent).
+* Credit scoring (default vs. no default).
+* Customer churn prediction (will leave vs. will stay).
+3. PRETEST
+Answer all 20 questions. Each question has exactly one correct answer.
+1. Logistic regression is primarily used for ___.
+A) Regression tasks
+B) Binary classification
+C) Clustering
+D) Dimensionality reduction
+2. The sigmoid function maps any real number to a value between ___.
+A) -1 and 1
+B) 0 and 1
+C) -8 and +8
+D) 0 and 100
+3. What is the output of s(0)?
+A) 0
+B) 0.5
+C) 1
+D) -1
+4. In binary classification, how many distinct classes exist?
+A) 1
+B) 2
+C) 3
+D) Any number
+5. A confusion matrix has dimensions ___.
+A) 1 1
+B) 2 2 (for binary)
+C) 3 3
+D) n n (always)
+6. True Positive means ___.
+A) Model predicted positive, and it was correct
+B) Model predicted negative, and it was correct
+C) Model predicted positive, but it was wrong
+D) Model predicted negative, but it was wrong
+7. False Negative (Type II error) means ___.
+A) Predicting positive when actual is negative
+B) Predicting negative when actual is positive
+C) Predicting positive when actual is positive
+D) Predicting negative when actual is negative
+8. Precision measures ___.
+A) TP / (TP + FN)
+B) TP / (TP + FP)
+C) TN / (TN + FP)
+D) (TP + TN) / Total
+9. Recall measures ___.
+A) TP / (TP + FP)
+B) TP / (TP + FN)
+C) TN / (TN + FN)
+D) (TP + TN) / Total
+10. F1-score is the ___ mean of precision and recall.
+A) Arithmetic
+B) Geometric
+C) Harmonic
+D) Weighted
+11. Why is logistic regression called 'regression' if it is used for classification?
+A) It was named incorrectly by accident
+B) It models the log-odds as a linear regression, then converts to probability
+C) It can only predict continuous values
+D) It uses the same loss function as linear regression
+12. What does predict_proba() return?
+A) Class labels
+B) Probability estimates for each class
+C) Residuals
+D) Coefficients
+13. A decision threshold of 0.5 means ___.
+A) Classes are always balanced
+B) Samples with predicted probability = 0.5 are assigned to class 1
+C) The model achieves 50% accuracy
+D) The sigmoid output is exactly 0.5
+14. Accuracy can be misleading when ___.
+A) The dataset is large
+B) Classes are balanced
+C) Classes are heavily imbalanced
+D) All features are numerical
+15. Which metric should be prioritised when false negatives are costly (e.g., cancer detection)?
+A) Precision
+B) Recall
+C) Accuracy
+D) Specificity
+16. The intercept in logistic regression is stored in ___.
+A) model.coef_
+B) model.intercept_
+C) model.bias_
+D) model.threshold_
+17. How many output probabilities does predict_proba return per sample for binary classification?
+A) 1
+B) 2
+C) 3
+D) Depends on features
+18. In the equation z = b0 + b1x1, z is passed through the ___ function.
+A) Linear
+B) Quadratic
+C) Sigmoid
+D) Exponential
+19. Which scikit-learn class implements logistic regression?
+A) LinearRegression
+B) LogisticRegression
+C) SVC
+D) KNeighborsClassifier
+20. A positive coefficient in logistic regression means ___.
+A) The feature decreases the probability of class 1
+B) The feature increases the probability of class 1
+C) The feature has no effect
+D) The feature is categorical
+
+Pretest - Answer Key
+Q
+Ans
+Q
+Ans
+Q
+Ans
+Q
+Ans
+1
+B
+6
+A
+11
+B
+16
+B
+2
+B
+7
+B
+12
+B
+17
+B
+3
+B
+8
+B
+13
+B
+18
+C
+4
+B
+9
+B
+14
+C
+19
+B
+5
+B
+10
+C
+15
+B
+20
+B
+4. PROCEDURE
+4.1 V-Lab Workflow
+* Step 1: Load a binary classification dataset (e.g., Breast Cancer Wisconsin).
+* Step 2: Split into training (80%) and test (20%) sets.
+* Step 3: Create a LogisticRegression model and train it on the training data.
+* Step 4: Generate predictions and probability estimates on the test set.
+* Step 5: Compute the confusion matrix.
+* Step 6: Calculate accuracy, precision, recall, and F1-score.
+* Step 7: Interpret the results and discuss which metric is most relevant for the given problem.
+4.2 Input ? Process ? Output
+Stage
+Details
+Input
+Binary classification dataset with features and two-class labels.
+Process
+Train-test split ? Model training ? Prediction ? Metric computation.
+Output
+Predicted classes, probabilities, confusion matrix, accuracy, precision, recall, F1.
+5. RESULTS AND ANALYSIS
+After completing the experiment, students should observe and interpret:
+* The confusion matrix - identify TP, TN, FP, and FN counts.
+* Accuracy - the overall correct classification rate.
+* Precision - how many predicted positives are truly positive.
+* Recall - how many actual positives were correctly detected.
+* F1-score - the balanced measure of precision and recall.
+* Probability outputs - predict_proba shows the model's confidence for each prediction.
+Students should consider which metric is most important for the specific application. For medical diagnosis, recall is often critical (missing a disease is dangerous). For spam filtering, precision may be prioritised (legitimate emails should not be flagged as spam).
+6. POSTTEST
+Answer all 20 questions. Each question has exactly one correct answer.
+1. A confusion matrix shows TP=45, TN=40, FP=5, FN=10. What is the accuracy?
+A) 0.85
+B) 0.90
+C) 0.80
+D) 0.95
+2. Using the same confusion matrix (TP=45, TN=40, FP=5, FN=10), what is the precision?
+A) 0.90
+B) 0.82
+C) 0.89
+D) 0.80
+3. Using the same matrix, what is the recall?
+A) 0.90
+B) 0.82
+C) 0.818
+D) 0.80
+4. predict_proba returns [[0.3, 0.7]] for a sample. With threshold 0.5, the predicted class is ___.
+A) 0
+B) 1
+C) 0.7
+D) Cannot determine
+5. If you lower the decision threshold from 0.5 to 0.3, what generally happens?
+A) Precision increases, recall decreases
+B) Precision decreases, recall increases
+C) Both increase
+D) Both decrease
+6. A model achieves 95% accuracy on a dataset where 95% of samples are class 0. Is this model useful?
+A) Yes, 95% is excellent
+B) Not necessarily; it may simply predict class 0 for everything
+C) Only if precision is also 95%
+D) Yes, but only for class 0
+7. Which code correctly computes the F1-score?
+A) accuracy_score(y_test, y_pred)
+B) f1_score(y_test, y_pred)
+C) recall_score(y_test, y_pred)
+D) r2_score(y_test, y_pred)
+8. The sigmoid of a very large positive z value is approximately ___.
+A) 0
+B) 0.5
+C) 1
+D) -8
+9. A logistic regression model has coef_ = [[-0.5, 1.2, 0.3]]. Which feature most strongly increases P(class=1)?
+A) Feature 1 (-0.5)
+B) Feature 2 (1.2)
+C) Feature 3 (0.3)
+D) All features equally
+10. In a medical test, FN=20 means ___.
+A) 20 healthy people were told they are sick
+B) 20 sick people were told they are healthy
+C) 20 people were correctly diagnosed
+D) 20 tests failed to run
+11. What does max_iter in LogisticRegression control?
+A) Number of features used
+B) Maximum number of iterations for the solver to converge
+C) Maximum number of test samples
+D) Maximum depth of the model
+12. predict_proba(X_test) for binary classification returns an array of shape ___.
+A) (n_samples,)
+B) (n_samples, 1)
+C) (n_samples, 2)
+D) (2, n_samples)
+13. The sum of probabilities from predict_proba for a single sample equals ___.
+A) 0
+B) 0.5
+C) 1
+D) Varies per sample
+14. Logistic regression can be extended to multi-class classification using ___.
+A) One-vs-Rest (OvR) strategy
+B) Clustering
+C) Principal Component Analysis
+D) KMeans
+15. Which of the following is NOT a valid parameter for LogisticRegression in scikit-learn?
+A) C
+B) penalty
+C) max_iter
+D) n_estimators
+16. The C parameter in LogisticRegression controls ___.
+A) The number of classes
+B) Inverse of regularisation strength (smaller C = stronger regularisation)
+C) The number of features
+D) The decision threshold
+17. Confusion matrix for a perfect classifier would have ___.
+A) All values in TP and TN; FP=0 and FN=0
+B) All values in FP and FN; TP=0 and TN=0
+C) Equal values in all four cells
+D) Zero in all cells
+18. If precision = 1.0 and recall = 0.5, F1-score is ___.
+A) 0.50
+B) 0.75
+C) 0.67
+D) 1.0
+19. Which metric is the harmonic mean of precision and recall?
+A) Accuracy
+B) F1-score
+C) Specificity
+D) ROC-AUC
+20. A patient has predict_proba = [0.15, 0.85]. With the default threshold, the model predicts ___.
+A) Negative (class 0)
+B) Positive (class 1)
+C) Unknown
+D) Both classes
+
+Posttest - Answer Key
+Q
+Ans
+Q
+Ans
+Q
+Ans
+Q
+Ans
+1
+B
+6
+B
+11
+B
+16
+B
+2
+A
+7
+B
+12
+C
+17
+A
+3
+C
+8
+C
+13
+C
+18
+C
+4
+B
+9
+B
+14
+A
+19
+B
+5
+B
+10
+B
+15
+D
+20
+B
+
+
+Experiment 5: Principal Component Analysis (PCA)
+1. AIM
+To understand Principal Component Analysis (PCA) as a dimensionality reduction technique, implement it in Python using scikit-learn, and analyse the explained variance to determine an appropriate number of principal components.
+2. THEORY
+2.1 The Problem of High-Dimensional Data
+Many real-world datasets have a large number of features (dimensions). High-dimensional data presents several challenges: increased computation time, higher risk of overfitting, difficulty in visualisation, and the 'curse of dimensionality' where distance-based algorithms degrade as dimensions increase.
+2.2 What Is Dimensionality Reduction?
+Dimensionality reduction transforms data from a high-dimensional space to a lower-dimensional space while retaining as much important information as possible. This is distinct from feature selection, which simply discards some original features. PCA creates entirely new features (principal components) that are linear combinations of the original features.
+2.3 Principal Component Analysis
+PCA is an unsupervised dimensionality reduction technique that identifies directions (principal components) along which the data varies the most. It projects the original data onto these directions, reducing the number of features while preserving maximum variance.
+2.4 Key Concepts
+* Variance - measures how spread out the data is along a direction. PCA seeks directions of maximum variance.
+* Covariance - measures how two features vary together. PCA analyses the covariance structure of the data.
+* Eigenvectors - the directions of the principal components.
+* Eigenvalues - the amount of variance captured by each principal component.
+* Principal Components (PCs) - new orthogonal axes ordered by decreasing variance.
+* Orthogonality - principal components are perpendicular to each other, meaning they capture independent patterns.
+* Projection - data points are projected onto the selected principal components.
+2.5 How PCA Works
+The PCA process can be summarised as:
+* Step 1: Standardise the data (important when features have different scales).
+* Step 2: Compute the covariance matrix of the standardised data.
+* Step 3: Compute the eigenvectors and eigenvalues of the covariance matrix.
+* Step 4: Sort eigenvectors by decreasing eigenvalue.
+* Step 5: Select the top k eigenvectors (principal components).
+* Step 6: Project the data onto the selected components.
+2.6 Explained Variance
+Each principal component captures a fraction of the total variance. The explained variance ratio for each component tells us how much of the data's variability it accounts for. The cumulative explained variance helps decide how many components to retain.
+A common rule of thumb is to retain enough components to capture 90-95% of the total variance.
+2.7 Importance of Scaling Before PCA
+PCA is sensitive to feature scales because it maximises variance. A feature with values in the thousands will dominate the principal components over a feature with values between 0 and 1, regardless of importance. Standardising features (zero mean, unit variance) before PCA ensures that all features contribute equally.
+2.8 Illustrative Python Example
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+from sklearn.datasets import load_iris
+import numpy as np
+
+# Load dataset (4 features)
+X, y = load_iris(return_X_y=True)
+
+# Standardise features
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Apply PCA - reduce to 2 components
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X_scaled)
+
+print(f"Original shape:  {X.shape}")
+print(f"Reduced shape:   {X_pca.shape}")
+print(f"Explained variance ratio: {pca.explained_variance_ratio_}")
+print(f"Total variance captured:  {sum(pca.explained_variance_ratio_):.4f}")
+  StandardScaler standardises features before PCA - essential when feature scales differ.
+  PCA(n_components=2) reduces the data from 4 features to 2 principal components.
+  fit_transform() computes the principal components and projects the data.
+  explained_variance_ratio_ shows the fraction of total variance captured by each component.
+  The sum gives the total variance retained (e.g., 0.9577 means 95.77% of variance is preserved).
+Python Example - Choosing the Number of Components
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+from sklearn.datasets import load_wine
+
+X, y = load_wine(return_X_y=True)
+X_scaled = StandardScaler().fit_transform(X)
+
+# Fit PCA with all components to examine variance
+pca_full = PCA()
+pca_full.fit(X_scaled)
+
+cumulative_var = np.cumsum(pca_full.explained_variance_ratio_)
+print("Cumulative explained variance per component:")
+for i, cv in enumerate(cumulative_var, 1):
+    print(f"  {i} components: {cv:.4f}")
+    if cv >= 0.95:
+        print(f"  --> {i} components capture >= 95% variance")
+        break
+  Fitting PCA without specifying n_components retains all components.
+  np.cumsum computes the cumulative sum of explained variance ratios.
+  This helps determine the minimum number of components needed to reach a variance threshold.
+2.9 Reconstruction Concept
+After reducing dimensions, PCA can approximately reconstruct the original data using inverse_transform(). The reconstruction is imperfect because some variance is discarded. The reconstruction error increases as fewer components are retained.
+2.10 Advantages
+* Reduces dimensionality, speeding up subsequent algorithms.
+* Removes correlated features by creating orthogonal components.
+* Helps visualise high-dimensional data in 2D or 3D.
+* Can reduce overfitting by eliminating noise captured in minor components.
+2.11 Limitations
+* Principal components are linear combinations - PCA cannot capture non-linear relationships.
+* Components are harder to interpret than original features.
+* Information loss is inevitable when reducing dimensions.
+* Requires feature scaling; results change if scaling is omitted.
+2.12 Applications
+* Visualising high-dimensional datasets (e.g., gene expression data).
+* Preprocessing for classification/regression to reduce feature count.
+* Image compression (representing images with fewer principal components).
+* Noise reduction in signal processing.
+3. PRETEST
+Answer all 20 questions. Each question has exactly one correct answer.
+1. PCA is a technique for ___.
+A) Classification
+B) Regression
+C) Dimensionality reduction
+D) Clustering
+2. PCA creates new features that are ___ of the original features.
+A) Copies
+B) Subsets
+C) Linear combinations
+D) Non-linear transformations
+3. Is PCA the same as feature selection?
+A) Yes, they are identical
+B) No - feature selection picks original features; PCA creates new ones
+C) Yes, but PCA is faster
+D) No - PCA is a clustering method
+4. What does PCA maximise along each principal component?
+A) Accuracy
+B) Variance
+C) Correlation
+D) Mean
+5. Principal components are ___ to each other.
+A) Parallel
+B) Orthogonal (perpendicular)
+C) Identical
+D) Inversely proportional
+6. Why should features be standardised before PCA?
+A) To speed up computation
+B) Because PCA is sensitive to feature scales
+C) To remove outliers
+D) Standardisation is optional for PCA
+7. Eigenvalues in PCA represent ___.
+A) Feature names
+B) Amount of variance captured per component
+C) Number of data points
+D) Classification accuracy
+8. If a dataset has 10 features, PCA can produce at most ___ components.
+A) 5
+B) 10
+C) 20
+D) 100
+9. Explained variance ratio tells us ___.
+A) The prediction accuracy
+B) The fraction of total variance captured by each component
+C) The number of outliers
+D) The mean of each feature
+10. A common threshold for cumulative explained variance is ___.
+A) 50%
+B) 70%
+C) 90-95%
+D) 100%
+11. PCA is a ___ learning technique.
+A) Supervised
+B) Unsupervised
+C) Reinforcement
+D) Semi-supervised
+12. Which matrix is central to the PCA computation?
+A) Confusion matrix
+B) Covariance matrix
+C) Identity matrix
+D) Adjacency matrix
+13. What does n_components in PCA specify?
+A) Number of original features to keep
+B) Number of principal components to retain
+C) Number of clusters
+D) Number of training samples
+14. After PCA with n_components=3, each data point is represented by ___ values.
+A) The original number of features
+B) 3
+C) 1
+D) 6
+15. Which method applies PCA and projects the data in one step?
+A) fit()
+B) transform()
+C) fit_transform()
+D) predict()
+16. If the first 2 components capture 95% of variance, the remaining components capture ___.
+A) 95%
+B) 5%
+C) 0%
+D) 100%
+17. PCA can be used for ___.
+A) Data visualisation in 2D
+B) Noise reduction
+C) Feature compression
+D) All of the above
+18. What happens to variance when dimensions are reduced by PCA?
+A) All variance is preserved
+B) Some variance is inevitably lost
+C) Variance increases
+D) Variance becomes zero
+19. Reconstruction after PCA is ___.
+A) Always exact
+B) Approximate (some information is lost)
+C) Impossible
+D) Better than the original
+20. Which Python class implements PCA in scikit-learn?
+A) PCA from sklearn.decomposition
+B) PCA from sklearn.linear_model
+C) PCA from sklearn.cluster
+D) PCA from sklearn.metrics
+
+Pretest - Answer Key
+Q
+Ans
+Q
+Ans
+Q
+Ans
+Q
+Ans
+1
+C
+6
+B
+11
+B
+16
+B
+2
+C
+7
+B
+12
+B
+17
+D
+3
+B
+8
+B
+13
+B
+18
+B
+4
+B
+9
+B
+14
+B
+19
+B
+5
+B
+10
+C
+15
+C
+20
+A
+4. PROCEDURE
+4.1 V-Lab Workflow
+* Step 1: Load the dataset and note the number of original features.
+* Step 2: Standardise the features using StandardScaler.
+* Step 3: Apply PCA with a specified number of components (e.g., 2 for visualisation).
+* Step 4: Examine the explained variance ratio for each component.
+* Step 5: Compute cumulative explained variance to determine how many components are needed.
+* Step 6: Observe the reduced-dimension representation of the data.
+* Step 7: Interpret the results - how much information is retained, and what is the trade-off.
+4.2 Input ? Process ? Output
+Stage
+Details
+Input
+High-dimensional dataset (standardised features).
+Process
+Standardisation ? PCA computation ? Projection onto top k components.
+Output
+Reduced-dimension dataset, explained variance ratios, cumulative variance.
+5. RESULTS AND ANALYSIS
+After completing the experiment, students should observe and interpret:
+* The shape of the data changes from (n_samples, original_features) to (n_samples, n_components).
+* The first principal component captures the largest fraction of variance.
+* Subsequent components capture progressively less variance.
+* Cumulative explained variance helps justify the chosen number of components.
+* A 2-component projection can be visualised as a scatter plot, often revealing cluster structure.
+Students should understand that PCA does not improve classification accuracy by itself - it reduces dimensions. Whether this helps or hurts downstream model performance depends on how much useful information is retained in the selected components.
+6. POSTTEST
+Answer all 20 questions. Each question has exactly one correct answer.
+1. PCA on 8 features produces explained_variance_ratio_ = [0.40, 0.25, 0.15, 0.10, 0.05, 0.03, 0.01, 0.01]. How many components capture at least 80% variance?
+A) 2
+B) 3
+C) 4
+D) 5
+2. You apply PCA without standardising. Feature A (range 0-100000) dominates PC1. Why?
+A) Feature A is most important
+B) PCA maximises variance; Feature A's large scale inflates its variance contribution
+C) PCA ignores small-scale features
+D) Standardisation has no effect on PCA
+3. After PCA(n_components=3).fit_transform(X), the output array has shape (200, ___)?
+A) Original number of features
+B) 3
+C) 200
+D) 6
+4. You compute pca.explained_variance_ratio_ and get [0.72, 0.23, 0.05]. What does 0.72 mean?
+A) 72% of samples are in component 1
+B) Component 1 captures 72% of total variance
+C) 72% accuracy
+D) 72 eigenvalues
+5. Why are principal components ordered from first to last?
+A) Alphabetically
+B) By decreasing variance captured
+C) By increasing computation time
+D) Randomly
+6. PCA with n_components=None retains ___.
+A) Zero components
+B) One component
+C) All components
+D) Half the components
+7. Can PCA be applied to image data?
+A) No, only tabular data
+B) Yes - images can be flattened into feature vectors and reduced
+C) Only if images are grayscale
+D) Only with convolutional neural networks
+8. After PCA, inverse_transform() approximately recovers ___.
+A) The target variable
+B) The original features
+C) The covariance matrix
+D) The eigenvalues
+9. A student runs PCA(n_components=2) on a 50-feature dataset. How much computation is saved for a downstream classifier?
+A) None
+B) The classifier now processes 2 features instead of 50
+C) The classifier becomes unsupervised
+D) Accuracy doubles
+10. What is the relationship between the number of principal components and information retention?
+A) More components = less information
+B) More components = more information retained
+C) They are unrelated
+D) Exactly 2 components always suffice
+11. PCA cannot capture ___ relationships between features.
+A) Linear
+B) Non-linear
+C) Positive
+D) Negative
+12. If all features are perfectly uncorrelated, PCA ___.
+A) Fails to run
+B) Returns the original features as principal components
+C) Reduces to a single component
+D) Doubles the features
+13. You plot cumulative variance vs. number of components. The curve flattens after 5 components. What does this suggest?
+A) Use all components
+B) 5 components capture most of the variance; additional components add little
+C) The data has 5 classes
+D) PCA failed
+14. StandardScaler before PCA ensures ___.
+A) Features are sorted
+B) All features contribute equally regardless of original scale
+C) Missing values are imputed
+D) The target variable is normalised
+15. Which of the following is a valid use of PCA?
+A) Predicting class labels directly
+B) Reducing 100 features to 10 for faster training
+C) Imputing missing values
+D) Encoding categorical variables
+16. Explained variance ratios always sum to ___.
+A) 0
+B) 1 (when all components are retained)
+C) 0.95
+D) Varies
+17. A colleague uses PCA for 'feature selection'. Is this technically correct?
+A) Yes, PCA selects original features
+B) No - PCA creates new features (principal components), which is dimensionality reduction, not selection
+C) Yes, if n_components < original features
+D) No - PCA is a clustering algorithm
+18. What does pca.components_ contain after fitting?
+A) The transformed data
+B) The principal component directions (loadings)
+C) The class labels
+D) The original feature names
+19. PCA on a 2D dataset with 2 components produces ___.
+A) A 1D dataset
+B) The same 2D dataset (rotated)
+C) A 3D dataset
+D) Nothing
+20. Which scenario benefits most from PCA?
+A) A dataset with 5 well-separated features
+B) A dataset with 500 highly correlated features
+C) A dataset with 2 features
+D) A dataset with no variance
+
+Posttest - Answer Key
+Q
+Ans
+Q
+Ans
+Q
+Ans
+Q
+Ans
+1
+C
+6
+C
+11
+B
+16
+B
+2
+B
+7
+B
+12
+B
+17
+B
+3
+B
+8
+B
+13
+B
+18
+B
+4
+B
+9
+B
+14
+B
+19
+B
+5
+B
+10
+B
+15
+B
+20
+B
+
+
+Experiment 6: Support Vector Machine Classification
+1. AIM
+To understand the principles of Support Vector Machine (SVM) classification, implement SVM using scikit-learn with different kernels, and evaluate classification performance on a test dataset.
+2. THEORY
+2.1 Classification and Decision Boundaries
+Classification aims to assign each data point to a class. A decision boundary is the surface that separates different classes in the feature space. SVM is a supervised learning algorithm that finds an optimal decision boundary.
+2.2 Hyperplane
+In SVM, the decision boundary is called a hyperplane. In 2D, a hyperplane is a line; in 3D, it is a plane; in higher dimensions, it is a flat subspace of dimension n-1.
+2.3 Margin and Maximum-Margin Principle
+The margin is the distance between the hyperplane and the nearest data points from each class. SVM selects the hyperplane that maximises this margin. The rationale is that a wider margin provides better generalisation - the classifier is more robust to small variations in the data.
+2.4 Support Vectors
+Support vectors are the data points closest to the hyperplane - the points that define the margin. If these points were removed, the position of the hyperplane would change. The rest of the training data does not influence the hyperplane position. This makes SVM memory-efficient.
+2.5 The Decision Function
+The SVM decision function for a linear classifier is:
+f(x) = w   x + b
+where w is the weight vector (normal to the hyperplane), x is the input feature vector, and b is the bias. A sample is classified based on the sign of f(x).
+2.6 Linear SVM
+A linear SVM uses a straight hyperplane to separate classes. It works well when the data is linearly separable or approximately so.
+2.7 The Kernel Trick
+When data is not linearly separable in the original feature space, the kernel trick maps the data into a higher-dimensional space where a linear hyperplane can separate the classes. The kernel function computes the similarity between data points in this higher-dimensional space without explicitly computing the transformation.
+Common kernel functions:
+Kernel
+Description
+Use Case
+linear
+No transformation; finds a straight hyperplane
+Linearly separable data
+rbf (Radial Basis Function)
+Maps to infinite-dimensional space using Gaussian similarity
+General-purpose; most common default
+poly (Polynomial)
+Maps using polynomial features of specified degree
+When polynomial boundaries are expected
+sigmoid
+Uses hyperbolic tangent function
+Less common; behaves like a neural network
+2.8 Important Parameters
+C (Regularisation Parameter)
+C controls the trade-off between maximising the margin and minimising classification errors on the training data. A small C allows a wider margin (more misclassifications tolerated), promoting generalisation. A large C penalises misclassifications heavily, potentially leading to a narrower margin and overfitting.
+gamma (for RBF/Poly Kernels)
+gamma defines the influence of a single training sample. A low gamma means each sample influences a large area (smoother boundary). A high gamma makes the influence local, leading to complex, potentially overfitting boundaries.
+
+
+2.9 Illustrative Python Example
+from sklearn.svm import SVC
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, classification_report
+from sklearn.datasets import load_iris
+
+# Load dataset (using 2 classes for binary SVM)
+X, y = load_iris(return_X_y=True)
+
+# Train-test split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# Scale features
+scaler = StandardScaler()
+X_train_s = scaler.fit_transform(X_train)
+X_test_s = scaler.transform(X_test)
+
+# Train SVM with RBF kernel
+model = SVC(kernel='rbf', C=1.0, gamma='scale', random_state=42)
+model.fit(X_train_s, y_train)
+
+# Predictions
+y_pred = model.predict(X_test_s)
+
+# Evaluation
+print(f"Accuracy: {accuracy_score(y_test, y_pred):.4f}")
+print("\nClassification Report:")
+print(classification_report(y_test, y_pred))
+print(f"Number of support vectors: {sum(model.n_support_)}")
+  SVC (Support Vector Classifier) is the scikit-learn implementation of SVM.
+  kernel='rbf' uses the Radial Basis Function kernel.
+  C=1.0 provides a moderate regularisation level.
+  gamma='scale' sets gamma = 1 / (n_features   variance), a sensible default.
+  Feature scaling is important for SVM because the algorithm is sensitive to feature magnitudes.
+  model.n_support_ returns the number of support vectors per class.
+
+
+Python Example - Comparing Kernels
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score
+
+kernels = ['linear', 'rbf', 'poly']
+
+for k in kernels:
+    model = SVC(kernel=k, random_state=42)
+    model.fit(X_train_s, y_train)
+    y_pred = model.predict(X_test_s)
+    acc = accuracy_score(y_test, y_pred)
+    print(f"Kernel: {k:8s}  Accuracy: {acc:.4f}")
+  This loop trains SVM with three different kernels and compares accuracy.
+  The best kernel depends on the data distribution and separability.
+2.10 Advantages
+* Effective in high-dimensional spaces.
+* Memory-efficient - only support vectors are stored.
+* Versatile - different kernels allow handling of various data distributions.
+* Works well with clear margin of separation between classes.
+2.11 Limitations
+* Computationally expensive on very large datasets (training time scales poorly).
+* Sensitive to feature scaling - must standardise before training.
+* Does not directly provide probability estimates (requires extra computation).
+* Choice of kernel and hyperparameters (C, gamma) significantly affects performance.
+2.12 Applications
+* Handwriting and digit recognition.
+* Text categorisation and spam detection.
+* Image classification.
+* Bioinformatics (e.g., protein classification).
+3. PRETEST
+Answer all 20 questions. Each question has exactly one correct answer.
+1. SVM stands for ___.
+A) Standard Vector Model
+B) Support Vector Machine
+C) Supervised Variance Method
+D) Simple Vector Mapping
+2. In SVM, the decision boundary is called a ___.
+A) Centroid
+B) Hyperplane
+C) Cluster
+D) Perceptron
+3. The margin in SVM is ___.
+A) The distance between classes and the hyperplane
+B) The classification accuracy
+C) The number of support vectors
+D) The number of features
+4. SVM aims to ___ the margin.
+A) Minimise
+B) Maximise
+C) Ignore
+D) Randomise
+5. Support vectors are ___.
+A) All training data points
+B) The data points closest to the hyperplane
+C) The data points farthest from the hyperplane
+D) The centroid of each class
+6. A linear SVM separates classes using a ___.
+A) Curved boundary
+B) Straight hyperplane
+C) Circular boundary
+D) Random boundary
+7. The kernel trick allows SVM to handle ___.
+A) Missing values
+B) Non-linearly separable data
+C) Categorical features
+D) Unsupervised learning
+8. Which kernel is the default in scikit-learn's SVC?
+A) linear
+B) poly
+C) rbf
+D) sigmoid
+9. The C parameter controls ___.
+A) The number of classes
+B) The trade-off between margin width and training error
+C) The number of support vectors
+D) The kernel type
+10. A large C value leads to ___.
+A) A wider margin, more generalisation
+B) A narrower margin, less tolerance for misclassification
+C) No change in the margin
+D) Automatic kernel selection
+11. gamma in the RBF kernel controls ___.
+A) The number of features
+B) The influence radius of each training sample
+C) The learning rate
+D) The number of iterations
+12. High gamma in RBF kernel leads to ___.
+A) Smoother, more general boundaries
+B) Complex, potentially overfitting boundaries
+C) Linear boundaries
+D) Ignoring all data points
+13. Is feature scaling important for SVM?
+A) No, SVM is scale-invariant
+B) Yes, SVM is sensitive to feature magnitudes
+C) Only for the linear kernel
+D) Only when C > 1
+14. Which of the following is NOT a common SVM kernel?
+A) linear
+B) rbf
+C) poly
+D) euclidean
+15. SVM is a ___ learning algorithm.
+A) Unsupervised
+B) Supervised
+C) Reinforcement
+D) Self-supervised
+16. In 2D feature space, the hyperplane is a ___.
+A) Point
+B) Line
+C) Plane
+D) Cube
+17. If you remove a non-support-vector training point, does the hyperplane change?
+A) Yes, significantly
+B) No
+C) It depends on the kernel
+D) Always
+18. The decision function f(x) = w   x + b classifies based on ___.
+A) The magnitude of f(x)
+B) The sign of f(x)
+C) The mean of f(x)
+D) The gradient of f(x)
+19. Which scikit-learn class implements SVM for classification?
+A) SVR
+B) SVC
+C) LinearRegression
+D) KMeans
+20. Polynomial kernel of degree 1 is equivalent to a ___ kernel.
+A) rbf
+B) sigmoid
+C) linear
+D) Gaussian
+
+Pretest - Answer Key
+Q
+Ans
+Q
+Ans
+Q
+Ans
+Q
+Ans
+1
+B
+6
+B
+11
+B
+16
+B
+2
+B
+7
+B
+12
+B
+17
+B
+3
+A
+8
+C
+13
+B
+18
+B
+4
+B
+9
+B
+14
+D
+19
+B
+5
+B
+10
+B
+15
+B
+20
+C
+4. PROCEDURE
+4.1 V-Lab Workflow
+* Step 1: Load the classification dataset.
+* Step 2: Split into training and test sets.
+* Step 3: Standardise features using StandardScaler.
+* Step 4: Create an SVC model with a chosen kernel (e.g., 'rbf').
+* Step 5: Set parameters C and gamma as needed.
+* Step 6: Train the model using fit().
+* Step 7: Predict on the test set and compute evaluation metrics.
+* Step 8: Optionally compare different kernels.
+4.2 Input ? Process ? Output
+Stage
+Details
+Input
+Classification dataset, kernel type, C, gamma.
+Process
+Scaling ? Model training ? Hyperplane optimisation ? Prediction.
+Output
+Predicted classes, accuracy, classification report, number of support vectors.
+5. RESULTS AND ANALYSIS
+After completing the experiment, students should observe and interpret:
+* The classification accuracy and detailed classification report (precision, recall, F1 per class).
+* The number of support vectors - fewer support vectors generally indicate clearer class separation.
+* The effect of changing C - smaller C gives a wider margin; larger C fits the training data more tightly.
+* The effect of changing the kernel - different kernels produce different decision boundaries.
+* The importance of feature scaling - SVM performance typically degrades without standardisation.
+6. POSTTEST
+Answer all 20 questions. Each question has exactly one correct answer.
+1. You train an SVM with kernel='linear' and C=0.01. The model misclassifies some training samples. What should you try?
+A) Decrease C further
+B) Increase C
+C) Remove all features
+D) Use KMeans instead
+2. An SVM with RBF kernel and very high gamma perfectly fits the training data but performs poorly on the test set. This is likely ___.
+A) Underfitting
+B) Overfitting
+C) Correct behaviour
+D) A data leakage issue
+3. You compare SVM with linear vs. RBF kernel. Linear kernel gives 75% accuracy; RBF gives 92%. What does this suggest?
+A) The data is linearly separable
+B) The data has non-linear boundaries that RBF captures better
+C) The linear kernel is always superior
+D) Both kernels are equivalent
+4. model.n_support_ returns [15, 20]. What does this mean?
+A) There are 35 training samples
+B) Class 0 has 15 support vectors and class 1 has 20
+C) The model accuracy is 35%
+D) 15 features and 20 samples
+5. Why is StandardScaler applied before SVM but not after?
+A) SVM outputs need rescaling
+B) SVM input features must be on a comparable scale for the algorithm to work correctly
+C) It does not matter when scaling is applied
+D) Scaling is only needed for clustering
+6. You use SVC(kernel='poly', degree=3). What type of boundary does this create?
+A) Linear boundary
+B) Cubic polynomial boundary
+C) Circular boundary
+D) Random boundary
+7. SVC(probability=True) enables which method?
+A) fit()
+B) predict_proba()
+C) transform()
+D) score()
+8. In a 3-class problem, SVM uses ___ strategy by default in scikit-learn.
+A) One-vs-Rest (OvR)
+B) One-vs-One (OvO)
+C) Direct multi-class
+D) Clustering
+9. The term 'maximum-margin classifier' refers to SVM because ___.
+A) It uses the maximum number of features
+B) It finds the hyperplane with the widest margin between classes
+C) It maximises training time
+D) It maximises the number of support vectors
+10. If you set gamma='auto' in SVC, gamma is computed as ___.
+A) 1 / n_features
+B) 1 / (n_features   variance)
+C) 1.0
+D) 0.5
+11. An SVM model has 200 training samples and 50 support vectors. If you retrain with only the 50 support vectors, the hyperplane would be ___.
+A) Completely different
+B) Approximately the same
+C) Undefined
+D) Always better
+12. Which parameter should you tune first when SVM performance is poor?
+A) random_state
+B) C and kernel
+C) The number of features
+D) The test set size
+13. For a linearly separable dataset, which kernel is computationally most efficient?
+A) rbf
+B) poly (degree=5)
+C) linear
+D) sigmoid
+14. You train SVM on unscaled data and get 60% accuracy. After scaling, accuracy jumps to 95%. Why?
+A) Scaling removed outliers
+B) SVM is sensitive to feature scales; scaling put features on equal footing
+C) Scaling added new features
+D) This is impossible
+15. model.support_vectors_ returns ___.
+A) All training data
+B) Only the support vectors used to define the hyperplane
+C) The coefficients
+D) The test predictions
+16. SVM with kernel='rbf', C=1.0 gives 90% accuracy. Which change is most likely to improve performance?
+A) Setting C=0.001
+B) Tuning C and gamma using GridSearchCV
+C) Removing the kernel
+D) Using a random forest instead
+17. The bias term b in the SVM decision function is stored in ___.
+A) model.coef_
+B) model.intercept_
+C) model.bias_
+D) model.support_
+18. What does classification_report() provide that accuracy_score() does not?
+A) A single accuracy number
+B) Per-class precision, recall, and F1-score
+C) The number of features
+D) The training time
+19. SVM is particularly effective when ___.
+A) The dataset has millions of samples
+B) The number of features is high relative to the number of samples
+C) All features are categorical
+D) The data has no structure
+20. Which of the following increases SVM training time the most?
+A) Increasing the number of features slightly
+B) Increasing the number of training samples significantly
+C) Changing the random_state
+D) Using a linear kernel
+
+Posttest - Answer Key
+Q
+Ans
+Q
+Ans
+Q
+Ans
+Q
+Ans
+1
+B
+6
+B
+11
+B
+16
+B
+2
+B
+7
+B
+12
+B
+17
+B
+3
+B
+8
+B
+13
+C
+18
+B
+4
+B
+9
+B
+14
+B
+19
+B
+5
+B
+10
+A
+15
+B
+20
+B
+
+
+Experiment 7: K-Means Clustering
+1. AIM
+To understand the K-Means clustering algorithm as an unsupervised learning technique, implement it in Python using scikit-learn, and use the elbow method to determine an appropriate number of clusters.
+2. THEORY
+2.1 Unsupervised Learning
+Unsupervised learning works with unlabelled data - there is no target variable to predict. The goal is to discover hidden patterns, groupings, or structures within the data. Clustering is one of the most common unsupervised learning tasks.
+2.2 What Is Clustering?
+Clustering divides a dataset into groups (clusters) such that data points within the same cluster are more similar to each other than to data points in other clusters. Unlike classification, clustering does not require labelled target classes.
+2.3 K-Means Algorithm
+K-Means is an iterative clustering algorithm that partitions data into exactly K clusters. It works by alternating between two steps:
+Assignment Step
+Each data point is assigned to the nearest centroid based on Euclidean distance.
+d(x, c) = v[?(x? - c?) ]
+where x is a data point and c is a centroid.
+Update Step
+Each centroid is recalculated as the mean of all data points assigned to that cluster.
+These two steps repeat until the centroids no longer change significantly (convergence) or a maximum number of iterations is reached.
+2.4 The K-Means Process
+* Step 1: Choose the number of clusters K.
+* Step 2: Initialise K centroids (randomly or using a smart method like k-means++).
+* Step 3: Assign each data point to its nearest centroid.
+* Step 4: Update each centroid to the mean of its assigned points.
+* Step 5: Repeat Steps 3-4 until convergence.
+2.5 Inertia (Within-Cluster Sum of Squares)
+Inertia measures the total distance of all data points to their assigned centroids:
+Inertia = ? ? ||x - c_k|| 
+Lower inertia indicates tighter, more compact clusters. However, inertia always decreases as K increases (adding more clusters always reduces distances), so inertia alone cannot determine the optimal K.
+2.6 The Elbow Method
+The elbow method plots inertia against different values of K. As K increases, inertia decreases. At some point, the rate of decrease slows sharply, forming an 'elbow' in the curve. The K value at this elbow is often a good choice for the number of clusters.
+2.7 Illustrative Python Example
+from sklearn.cluster import KMeans
+from sklearn.datasets import make_blobs
+import numpy as np
+
+# Generate synthetic data with 3 natural clusters
+X, _ = make_blobs(n_samples=300, centers=3, random_state=42)
+
+# Fit K-Means with K=3
+kmeans = KMeans(n_clusters=3, random_state=42, n_init=10)
+kmeans.fit(X)
+
+# Results
+print("Cluster labels (first 10):", kmeans.labels_[:10])
+print("Cluster centres:\n", kmeans.cluster_centers_)
+print(f"Inertia: {kmeans.inertia_:.2f}")
+  make_blobs generates synthetic data with known cluster structure.
+  KMeans(n_clusters=3) partitions the data into 3 clusters.
+  n_init=10 runs K-Means 10 times with different initialisations, keeping the best result.
+  labels_ contains the cluster assignment (0, 1, or 2) for each data point.
+  cluster_centers_ contains the coordinates of the final centroids.
+  inertia_ is the total within-cluster sum of squared distances.
+
+
+Python Example - Elbow Method
+from sklearn.cluster import KMeans
+import numpy as np
+
+# Compute inertia for K = 1 to 10
+inertias = []
+K_range = range(1, 11)
+
+for k in K_range:
+    km = KMeans(n_clusters=k, random_state=42, n_init=10)
+    km.fit(X)
+    inertias.append(km.inertia_)
+
+print("K  |  Inertia")
+print("-" * 20)
+for k, inertia in zip(K_range, inertias):
+    print(f"{k:2d} |  {inertia:.2f}")
+
+# The 'elbow' point is where inertia stops decreasing rapidly
+  The loop fits K-Means for each value of K and records the inertia.
+  Plotting K vs. inertia reveals the elbow point.
+  Beyond the elbow, adding more clusters provides diminishing returns.
+2.8 Sensitivity to Initialisation and Outliers
+K-Means results depend on the initial placement of centroids. Poor initialisation can lead to suboptimal clusters. The k-means++ initialisation method (default in scikit-learn) mitigates this by spreading initial centroids apart.
+Outliers can distort centroids because the mean is pulled toward extreme values. This may result in unnatural cluster assignments.
+2.9 Advantages
+* Simple and intuitive.
+* Computationally efficient - scales well to large datasets.
+* Works well with spherical, equally sized clusters.
+* Easy to interpret - each point belongs to exactly one cluster.
+2.10 Limitations
+* Requires specifying K in advance.
+* Assumes spherical clusters of similar size and density.
+* Sensitive to initialisation and outliers.
+* Uses Euclidean distance - performs poorly with non-convex clusters.
+* Not suitable for categorical data directly.
+2.11 Applications
+* Customer segmentation in marketing.
+* Image compression (colour quantisation).
+* Document clustering for topic modelling.
+* Anomaly detection (points far from any centroid).
+3. PRETEST
+Answer all 20 questions. Each question has exactly one correct answer.
+1. K-Means is a ___ learning algorithm.
+A) Supervised
+B) Unsupervised
+C) Reinforcement
+D) Semi-supervised
+2. Clustering groups data based on ___.
+A) Known class labels
+B) Similarity among data points
+C) Regression targets
+D) Feature names
+3. Does K-Means require labelled target classes?
+A) Yes
+B) No
+C) Only for the test set
+D) Only for validation
+4. In K-Means, K refers to ___.
+A) The number of features
+B) The number of clusters
+C) The number of iterations
+D) The number of samples
+5. A centroid is ___.
+A) A data point at the boundary
+B) The mean position of all points in a cluster
+C) The median of the dataset
+D) An outlier
+6. Euclidean distance measures ___.
+A) Angular similarity
+B) Straight-line distance between two points
+C) Correlation
+D) Cosine similarity
+7. In the assignment step, each point is assigned to ___.
+A) A random cluster
+B) The nearest centroid
+C) The farthest centroid
+D) All clusters
+8. In the update step, centroids are recalculated as ___.
+A) The median of assigned points
+B) The mean of assigned points
+C) The mode of assigned points
+D) The maximum of assigned points
+9. K-Means iterates until ___.
+A) K becomes zero
+B) Centroids stop changing significantly
+C) All points are in one cluster
+D) Exactly 10 iterations
+10. Inertia in K-Means measures ___.
+A) The number of clusters
+B) Total within-cluster sum of squared distances
+C) Between-cluster distance
+D) The number of iterations
+11. As K increases, inertia generally ___.
+A) Increases
+B) Decreases
+C) Stays the same
+D) Oscillates
+12. The elbow method helps determine ___.
+A) The best features
+B) An appropriate value of K
+C) The learning rate
+D) The optimal distance metric
+13. k-means++ is an improved method for ___.
+A) Computing distances
+B) Initialising centroids
+C) Selecting features
+D) Evaluating clusters
+14. K-Means assumes clusters are approximately ___.
+A) Linear
+B) Spherical
+C) Triangular
+D) Hierarchical
+15. Which Python class implements K-Means in scikit-learn?
+A) KMeans from sklearn.cluster
+B) KMeans from sklearn.linear_model
+C) KMeans from sklearn.tree
+D) KMeans from sklearn.svm
+16. n_init in KMeans specifies ___.
+A) Number of clusters
+B) Number of times K-Means runs with different initialisations
+C) Number of features
+D) Number of data points
+17. After fitting, kmeans.labels_ contains ___.
+A) Feature names
+B) Cluster assignment for each data point
+C) Centroid coordinates
+D) Inertia values
+18. After fitting, kmeans.cluster_centers_ contains ___.
+A) The original data
+B) Coordinates of the final centroids
+C) Distance matrix
+D) Labels
+19. Outliers can distort K-Means because ___.
+A) They are always removed
+B) They pull centroids toward extreme values
+C) They create new clusters automatically
+D) They have no effect
+20. K-Means uses which distance metric by default?
+A) Manhattan
+B) Euclidean
+C) Cosine
+D) Hamming
+
+Pretest - Answer Key
+Q
+Ans
+Q
+Ans
+Q
+Ans
+Q
+Ans
+1
+B
+6
+B
+11
+B
+16
+B
+2
+B
+7
+B
+12
+B
+17
+B
+3
+B
+8
+B
+13
+B
+18
+B
+4
+B
+9
+B
+14
+B
+19
+B
+5
+B
+10
+B
+15
+A
+20
+B
+4. PROCEDURE
+4.1 V-Lab Workflow
+* Step 1: Load or generate the dataset (note: no target labels are needed).
+* Step 2: Choose an initial value for K (e.g., 3).
+* Step 3: Fit KMeans with the chosen K.
+* Step 4: Examine cluster labels, centroids, and inertia.
+* Step 5: Perform the elbow method: fit K-Means for K = 1 to 10 and record inertia.
+* Step 6: Identify the elbow point in the inertia vs. K plot.
+* Step 7: Re-run K-Means with the chosen optimal K and interpret results.
+4.2 Input ? Process ? Output
+Stage
+Details
+Input
+Unlabelled dataset, number of clusters K.
+Process
+Centroid initialisation ? Assignment ? Update ? Repeat until convergence.
+Output
+Cluster labels, centroid coordinates, inertia, elbow plot data.
+5. RESULTS AND ANALYSIS
+After completing the experiment, students should observe and interpret:
+* Each data point receives a cluster label (0, 1, ... K-1).
+* Centroids represent the centre of each cluster - they summarise the cluster.
+* Inertia quantifies cluster compactness - lower is better for a given K.
+* The elbow plot helps identify when adding more clusters provides diminishing returns.
+* Different random seeds or initialisations may produce slightly different results.
+Students should understand that K-Means does not guarantee globally optimal clusters. Multiple runs (n_init) and the k-means++ initialisation help mitigate this.
+6. POSTTEST
+Answer all 20 questions. Each question has exactly one correct answer.
+1. You run K-Means with K=4 on 200 data points. How many centroids are there after convergence?
+A) 1
+B) 4
+C) 200
+D) 50
+2. Inertia for K=3 is 150. For K=4, inertia is 148. For K=5, inertia is 147. What does this suggest?
+A) K=3 is optimal because inertia is highest
+B) The elbow is around K=3; increasing K beyond 3 gives marginal improvement
+C) K=5 is always the best choice
+D) Inertia should increase with K
+3. After running K-Means, you find one cluster has 5 points and another has 195. What might this indicate?
+A) K-Means always creates equal clusters
+B) The data may have one large natural group and some outliers or a small subgroup
+C) The algorithm failed
+D) K should be increased to 200
+4. You apply K-Means to customer data with features 'Age' (20-70) and 'Income' (20000-200000). What preprocessing is recommended?
+A) No preprocessing needed
+B) Feature scaling to equalise the influence of both features
+C) Removing the Age feature
+D) Label encoding
+5. kmeans.predict(new_data) assigns each new data point to ___.
+A) A random cluster
+B) The nearest existing centroid
+C) A new cluster
+D) The centroid with the most points
+6. If K = n_samples (each point is its own cluster), inertia equals ___.
+A) Maximum
+B) Minimum (0)
+C) Undefined
+D) Infinity
+7. K-Means converged after 5 iterations. What does this mean?
+A) It ran for exactly 5 iterations regardless
+B) Centroids stopped moving significantly after 5 iterations
+C) There are 5 clusters
+D) 5 features were used
+8. You run K-Means twice with different random_state values and get different cluster assignments. Why?
+A) The algorithm is deterministic
+B) Different initial centroids can lead to different local optima
+C) The data changed between runs
+D) K-Means uses gradient descent
+9. n_init=10 means K-Means runs ___ times and keeps ___.
+A) 10 times; the result with lowest inertia
+B) 10 times; the result with highest inertia
+C) 10 times; the average of all results
+D) 1 time with 10 clusters
+10. Your data has 3 well-separated spherical clusters. K-Means with K=3 will likely ___.
+A) Fail completely
+B) Correctly identify the 3 clusters
+C) Merge all clusters into 1
+D) Create 6 clusters
+11. For K-Means, which type of cluster shape is hardest to detect?
+A) Spherical
+B) Crescent-shaped (non-convex)
+C) Equal-sized spheres
+D) Dense spheres
+12. What is the time complexity order of K-Means?
+A) O(n )
+B) O(n   K   iterations   features)
+C) O(log n)
+D) O(1)
+13. After fitting, you want to see which cluster a specific sample belongs to. You check ___.
+A) kmeans.inertia_
+B) kmeans.labels_[sample_index]
+C) kmeans.cluster_centers_
+D) kmeans.n_init
+14. K-Means on text data requires ___.
+A) No preprocessing
+B) Converting text to numerical vectors (e.g., TF-IDF) first
+C) Using K = number of words
+D) Labelling the text manually
+15. The elbow method is subjective because ___.
+A) It always gives K=5
+B) The exact elbow point can be ambiguous
+C) It uses supervised labels
+D) It only works for K=2
+16. Silhouette score is an alternative to the elbow method. It measures ___.
+A) Training accuracy
+B) How similar a point is to its cluster vs. other clusters
+C) The number of iterations
+D) The learning rate
+17. You set max_iter=1 in KMeans. What happens?
+A) The algorithm doesn't run
+B) Only one assignment-update cycle is performed, and centroids may not have converged
+C) K is set to 1
+D) An error is raised
+18. K-Means is an example of ___ clustering.
+A) Hierarchical
+B) Partitional
+C) Density-based
+D) Graph-based
+19. Can K-Means be used for image compression?
+A) No, it only works for tabular data
+B) Yes - colours can be clustered and replaced with centroid colours
+C) Only with supervised labels
+D) Only for grayscale images
+20. After clustering, you notice one centroid is very far from all data points. This likely means ___.
+A) The clustering is perfect
+B) The centroid was initialised poorly or there are outliers pulling it
+C) K is too small
+D) The data is not numerical
+
+Posttest - Answer Key
+Q
+Ans
+Q
+Ans
+Q
+Ans
+Q
+Ans
+1
+B
+6
+B
+11
+B
+16
+B
+2
+B
+7
+B
+12
+B
+17
+B
+3
+B
+8
+B
+13
+B
+18
+B
+4
+B
+9
+A
+14
+B
+19
+B
+5
+B
+10
+B
+15
+B
+20
+B
+
+
+Experiment 8: Decision Tree Classification
+1. AIM
+To understand the decision tree classification algorithm, implement it in Python using scikit-learn, and analyse how the tree makes predictions using splitting criteria such as Gini impurity and entropy.
+2. THEORY
+2.1 What Is a Decision Tree?
+A decision tree is a supervised learning algorithm that makes predictions by learning a sequence of if-then-else decision rules from the training data. It recursively partitions the feature space into regions, each associated with a class label.
+2.2 Tree Structure
+A decision tree consists of:
+* Root node - the topmost node; the first splitting decision.
+* Internal nodes - nodes where the data is split based on a feature condition.
+* Branches - connections between nodes, representing the outcome of a decision.
+* Leaf nodes - terminal nodes that provide the final class prediction.
+2.3 How Predictions Are Made
+To classify a new sample, the tree starts at the root node and follows branches based on the sample's feature values. At each internal node, a condition is checked (e.g., 'Is Feature A = 5.0?'). The sample moves left or right depending on the answer. This continues until a leaf node is reached, which provides the predicted class.
+2.4 Splitting Criteria
+The tree decides which feature and threshold to split on by evaluating how well a split separates the classes. The goal is to create child nodes that are as 'pure' as possible (dominated by a single class).
+Gini Impurity
+Gini = 1 - ? p? 
+where p? is the proportion of samples belonging to class i in a node. Gini = 0 means the node is perfectly pure (all samples belong to one class). Gini is maximised when classes are equally distributed.
+Entropy
+Entropy = -? p?   log2(p?)
+Entropy measures disorder. Entropy = 0 means the node is pure. Maximum entropy occurs when all classes are equally represented.
+Information Gain
+Information Gain = Entropy(parent) - Weighted Average of Entropy(children)
+The split that produces the highest information gain (or equivalently, the largest reduction in impurity) is selected. Gini impurity and entropy often produce similar splits.
+2.5 Tree Depth and Overfitting
+A decision tree can grow until every leaf is perfectly pure, but this often leads to overfitting - the tree memorises the training data, including noise, and generalises poorly. Controlling tree depth is essential.
+2.6 Pruning
+Pruning removes parts of the tree that do not improve generalisation. Pre-pruning limits growth during training (e.g., setting max_depth, min_samples_split). Post-pruning removes branches after the full tree is grown. In scikit-learn, pre-pruning parameters are commonly used.
+2.7 Important Parameters
+Parameter
+Description
+criterion
+'gini' or 'entropy' - the splitting criterion.
+max_depth
+Maximum depth of the tree. Limits overfitting.
+min_samples_split
+Minimum samples required to split an internal node.
+min_samples_leaf
+Minimum samples required at a leaf node.
+max_features
+Number of features to consider for each split.
+
+
+2.8 Illustrative Python Example
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, classification_report
+from sklearn.datasets import load_iris
+
+# Load dataset
+X, y = load_iris(return_X_y=True)
+feature_names = load_iris().feature_names
+
+# Split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# Train Decision Tree
+model = DecisionTreeClassifier(
+    criterion='gini', max_depth=3, random_state=42
+)
+model.fit(X_train, y_train)
+
+# Predictions
+y_pred = model.predict(X_test)
+
+# Evaluation
+print(f"Accuracy: {accuracy_score(y_test, y_pred):.4f}")
+print("\nClassification Report:")
+print(classification_report(y_test, y_pred))
+
+# Feature importance
+print("\nFeature Importances:")
+for name, importance in zip(feature_names, model.feature_importances_):
+    print(f"  {name}: {importance:.4f}")
+  DecisionTreeClassifier builds a classification tree.
+  criterion='gini' uses Gini impurity for splitting (default).
+  max_depth=3 limits the tree to 3 levels, reducing overfitting.
+  feature_importances_ shows each feature's contribution to the splitting decisions.
+  A higher importance value means the feature is more influential in classification.
+
+
+Python Example - Using Entropy
+# Train with entropy criterion
+model_entropy = DecisionTreeClassifier(
+    criterion='entropy', max_depth=4, random_state=42
+)
+model_entropy.fit(X_train, y_train)
+y_pred_e = model_entropy.predict(X_test)
+print(f"Accuracy (entropy): {accuracy_score(y_test, y_pred_e):.4f}")
+  Changing criterion to 'entropy' uses information gain for splitting.
+  Both Gini and entropy generally produce comparable tree structures.
+2.9 Advantages
+* Easy to understand and visualise - resembles human decision-making.
+* Requires minimal data preprocessing (no scaling needed).
+* Handles both numerical and categorical features.
+* Feature importance is built in.
+2.10 Limitations
+* Prone to overfitting, especially with deep trees and noisy data.
+* Unstable - small changes in data can produce a very different tree.
+* Biased toward features with many levels or high cardinality.
+* Cannot extrapolate beyond the range of training data.
+2.11 Applications
+* Medical diagnosis decision support.
+* Credit approval systems.
+* Customer behaviour analysis.
+* Rule extraction for business logic.
+3. PRETEST
+Answer all 20 questions. Each question has exactly one correct answer.
+1. A decision tree makes predictions using a sequence of ___.
+A) Mathematical equations
+B) If-then-else rules
+C) Random guesses
+D) Gradient computations
+2. The topmost node in a decision tree is called the ___.
+A) Leaf node
+B) Root node
+C) Internal node
+D) Branch
+3. Leaf nodes in a decision tree provide ___.
+A) Splitting conditions
+B) The final class prediction
+C) Feature names
+D) Training data
+4. Gini impurity of 0 means ___.
+A) Maximum impurity
+B) The node is perfectly pure
+C) All classes are equally distributed
+D) The tree has no nodes
+5. Entropy of 0 means ___.
+A) Maximum disorder
+B) The node is perfectly pure
+C) The tree is unpruned
+D) All features are used
+6. Information gain measures ___.
+A) The depth of the tree
+B) The reduction in impurity after a split
+C) The number of features
+D) The accuracy of the model
+7. Overfitting in a decision tree occurs when ___.
+A) The tree is too shallow
+B) The tree is too deep and memorises noise in the data
+C) No features are used
+D) The training accuracy is low
+8. max_depth limits ___.
+A) The number of features
+B) The maximum number of levels in the tree
+C) The number of training samples
+D) The number of leaf nodes only
+9. Pruning a decision tree helps ___.
+A) Increase tree complexity
+B) Reduce overfitting by simplifying the tree
+C) Add more data
+D) Speed up data loading
+10. Which parameter changes the splitting criterion to entropy?
+A) max_depth='entropy'
+B) criterion='entropy'
+C) splitter='entropy'
+D) strategy='entropy'
+11. Decision trees do NOT require ___.
+A) Labelled training data
+B) Feature scaling
+C) Internal nodes
+D) A splitting criterion
+12. A node with Gini = 0.5 (for 2 classes) is ___.
+A) Perfectly pure
+B) Maximally impure
+C) Empty
+D) A leaf node
+13. Feature importance in a decision tree is based on ___.
+A) Alphabetical order of feature names
+B) How much each feature reduces impurity across all splits
+C) The number of missing values
+D) The feature's data type
+14. Which scikit-learn class implements classification trees?
+A) DecisionTreeRegressor
+B) DecisionTreeClassifier
+C) RandomForestClassifier
+D) SVC
+15. In Gini = 1 - ?p? , p? is ___.
+A) The feature value
+B) The proportion of class i in the node
+C) The number of samples
+D) The tree depth
+16. A decision tree with max_depth=1 is called a ___.
+A) Forest
+B) Stump
+C) Bush
+D) Root
+17. Which of the following can a decision tree handle directly?
+A) Both numerical and categorical features
+B) Only numerical features
+C) Only categorical features
+D) Only binary features
+18. At each internal node, the tree checks ___.
+A) All features simultaneously
+B) A condition on one feature (e.g., Feature A = 5.0)
+C) The target variable
+D) The test accuracy
+19. How does a decision tree classify a new sample?
+A) By computing a weighted sum
+B) By traversing from root to leaf, following branches based on feature values
+C) By comparing to all training samples
+D) By random selection
+20. The default criterion in DecisionTreeClassifier is ___.
+A) entropy
+B) gini
+C) log_loss
+D) mse
+
+Pretest - Answer Key
+Q
+Ans
+Q
+Ans
+Q
+Ans
+Q
+Ans
+1
+B
+6
+B
+11
+B
+16
+B
+2
+B
+7
+B
+12
+B
+17
+A
+3
+B
+8
+B
+13
+B
+18
+B
+4
+B
+9
+B
+14
+B
+19
+B
+5
+B
+10
+B
+15
+B
+20
+B
+4. PROCEDURE
+4.1 V-Lab Workflow
+* Step 1: Load the classification dataset.
+* Step 2: Split into training and test sets.
+* Step 3: Create a DecisionTreeClassifier with a chosen criterion and max_depth.
+* Step 4: Train the model using fit().
+* Step 5: Predict on the test set.
+* Step 6: Compute accuracy and classification report.
+* Step 7: Examine feature importances.
+* Step 8: Experiment with different max_depth values to observe the effect on accuracy.
+4.2 Input ? Process ? Output
+Stage
+Details
+Input
+Classification dataset, criterion (gini/entropy), max_depth.
+Process
+Recursive splitting based on impurity reduction ? Tree construction ? Prediction.
+Output
+Predicted classes, accuracy, classification report, feature importances.
+5. RESULTS AND ANALYSIS
+After completing the experiment, students should observe and interpret:
+* Classification accuracy - does the tree correctly classify most test samples?
+* Feature importances - which features are most influential in the decision-making process?
+* Effect of max_depth - deeper trees may overfit (high train accuracy, lower test accuracy).
+* Gini vs. entropy - both criteria typically yield similar results for most datasets.
+* The tree structure implicitly encodes interpretable decision rules.
+Students should compare the performance of a shallow tree (e.g., max_depth=2) versus a deep tree (e.g., max_depth=None) and discuss the trade-off between bias and variance.
+6. POSTTEST
+Answer all 20 questions. Each question has exactly one correct answer.
+1. A node contains 40 samples of class A and 60 of class B. The Gini impurity is ___.
+A) 0.48
+B) 0.50
+C) 0.40
+D) 0.60
+2. Using the same node (40A, 60B), if a split produces a child with 40A and 0B, that child's Gini is ___.
+A) 0.0
+B) 0.48
+C) 0.50
+D) 1.0
+3. You train a tree with max_depth=None. Training accuracy is 100% but test accuracy is 65%. This suggests ___.
+A) The tree is underfitting
+B) The tree is overfitting
+C) Perfect generalisation
+D) The test set is wrong
+4. To reduce overfitting, you should ___.
+A) Remove max_depth
+B) Decrease max_depth
+C) Increase training data to infinity
+D) Use a larger tree
+5. feature_importances_ = [0.05, 0.80, 0.10, 0.05]. Which feature is most important?
+A) Feature 1
+B) Feature 2
+C) Feature 3
+D) Feature 4
+6. A stump (max_depth=1) makes ___ split(s).
+A) 0
+B) 1
+C) 2
+D) Many
+7. You change criterion from 'gini' to 'entropy'. The accuracy changes from 0.93 to 0.92. What does this suggest?
+A) Entropy is always worse
+B) Gini and entropy often give similar results; the small difference may not be significant
+C) Gini is incorrect
+D) The dataset requires a different algorithm
+8. A decision tree with no depth limit and min_samples_leaf=1 is likely to ___.
+A) Underfit
+B) Overfit by memorising training data
+C) Achieve exactly 50% accuracy
+D) Not train at all
+9. In a multi-class problem with 5 classes, the maximum Gini impurity is ___.
+A) 0.50
+B) 0.80
+C) 0.20
+D) 1.00
+10. You notice the tree uses only 2 out of 10 features. The importance of unused features is ___.
+A) Negative
+B) 0.0
+C) 1.0
+D) Undefined
+11. For the split 'petal_length = 2.45', samples with petal_length = 2.0 go to the ___ branch.
+A) Left (True/Yes)
+B) Right (False/No)
+C) Both branches
+D) Neither branch
+12. min_samples_split=10 means ___.
+A) A node must have at least 10 samples to be considered for splitting
+B) The tree has exactly 10 splits
+C) 10 features are used per split
+D) The test set has 10 samples
+13. Decision trees can handle missing values natively in scikit-learn (as of recent versions). True or False?
+A) True
+B) False
+C) Only for regression trees
+D) Only with entropy
+14. A very shallow tree (max_depth=1) is likely to ___.
+A) Overfit
+B) Underfit
+C) Achieve perfect accuracy
+D) Crash
+15. Which attribute provides the tree structure after fitting?
+A) model.tree_
+B) model.structure_
+C) model.nodes_
+D) model.graph_
+16. What does model.predict(X_test) return for a DecisionTreeClassifier?
+A) Probabilities
+B) Class labels
+C) Feature importances
+D) Gini values
+17. Two features have equal Gini reduction at a node. Which one is selected?
+A) The first one encountered (implementation-dependent)
+B) Both are used simultaneously
+C) Neither; the node becomes a leaf
+D) The one with fewer unique values
+18. Adding random_state to DecisionTreeClassifier ensures ___.
+A) The tree is always optimal
+B) Reproducible results when there are ties in feature selection
+C) The data is shuffled differently each time
+D) Overfitting is prevented
+19. Can the same feature be used for splitting at multiple nodes in the same tree?
+A) No, each feature is used only once
+B) Yes, a feature can be used at different thresholds in different nodes
+C) Only if max_depth > 5
+D) Only with entropy criterion
+20. predict_proba() for a decision tree returns the proportion of ___ in the leaf node.
+A) Features
+B) Training samples of each class
+C) Splits
+D) Internal nodes
+
+Posttest - Answer Key
+Q
+Ans
+Q
+Ans
+Q
+Ans
+Q
+Ans
+1
+A
+6
+B
+11
+A
+16
+B
+2
+A
+7
+B
+12
+A
+17
+A
+3
+B
+8
+B
+13
+A
+18
+B
+4
+B
+9
+B
+14
+B
+19
+B
+5
+B
+10
+B
+15
+A
+20
+B
+Experiment 9: Random Forest Classification
+1. AIM
+To understand Random Forest as an ensemble learning method built on multiple decision trees, implement it in Python using scikit-learn, and compare its performance and robustness against a single decision tree.
+2. THEORY
+2.1 Ensemble Learning
+Ensemble learning combines the predictions of multiple individual models (base learners) to produce a more accurate and robust overall prediction. The idea is that a group of diverse models, even if individually imperfect, can collectively outperform any single model.
+2.2 From Decision Tree to Random Forest
+A single decision tree is easy to interpret but prone to overfitting and instability. Random Forest addresses these weaknesses by building many decision trees and combining their predictions.
+Aspect
+Decision Tree
+Random Forest
+Number of trees
+1
+Many (controlled by n_estimators)
+Training data
+Uses the full training set
+Each tree uses a random bootstrap sample
+Feature selection
+Considers all features at each split
+Considers a random subset at each split
+Overfitting
+High risk (especially deep trees)
+Much lower risk due to averaging
+Stability
+Unstable - small data changes can change the tree
+More stable - many trees smooth out variations
+Interpretability
+High (visualise a single tree)
+Lower (many trees are harder to inspect individually)
+2.3 How Random Forest Works
+Bootstrap Sampling (Bagging)
+Each tree is trained on a bootstrap sample - a random sample drawn with replacement from the training data. This means each tree sees a slightly different version of the data, introducing diversity.
+Random Feature Selection
+At each split, only a random subset of features is considered (typically vn features for classification). This further decorrelates the trees, making the ensemble more robust.
+Voting (Aggregation)
+For classification, each tree votes for a class. The class with the most votes across all trees is the final prediction (majority voting). For regression, predictions are averaged.
+2.4 Key Parameter: n_estimators
+n_estimators is the number of trees in the forest. More trees generally improve performance and stability, but with diminishing returns and increased computation time. Common values range from 100 to 500.
+2.5 Feature Importance
+Random Forest provides a built-in measure of feature importance, calculated by averaging the impurity reduction contributed by each feature across all trees. This gives a more reliable estimate than a single tree, because it is averaged over many diverse trees.
+2.6 Overfitting and Generalisation
+Random Forest is inherently resistant to overfitting compared to a single deep decision tree. The combination of bagging and random feature selection ensures that the trees make different errors, which are cancelled out during voting. However, Random Forest can still overfit if n_estimators is very small or max_depth is excessive on noisy data.
+
+
+2.7 Illustrative Python Example
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, classification_report
+from sklearn.datasets import load_iris
+
+# Load dataset
+X, y = load_iris(return_X_y=True)
+feature_names = load_iris().feature_names
+
+# Split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# Train Random Forest
+model = RandomForestClassifier(
+    n_estimators=100, random_state=42
+)
+model.fit(X_train, y_train)
+
+# Predictions
+y_pred = model.predict(X_test)
+
+# Evaluation
+print(f"Accuracy: {accuracy_score(y_test, y_pred):.4f}")
+print("\nClassification Report:")
+print(classification_report(y_test, y_pred))
+
+# Feature importance
+print("\nFeature Importances:")
+for name, importance in zip(feature_names, model.feature_importances_):
+    print(f"  {name}: {importance:.4f}")
+  RandomForestClassifier builds an ensemble of decision trees.
+  n_estimators=100 creates 100 trees in the forest.
+  Each tree is trained on a different bootstrap sample with random feature subsets.
+  The final prediction is determined by majority voting across all trees.
+  feature_importances_ is averaged across all trees, providing a more stable estimate.
+
+
+Python Example - Comparing Decision Tree vs. Random Forest
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+
+# Decision Tree
+dt = DecisionTreeClassifier(random_state=42)
+dt.fit(X_train, y_train)
+dt_acc = accuracy_score(y_test, dt.predict(X_test))
+
+# Random Forest
+rf = RandomForestClassifier(n_estimators=100, random_state=42)
+rf.fit(X_train, y_train)
+rf_acc = accuracy_score(y_test, rf.predict(X_test))
+
+print(f"Decision Tree Accuracy: {dt_acc:.4f}")
+print(f"Random Forest Accuracy: {rf_acc:.4f}")
+  This comparison highlights that Random Forest typically matches or exceeds a single decision tree.
+  The improvement comes from reduced variance through ensemble averaging.
+2.8 Advantages
+* More accurate and robust than a single decision tree.
+* Resistant to overfitting due to bagging and random feature selection.
+* Handles high-dimensional data well.
+* Provides reliable feature importance estimates.
+* Works well with default hyperparameters.
+2.9 Limitations
+* Less interpretable than a single decision tree - harder to visualise the ensemble.
+* Slower to train and predict than a single tree (especially with many estimators).
+* Higher memory usage due to storing many trees.
+* May not improve significantly over a single tree on very simple datasets.
+2.10 Applications
+* Medical diagnosis and clinical prediction.
+* Fraud detection in financial transactions.
+* Gene expression analysis and bioinformatics.
+* Remote sensing and land cover classification.
+3. PRETEST
+Answer all 20 questions. Each question has exactly one correct answer.
+1. Random Forest is an example of ___.
+A) A single model
+B) An ensemble method
+C) An unsupervised algorithm
+D) A preprocessing technique
+2. Random Forest is built from multiple ___.
+A) Linear regressions
+B) Decision trees
+C) SVMs
+D) Perceptrons
+3. n_estimators in Random Forest controls ___.
+A) The number of features
+B) The number of trees
+C) The tree depth
+D) The number of classes
+4. Bootstrap sampling means ___.
+A) Using all data for every tree
+B) Drawing random samples with replacement
+C) Removing outliers
+D) Splitting data into K folds
+5. At each split in a Random Forest tree, the algorithm considers ___.
+A) All features
+B) A random subset of features
+C) Only the most important feature
+D) No features
+6. The final prediction in Random Forest classification is determined by ___.
+A) The first tree only
+B) The last tree only
+C) Majority voting across all trees
+D) The average of probabilities only
+7. Compared to a single decision tree, Random Forest is generally ___.
+A) Less accurate
+B) More accurate and more robust
+C) Faster to train
+D) More prone to overfitting
+8. Feature importance in Random Forest is ___.
+A) Based on one tree only
+B) Averaged across all trees in the ensemble
+C) Always zero
+D) Not available
+9. Random Forest reduces overfitting by ___.
+A) Making the tree deeper
+B) Combining many diverse trees that make different errors
+C) Using only one feature
+D) Removing the training data
+10. Increasing n_estimators from 10 to 100 generally ___.
+A) Decreases accuracy
+B) Improves accuracy with diminishing returns
+C) Has no effect
+D) Causes overfitting
+11. Which is more interpretable?
+A) A single decision tree
+B) A Random Forest
+C) Both equally
+D) Neither
+12. In Random Forest, each tree sees ___.
+A) The exact same data
+B) A different bootstrap sample
+C) Only 10% of the data
+D) Only the test data
+13. Bagging stands for ___.
+A) Basic aggregation
+B) Bootstrap aggregating
+C) Batch gradient
+D) Binary averaging
+14. For classification with Random Forest, the default number of features considered per split is ___.
+A) All features
+B) vn features
+C) 1 feature
+D) n/2 features
+15. A Random Forest with n_estimators=1 is equivalent to ___.
+A) A logistic regression
+B) A single decision tree (trained on a bootstrap sample)
+C) K-Means
+D) PCA
+16. Which Python class implements Random Forest classification in scikit-learn?
+A) RandomForestRegressor
+B) RandomForestClassifier
+C) DecisionTreeClassifier
+D) GradientBoostingClassifier
+17. Random Forest provides out-of-bag (OOB) score. This is an estimate of ___.
+A) Training accuracy
+B) Generalisation accuracy without a separate test set
+C) Feature importance
+D) The number of trees needed
+18. Compared to a single decision tree, Random Forest uses ___.
+A) Less memory
+B) More memory (stores all trees)
+C) The same memory
+D) No memory
+19. Random Forest can handle ___ features.
+A) Only numerical
+B) Only categorical
+C) Both numerical and categorical
+D) Only binary
+20. The key difference between a Decision Tree and Random Forest is ___.
+A) Random Forest uses a different splitting criterion
+B) Random Forest trains multiple trees on bootstrapped data with random feature subsets
+C) Decision Trees cannot classify data
+D) Random Forest uses K-Means internally
+
+
+
+Pretest - Answer Key
+Q
+Ans
+Q
+Ans
+Q
+Ans
+Q
+Ans
+1
+B
+6
+C
+11
+A
+16
+B
+2
+B
+7
+B
+12
+B
+17
+B
+3
+B
+8
+B
+13
+B
+18
+B
+4
+B
+9
+B
+14
+B
+19
+C
+5
+B
+10
+B
+15
+B
+20
+B
+4. PROCEDURE
+4.1 V-Lab Workflow
+* Step 1: Load the classification dataset.
+* Step 2: Split into training and test sets.
+* Step 3: Train a single DecisionTreeClassifier and record its accuracy.
+* Step 4: Train a RandomForestClassifier with n_estimators=100 and record its accuracy.
+* Step 5: Compare the accuracy and classification reports of both models.
+* Step 6: Examine feature importances from the Random Forest.
+* Step 7: Optionally vary n_estimators and observe the effect on accuracy.
+4.2 Input ? Process ? Output
+Stage
+Details
+Input
+Classification dataset, n_estimators.
+Process
+Bootstrap sampling ? Train multiple trees ? Majority voting.
+Output
+Predicted classes, accuracy, classification report, feature importances.
+5. RESULTS AND ANALYSIS
+After completing the experiment, students should observe and interpret:
+* Random Forest accuracy is typically equal to or higher than a single decision tree.
+* Random Forest feature importances are more stable (less sensitive to specific data splits).
+* Increasing n_estimators improves accuracy up to a point, after which returns diminish.
+* Random Forest generalises better - the gap between training and test accuracy is usually smaller.
+* The trade-off: improved accuracy comes at the cost of interpretability and computation.
+6. POSTTEST
+Answer all 20 questions. Each question has exactly one correct answer.
+1. You train a Decision Tree (accuracy=0.88) and a Random Forest (accuracy=0.95). Why is the Random Forest better?
+A) It uses a completely different algorithm
+B) The ensemble of diverse trees reduces variance and errors
+C) It uses fewer features
+D) It always achieves 100% accuracy
+2. A Random Forest with n_estimators=500 is slower than one with n_estimators=50. Why?
+A) 500 trees require more training and prediction time
+B) 500 trees use fewer features
+C) The accuracy decreases with more trees
+D) The data size increases
+3. You observe that a single decision tree's feature importances vary significantly when trained on different random splits. Random Forest importances are more consistent. Why?
+A) Random Forest uses a fixed split
+B) Random Forest averages importances across many trees, reducing variability
+C) Random Forest ignores feature importance
+D) Decision trees compute importances incorrectly
+4. oob_score=True in RandomForestClassifier enables ___.
+A) Overfit detection
+B) Out-of-bag accuracy estimation using samples not included in each tree's bootstrap
+C) Outlier removal
+D) Optimal bias computation
+5. In a Random Forest with 100 trees, each prediction is made by ___.
+A) 1 tree
+B) 50 trees
+C) All 100 trees (majority vote)
+D) The tree with highest accuracy
+6. You set max_features='sqrt' in RandomForestClassifier. For a dataset with 16 features, each split considers ___.
+A) 16 features
+B) 4 features
+C) 8 features
+D) 1 feature
+7. A Random Forest on a small dataset (50 samples) with n_estimators=1000 is likely to ___.
+A) Underfit severely
+B) Perform well but be computationally wasteful; the many trees see very similar bootstrap samples
+C) Crash
+D) Achieve 0% accuracy
+8. Which of the following is NOT a hyperparameter of Random Forest?
+A) n_estimators
+B) max_depth
+C) learning_rate
+D) min_samples_split
+9. Two Random Forest models have the same n_estimators but different random_state values. Their accuracies will likely be ___.
+A) Identical
+B) Very similar but not identical
+C) Completely different
+D) Zero for one of them
+10. model.estimators_ in Random Forest contains ___.
+A) Feature importances
+B) The list of individual decision tree objects
+C) The training data
+D) The bootstrap samples
+11. Can you visualise a single tree from a Random Forest?
+A) No, never
+B) Yes - each tree in model.estimators_ is a standard DecisionTreeClassifier
+C) Only the first tree
+D) Only if n_estimators=1
+12. Random Forest with n_estimators=1 and max_features=None is essentially ___.
+A) A logistic regression
+B) A single decision tree trained on a bootstrap sample
+C) K-Means clustering
+D) PCA
+13. What is the effect of setting bootstrap=False in RandomForestClassifier?
+A) Each tree is trained on the full dataset (no bootstrap sampling)
+B) The model does not train
+C) Each tree uses only 50% of the data
+D) Out-of-bag estimation is enabled
+14. For a problem with 4 classes, Random Forest's majority voting selects ___.
+A) Always class 0
+B) The class with the most votes across all trees
+C) The class with the least votes
+D) A random class
+15. You compare Random Forest to a single decision tree on 10 different random splits. Random Forest accuracy has lower variance. This demonstrates ___.
+A) Underfitting
+B) Greater stability due to ensemble averaging
+C) Worse performance
+D) Data leakage
+16. Feature importances from Random Forest always sum to ___.
+A) 0
+B) 0.5
+C) 1.0
+D) n_features
+17. A Random Forest trained on text data would require ___.
+A) No preprocessing
+B) Converting text to numerical features (e.g., TF-IDF) first
+C) Only one tree
+D) Removing all text
+18. Which ensemble method does Random Forest use?
+A) Boosting
+B) Bagging
+C) Stacking
+D) Blending
+19. Setting max_depth=3 in Random Forest limits each tree to ___.
+A) 3 features
+B) 3 levels of depth
+C) 3 estimators
+D) 3 classes
+20. The main source of diversity among trees in a Random Forest comes from ___.
+A) Different splitting criteria per tree
+B) Bootstrap sampling and random feature selection at each split
+C) Using different algorithms per tree
+D) Different learning rates per tree
+
+Posttest - Answer Key
+Q
+Ans
+Q
+Ans
+Q
+Ans
+Q
+Ans
+1
+B
+6
+B
+11
+B
+16
+C
+2
+A
+7
+B
+12
+B
+17
+B
+3
+B
+8
+C
+13
+A
+18
+B
+4
+B
+9
+B
+14
+B
+19
+B
+5
+C
+10
+B
+15
+B
+20
+B
+
+
+Experiment 10: Artificial Neural Network using Perceptron Learning
+1. AIM
+To understand the concept of an artificial neuron and the perceptron learning algorithm, implement a perceptron classifier in Python using scikit-learn, and observe its ability to classify linearly separable data.
+2. THEORY
+2.1 Biological Inspiration
+Artificial neural networks are loosely inspired by biological neurons. A biological neuron receives signals through dendrites, processes them in the cell body, and transmits output through the axon. An artificial neuron mimics this process mathematically.
+2.2 The Artificial Neuron
+An artificial neuron (perceptron) has the following components:
+* Inputs (x1, x2, ..., x?) - the feature values of a data sample.
+* Weights (w1, w2, ..., w?) - parameters that determine the importance of each input.
+* Bias (b) - an additional parameter that shifts the decision boundary.
+* Weighted sum - the linear combination of inputs and weights.
+* Activation function - determines the output based on the weighted sum.
+2.3 Weighted Sum
+The perceptron computes a weighted sum of the inputs:
+z = w1x1 + w2x2 + ... + w?x? + b
+This can also be written in vector notation as z = w   x + b.
+2.4 Activation Function
+The original perceptron uses a step (threshold) activation function:
+* If z = 0 ? output = 1 (class 1)
+* If z < 0 ? output = 0 (class 0)
+This binary output makes the perceptron a linear binary classifier. The step function is simple but non-differentiable, which limits the perceptron to basic learning rules.
+2.5 The Perceptron Learning Algorithm
+The perceptron learns by iteratively adjusting its weights:
+* Step 1: Initialise weights and bias (often to zero or small random values).
+* Step 2: For each training sample, compute the prediction.
+* Step 3: Compare the prediction to the actual label. Compute the error.
+* Step 4: Update weights using the rule below.
+* Step 5: Repeat for multiple epochs until convergence or a stopping condition.
+Weight Update Rule
+w? = w? + ?   (y_actual - y_predicted)   x?
+where:
+* ? (eta) is the learning rate - a small positive number controlling the step size.
+* y_actual is the true class label.
+* y_predicted is the perceptron's output.
+* x? is the input feature value.
+If the prediction is correct (y_actual = y_predicted), the error is 0 and weights remain unchanged. If the prediction is wrong, weights are adjusted in the direction that would improve the prediction.
+2.6 Learning Rate
+The learning rate ? controls how much the weights change in each update. A very small learning rate leads to slow convergence. A very large learning rate may cause the algorithm to overshoot and oscillate without converging. Typical values range from 0.001 to 1.0.
+2.7 Epoch
+An epoch is one complete pass through the entire training dataset. The perceptron may need multiple epochs for the weights to converge to good values.
+2.8 Linear Separability
+A dataset is linearly separable if a single straight line (or hyperplane in higher dimensions) can perfectly separate the classes. The perceptron convergence theorem guarantees that the perceptron will find a separating hyperplane if the data is linearly separable.
+2.9 Limitations of a Single Perceptron
+A single perceptron can only solve linearly separable problems. It cannot solve the classic XOR problem, where no single straight line can separate the two classes. This limitation was a major factor in the early criticism of perceptrons and motivated the development of multi-layer neural networks.
+2.10 Illustrative Python Example
+from sklearn.linear_model import Perceptron
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, classification_report
+from sklearn.datasets import load_iris
+import numpy as np
+
+# Load dataset - use only 2 classes for binary classification
+X, y = load_iris(return_X_y=True)
+mask = y != 2  # Keep only class 0 and class 1
+X, y = X[mask], y[mask]
+
+# Split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# Scale features
+scaler = StandardScaler()
+X_train_s = scaler.fit_transform(X_train)
+X_test_s = scaler.transform(X_test)
+
+# Train Perceptron
+model = Perceptron(max_iter=1000, eta0=0.1, random_state=42)
+model.fit(X_train_s, y_train)
+
+# Predictions
+y_pred = model.predict(X_test_s)
+
+# Evaluation
+print(f"Accuracy: {accuracy_score(y_test, y_pred):.4f}")
+print("\nClassification Report:")
+print(classification_report(y_test, y_pred))
+
+# Learned parameters
+print(f"\nWeights: {model.coef_}")
+print(f"Bias:    {model.intercept_}")
+print(f"Epochs completed: {model.n_iter_}")
+  Perceptron() creates a perceptron classifier.
+  max_iter=1000 sets the maximum number of epochs.
+  eta0=0.1 sets the learning rate.
+  Feature scaling is important because the perceptron is sensitive to feature magnitudes.
+  model.coef_ contains the learned weights; model.intercept_ is the bias term.
+  model.n_iter_ reports how many epochs were needed before convergence.
+Python Example - Observing the Effect of Learning Rate
+from sklearn.linear_model import Perceptron
+from sklearn.metrics import accuracy_score
+
+for lr in [0.001, 0.01, 0.1, 1.0]:
+    model = Perceptron(max_iter=1000, eta0=lr, random_state=42)
+    model.fit(X_train_s, y_train)
+    acc = accuracy_score(y_test, model.predict(X_test_s))
+    print(f"Learning rate: {lr}  Accuracy: {acc:.4f}  Epochs: {model.n_iter_}")
+  This loop trains perceptrons with different learning rates.
+  Students can observe how the learning rate affects convergence speed and accuracy.
+2.11 Advantages
+* Very simple and fast to train.
+* Guaranteed to converge for linearly separable data.
+* Provides a foundation for understanding more complex neural networks.
+* Low computational requirements.
+2.12 Limitations
+* Cannot solve non-linearly separable problems (e.g., XOR).
+* Does not output probabilities - only class labels.
+* Sensitive to feature scaling.
+* A single perceptron has very limited representational power.
+2.13 From Perceptron to Multi-Layer Networks
+The limitations of a single perceptron are overcome by stacking multiple layers of neurons, forming a multi-layer perceptron (MLP). MLPs can learn non-linear decision boundaries and are the foundation of modern deep learning.
+2.14 Applications of Perceptron Learning
+* Simple binary classification tasks with linearly separable data.
+* Online learning scenarios where data arrives sequentially.
+* Educational introduction to neural network concepts.
+* Building block for more complex architectures (MLPs, deep networks).
+3. PRETEST
+Answer all 20 questions. Each question has exactly one correct answer.
+1. A perceptron is a type of ___.
+A) Clustering algorithm
+B) Artificial neuron / linear classifier
+C) Dimensionality reduction technique
+D) Ensemble method
+2. The inputs to a perceptron are ___.
+A) Class labels
+B) Feature values of a sample
+C) Random numbers
+D) Other perceptrons
+3. Weights in a perceptron determine ___.
+A) The number of inputs
+B) The importance/contribution of each input
+C) The number of classes
+D) The dataset size
+4. The bias in a perceptron allows ___.
+A) Faster training
+B) Shifting the decision boundary away from the origin
+C) Adding more inputs
+D) Removing outliers
+5. The weighted sum is computed as ___.
+A) z = x1 + x2 + ... + x?
+B) z = w1x1 + w2x2 + ... + w?x? + b
+C) z = w1/x1 + w2/x2
+D) z = max(x1, x2, ..., x?)
+6. The step activation function outputs ___.
+A) Any real number
+B) 0 or 1
+C) A probability between 0 and 1
+D) A continuous value
+7. The learning rate ? controls ___.
+A) The number of features
+B) How much weights change per update
+C) The number of epochs
+D) The number of classes
+8. An epoch is ___.
+A) A single weight update
+B) One complete pass through the entire training dataset
+C) A type of activation function
+D) The final prediction
+9. The perceptron weight update rule is ___.
+A) w? = w? + ?   (y - y)   x?
+B) w? = w?   x?
+C) w? = x? / ?
+D) w? = w? - y
+10. If the perceptron's prediction matches the actual label, the weight update is ___.
+A) Maximum
+B) Zero (no change)
+C) Always 1
+D) Negative
+11. A dataset is linearly separable if ___.
+A) It has more than two classes
+B) A single hyperplane can separate all classes perfectly
+C) No algorithm can classify it
+D) It requires non-linear models
+12. The classic problem that a single perceptron CANNOT solve is ___.
+A) AND gate
+B) OR gate
+C) XOR problem
+D) NOT gate
+13. Why can't a single perceptron solve XOR?
+A) XOR has too many features
+B) XOR is not linearly separable
+C) The learning rate is too small
+D) XOR requires regression, not classification
+14. Perceptron convergence theorem states that ___.
+A) Perceptrons always converge
+B) A perceptron will converge if the data is linearly separable
+C) Perceptrons never converge
+D) Convergence depends on the dataset size only
+15. Which Python class implements the perceptron in scikit-learn?
+A) Perceptron from sklearn.linear_model
+B) Perceptron from sklearn.neural_network
+C) MLPClassifier
+D) NeuralNetwork
+16. The parameter eta0 in scikit-learn's Perceptron sets ___.
+A) The number of epochs
+B) The learning rate
+C) The number of features
+D) The activation function
+17. max_iter in Perceptron controls ___.
+A) Maximum number of features
+B) Maximum number of epochs
+C) Maximum number of samples
+D) Maximum weight value
+18. After training, model.coef_ contains ___.
+A) The input features
+B) The learned weights
+C) The predictions
+D) The class labels
+19. model.n_iter_ reports ___.
+A) The number of features used
+B) The number of epochs completed during training
+C) The number of test samples
+D) The number of support vectors
+20. Feature scaling before training a perceptron is ___.
+A) Optional but unnecessary
+B) Important because the perceptron is sensitive to feature magnitudes
+C) Harmful to performance
+D) Required only for categorical features
+
+Pretest - Answer Key
+Q
+Ans
+Q
+Ans
+Q
+Ans
+Q
+Ans
+1
+B
+6
+B
+11
+B
+16
+B
+2
+B
+7
+B
+12
+C
+17
+B
+3
+B
+8
+B
+13
+B
+18
+B
+4
+B
+9
+A
+14
+B
+19
+B
+5
+B
+10
+B
+15
+A
+20
+B
+4. PROCEDURE
+4.1 V-Lab Workflow
+* Step 1: Load a binary classification dataset (or filter a multi-class dataset to two classes).
+* Step 2: Split into training and test sets.
+* Step 3: Standardise features using StandardScaler.
+* Step 4: Create a Perceptron with a chosen learning rate (eta0) and max_iter.
+* Step 5: Train the perceptron using fit().
+* Step 6: Predict on the test set.
+* Step 7: Compute accuracy and classification report.
+* Step 8: Examine the learned weights (coef_), bias (intercept_), and number of epochs (n_iter_).
+* Step 9: Experiment with different learning rates and observe convergence.
+4.2 Input ? Process ? Output
+Stage
+Details
+Input
+Binary classification dataset, learning rate, maximum epochs.
+Process
+Feature scaling ? Weight initialisation ? Iterative weight updates ? Convergence.
+Output
+Predicted classes, accuracy, learned weights, bias, epochs completed.
+5. RESULTS AND ANALYSIS
+After completing the experiment, students should observe and interpret:
+* The perceptron achieves high accuracy on linearly separable data.
+* The learned weights indicate the importance and direction of each feature's influence.
+* The bias shifts the decision boundary; its value should be noted.
+* n_iter_ shows how quickly the algorithm converged - fewer epochs indicate faster convergence.
+* Different learning rates affect convergence speed; very small rates may require more epochs.
+* On non-linearly separable data, the perceptron may fail to achieve good accuracy, demonstrating its fundamental limitation.
+Students should appreciate that the perceptron is the simplest neural network model. Its limitations motivated the development of multi-layer perceptrons and, eventually, deep learning.
+6. POSTTEST
+Answer all 20 questions. Each question has exactly one correct answer.
+1. A perceptron with weights w = [0.5, -0.3] and bias b = 0.1 receives input x = [2, 4]. What is the weighted sum z?
+A) 0.9
+B) 0.0
+C) -0.1
+D) 0.5
+2. Using the same z = -0.1, what does the step activation function output?
+A) 1
+B) 0
+C) 0.5
+D) -0.1
+3. After one epoch, a perceptron misclassifies 3 out of 80 samples. In the next epoch, it misclassifies 0. What happened?
+A) The perceptron failed
+B) Weights were adjusted enough to correctly classify all training samples
+C) The test set changed
+D) The learning rate became zero
+4. You train a perceptron with eta0=0.001 and it hasn't converged after max_iter=100. What should you try?
+A) Decrease eta0 further
+B) Increase max_iter or increase eta0
+C) Remove all features
+D) Use an unsupervised algorithm
+5. A perceptron achieves 50% accuracy on a binary dataset. This is equivalent to ___.
+A) A perfect classifier
+B) Random guessing
+C) A very good classifier
+D) An underfitting regression model
+6. model.coef_ = [[0.8, -0.5, 0.3, 0.0]]. Feature 4 has weight 0.0, meaning ___.
+A) Feature 4 is the most important
+B) Feature 4 does not influence the perceptron's decision
+C) Feature 4 is always 0
+D) The model is broken
+7. Why does the perceptron fail on XOR data even with many epochs?
+A) The learning rate is too small
+B) XOR is not linearly separable; no single hyperplane can separate the classes
+C) The perceptron needs more features
+D) XOR requires regression
+8. In the weight update w? = w? + ?(y - y)x?, if y=1, y=0, ?=0.1, x?=3, the new w? change is ___.
+A) +0.3
+B) -0.3
+C) +0.1
+D) +3.0
+9. In the same update, if y=0 and y=0, the weight change is ___.
+A) +0.3
+B) -0.3
+C) 0.0 (no change)
+D) +0.1
+10. You train a perceptron on scaled data and get 100% accuracy. You then feed it unscaled data. What happens?
+A) The same accuracy
+B) Accuracy likely drops because the model learned on a different scale
+C) Accuracy increases
+D) An error is raised
+11. A perceptron is a special case of a neural network with ___ layer(s).
+A) 0
+B) 1 (single layer, no hidden layer)
+C) 2
+D) Many
+12. Multi-layer perceptrons (MLPs) overcome the single perceptron's limitation by ___.
+A) Using more data
+B) Adding hidden layers that can learn non-linear boundaries
+C) Using a different distance metric
+D) Removing the activation function
+13. If model.n_iter_ = 5 and max_iter = 1000, the perceptron ___.
+A) Failed to converge
+B) Converged in 5 epochs (early stopping)
+C) Is underfitting
+D) Used 1000 epochs
+14. Which of the following is NOT a perceptron component?
+A) Weights
+B) Bias
+C) Activation function
+D) Convolutional filter
+15. Perceptron with eta0=0.5 updates weights ___ than eta0=0.01.
+A) 50 times faster
+B) More aggressively (larger steps)
+C) More slowly
+D) Identically
+16. On linearly separable 2D data with 2 classes, the perceptron finds a ___.
+A) Curve
+B) Straight line decision boundary
+C) Circular boundary
+D) No boundary
+17. model.intercept_ in scikit-learn's Perceptron corresponds to ___.
+A) The weight vector
+B) The bias term b
+C) The learning rate
+D) The number of iterations
+18. What is the difference between Perceptron and LogisticRegression in scikit-learn?
+A) They are identical
+B) Perceptron uses a step function and hinge-like loss; LogisticRegression uses sigmoid and log loss
+C) Perceptron is for regression; LogisticRegression is for clustering
+D) There is no difference in output
+19. A perceptron can be trained online (one sample at a time) because ___.
+A) It requires batch processing
+B) The weight update rule applies per sample
+C) It uses gradient descent on the full dataset
+D) It requires all data in memory
+20. To classify data into 3 classes using perceptrons, you would need ___.
+A) 1 perceptron
+B) 2 perceptrons
+C) 3 perceptrons (e.g., one-vs-rest)
+D) Perceptrons cannot handle 3 classes
+
+Posttest - Answer Key
+Q
+Ans
+Q
+Ans
+Q
+Ans
+Q
+Ans
+1
+C
+6
+B
+11
+B
+16
+B
+2
+B
+7
+B
+12
+B
+17
+B
+3
+B
+8
+A
+13
+B
+18
+B
+4
+B
+9
+C
+14
+D
+19
+B
+5
+B
+10
+B
+15
+B
+20
+C
+1
+
+
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-09-05T03:42:26+05:30.
+</ADDITIONAL_METADATA>
+<USER_SETTINGS_CHANGE>
+The user changed setting `Model Selection` from Claude Opus 4.6 (Thinking) to GPT-OSS 120B (Medium). No need to comment on this change if the user doesn't ask about it. If reporting what model you are, please use a human readable name instead of the exact string.
+</USER_SETTINGS_CHANGE>
