@@ -178,12 +178,17 @@ export default function Home() {
       {/* ─── Learning Path ─── */}
       <section className="home-section">
         <div className="home-section-inner">
-          <div className="home-section-header">
-            <div className="home-section-label">Your ML Learning Path</div>
-            <h2 className="home-section-title">10 Experiments. One Journey.</h2>
-            <p className="home-section-desc">
-              Progress from data foundations through advanced ensemble methods and neural networks.
-            </p>
+          <div className="home-section-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 'var(--space-4)' }}>
+            <div>
+              <div className="home-section-label">Your ML Learning Path</div>
+              <h2 className="home-section-title">10 Experiments. One Journey.</h2>
+              <p className="home-section-desc">
+                Progress from data foundations through advanced ensemble methods and neural networks.
+              </p>
+            </div>
+            <Link to="/learning-path" className="btn btn-secondary" style={{ marginBottom: 'var(--space-2)' }}>
+              View 6-Level Curriculum Path →
+            </Link>
           </div>
 
           <div className="home-experiments-grid stagger">

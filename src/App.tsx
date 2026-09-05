@@ -12,6 +12,9 @@ import ProtectedRoute from './components/ProtectedRoute';
 const Home = lazy(() => import('./pages/Home'));
 const ExperimentsIndex = lazy(() => import('./pages/ExperimentsIndex'));
 const ExperimentPage = lazy(() => import('./pages/ExperimentPage'));
+const LearningPath = lazy(() => import('./pages/LearningPath'));
+const Glossary = lazy(() => import('./pages/Glossary'));
+const VisualLab = lazy(() => import('./pages/VisualLab'));
 const Login = lazy(() => import('./pages/Auth/Login'));
 const Register = lazy(() => import('./pages/Auth/Register'));
 const StudentDashboard = lazy(() => import('./pages/Student/StudentDashboard'));
@@ -57,6 +60,9 @@ export default function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/experiments" element={<ExperimentsIndex />} />
                   <Route path="/experiment/:id" element={<ExperimentPage />} />
+                  <Route path="/learning-path" element={<LearningPath />} />
+                  <Route path="/glossary" element={<Glossary />} />
+                  <Route path="/visual-lab" element={<VisualLab />} />
 
                   {/* Auth routes */}
                   <Route path="/login" element={<Login />} />
@@ -101,11 +107,6 @@ export default function App() {
                     }
                   />
 
-                  {/* Placeholder routes */}
-                  <Route path="/learning-path" element={<PlaceholderPage title="Learning Path" />} />
-                  <Route path="/visual-lab" element={<PlaceholderPage title="Visual Lab" />} />
-                  <Route path="/glossary" element={<PlaceholderPage title="Glossary" />} />
-
                   {/* 404 Catch-All */}
                   <Route path="*" element={<NotFound />} />
                 </Routes>
@@ -115,21 +116,5 @@ export default function App() {
         </AuthProvider>
       </ThemeProvider>
     </ErrorBoundary>
-  );
-}
-
-function PlaceholderPage({ title }: { title: string }) {
-  return (
-    <div className="page-layout">
-      <main className="page-main">
-        <div className="page-content">
-          <div className="section-label">SRM Machine Learning Lab</div>
-          <h1 className="section-title">{title}</h1>
-          <p className="section-description" style={{ marginTop: 'var(--space-4)' }}>
-            This resource module is part of the SRM Machine Learning curriculum. Please explore the 10 interactive laboratory experiments in the meantime.
-          </p>
-        </div>
-      </main>
-    </div>
   );
 }

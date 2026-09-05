@@ -64,7 +64,10 @@ export default function StudentDashboard() {
             Reg No: <strong>{user?.studentId || 'N/A'}</strong> · Academic Email: <strong>{user?.email}</strong>
           </p>
         </div>
-        <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
+        <div style={{ display: 'flex', gap: 'var(--space-3)', flexWrap: 'wrap' }}>
+          <Link to="/learning-path" className="btn btn-secondary">
+            🗺 Learning Path
+          </Link>
           <Link to="/experiments" className="btn btn-primary">
             Resume Learning
           </Link>
