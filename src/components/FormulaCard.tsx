@@ -1,5 +1,9 @@
+// src/components/FormulaCard.tsx
+import React, { useEffect, useRef } from 'react';
 import katexLib from 'katex';
 import 'katex/dist/katex.min.css';
+import './FormulaCard.css';
+
 
 interface FormulaCardProps {
   name: string;
